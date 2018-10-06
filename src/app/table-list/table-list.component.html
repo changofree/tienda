@@ -1,0 +1,59 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title "> Tabla de productos </h4>
+                      <p class="card-category"> Administrá tus productos </p>
+                      <button mat-raised-button class="pull-right mr-1" style="color:black!important" routerLink="agregar">Agregar producto</button>
+                    </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      Imagen
+                                  </th>
+                                  <th>
+                                      Producto
+                                  </th>
+                                  <th>
+                                      Cantidad
+                                  </th>
+                                  <th>
+                                      Precio
+                                  </th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let toto of listProducts">
+                                      <td class="img-th">
+                                          <img src="{{toto.img[0]}}">
+                                      </td>
+                                      <td class="td-name">
+                                          {{toto.name}}
+                                      </td>
+                                      <td>
+                                          {{toto.stock}}
+                                      </td>
+                                      <td class="text-primary">
+                                          $ {{ toto.price }}
+                                      </td>
+                                      <td class="text-primary td-button">
+                                          <button mat-raised-button color="primary" routerLink="editar/{{toto.$key}}" >Editar</button>
+                                    </td>
+                                    <td class="text-primary td-button">
+                                        <button mat-raised-button (click)="DestroyThis(toto.$key)">Borrar</button>                                            
+                                      </td>
+                                  </tr>
+                                  
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</div>

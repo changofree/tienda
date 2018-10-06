@@ -1,0 +1,39 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="card">
+          <div class="card-header card-header-danger">
+              <h3 class="card-title">Primeros pasos</h3>
+              <p class="card-category">En esta pagina vas a encontrar una mini guia de como empezar a usar tu ecommerce</p>
+          </div>
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-md-6">
+                      <h4 class="card-title">Objetivos</h4>
+                      <div class="alert alert-warning alert-with-icon" data-notify="container">
+                          <span><i class="material-icons" data-notify="icon">add_alert</i><b *ngIf='boolView'>En curso:</b><b *ngIf="!boolView">¡Completado!</b> Visitas en tu pagina {{listViews}}/1000</span>
+                      </div>
+                      <div class="alert alert-warning alert-with-icon" data-notify="container">
+                            <span><i class="material-icons" data-notify="icon">add_alert</i><b *ngIf="boolProduct">En curso:</b><b *ngIf="!boolProduct">¡Completado!</b> 
+                                Productos subidos {{listProductsLenght}}/10   
+                                <button mat-button-raised mat-raised-button color="primary" class="ml-5">Subir productos</button></span>
+                        </div>
+                        <div class="alert alert-warning alert-with-icon" data-notify="container">
+                                <span><i class="material-icons" data-notify="icon">add_alert</i><b>En curso:</b> Concretar una venta 0/1</span>
+                            </div>
+                  </div>
+                  <div class="col-md-6">
+                      <h4 class="card-title">Notificaciones</h4>
+                      <div class="alert alert-info">
+                          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <i class="material-icons">close</i>
+                          </button>
+                          <span>
+                              Estas al día, 0 notificaciones nuevas. </span>
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

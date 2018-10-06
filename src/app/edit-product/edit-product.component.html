@@ -1,0 +1,74 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h2 class="card-title text-center"> Editar un producto</h2> 
+                        <button mat-raised-button color="primary" class="pull-right mr-1">Volver</button>
+                      </div>
+                    <div class="card-body">
+                      <form>
+                        {{hora}}
+                      <mat-form-field>
+                        <input matInput type="text" placeholder="Nombre del producto" name="name" (change)="updateTemp()" [(ngModel)]="ProductToEdit.name">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <textarea matInput type="text" placeholder="Descripcion del producto" style="min-height: 50px"  (change)="updateTemp()" name="descripcion" [(ngModel)]="ProductToEdit.description"></textarea>
+                      </mat-form-field>
+                      <div class="row">
+                      <mat-form-field class="col-3">
+                          <input matInput type="text" placeholder="Precio del producto" name="precio" [(ngModel)]="ProductToEdit.price" (change)="updateTemp()">
+                      </mat-form-field>
+                      <mat-form-field class="col-3">
+                          <input matInput type="text" placeholder="Cantidad de productos en stock" name="stock" [(ngModel)]="ProductToEdit.stock" (change)="updateTemp()">
+                      </mat-form-field>
+                      <mat-form-field class="col-3">
+                          <input matInput type="text" placeholder="Codigo del producto" name="codigo" [(ngModel)]="ProductToEdit.code" (change)="updateTemp()">
+                      </mat-form-field>
+                      <div class="form-group col-3">
+                      <select class="form-control" id="exampleFormControlSelect1" name="category" [(ngModel)]="ProductToEdit.category" (change)="updateTemp()">
+                        <option value="0">Seleccionar una categoria</option>
+                        <option *ngFor="let x of listCategory" value="{{x.name}}">{{x.name}}</option>
+                      </select>
+                      <a routerLink="/listado-categorias">+ Agregar otra categoria</a>
+                    </div>
+                      </div>
+                     
+                      <div class="row">
+                        <div class="col-12">
+                          <label class="labelFile text-center">
+                            Agregar imagen
+                            <input type="file" id="upload-file" (change)="selectFile($event)">
+                          </label>
+                          <div *ngIf="currentFileUpload" class="progress">
+                            <div class="progress-bar progress-bar-info progress-bar-striped"
+                              role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                              aria-valuemin="0" aria-valuemax="100"
+                              [ngStyle]="{width:progress.percentage+'%'}">
+                              {{progress.percentage}}%</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mt-3">
+                          <div class="col-3 text-center" *ngFor="let x of arrayImg">
+                            <div class="img-container">
+                              <img src="{{x}}">
+                            </div>
+                            <span class="cerrar-img" (click)="closeImg(x)"><b>X</b></span>
+                          </div>
+                        </div>
+                    </form>
+                    <div class="row mt-2">
+                      <div class="col-12 text-center">
+                        <button mat-raised-button color="primary" routerLink="/listado-productos">Editar</button>
+                      </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+  </div>
+  

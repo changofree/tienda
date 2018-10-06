@@ -1,0 +1,63 @@
+.labelFile {
+    overflow: hidden;
+    position: relative;
+}
+.labelFile [type=file] {
+    cursor: inherit;
+    display: none;
+    font-size: 10px;
+    color: black;
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.img-container > img{
+    max-width: 100%;
+    max-height: 100%;
+    position:relative;
+    display: table-cell;
+    vertical-align:middle;
+    text-align:center;
+}
+.categoriaAdd{
+    width: 100%;
+    margin-top:25px;
+}
+.w100{
+    width: 100%!important;
+}
+.img-container{
+    height: 200px;
+    width: 200px;
+    display:inline-block;
+    position: relative;
+    display: flex;
+    border: 1px solid #80808042;
+}
+
+.cerrar-img{
+    cursor: pointer;
+    position: relative;
+    bottom: 200px;
+    left: 65px;
+}
+
+
+.labelFile{
+    cursor: pointer;
+    background: #4054b5;
+    display: block;
+    width: 198px;
+    border-radius: 0px;
+    box-shadow: 0px 2px 1.5px #a5a5a5;
+    color: white;
+    padding: 11px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+#exampleFormControlSelect1{
+    height: 33px!important;
+}
