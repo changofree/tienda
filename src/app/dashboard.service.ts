@@ -20,7 +20,23 @@ export class DashboardService {
   returnListClients(){
     return  this.listClient = this.fireBase.list('cliente');
   }
+
   updateVisitas(keyClient, webClient : Cliente){
+   if(webClient.web.carrito === undefined){
+     webClient.web.carrito = null;
+   }
+   if(webClient.web.categoria === undefined){
+     webClient.web.categoria = null;
+   }
+   if(webClient.web.product === undefined){
+     webClient.web.product = null;
+   }
+   if(webClient.web.name === undefined){
+     webClient.web.name = null;
+   }
+   if(webClient.web.anuncios === undefined){
+     webClient.web.anuncios = null;
+   }
     this.listClient.update(keyClient,{
       web:{
         anuncios:webClient.web.anuncios,
@@ -35,7 +51,6 @@ export class DashboardService {
         carrito: webClient.web.carrito
       }
     });
-    return false;
   }
 
 

@@ -15,6 +15,9 @@ export class FooterwebComponent implements OnInit {
   listCategory : Category[];
   listClients : Cliente[];
 
+  WhatsApp : string;
+  Facebook : string;
+  Instagram: string;
   constructor(
     private dashboard : DashboardService,
     private ProductService : ProductoService,
@@ -23,6 +26,9 @@ export class FooterwebComponent implements OnInit {
 
   ngOnInit() {
     const key = this._activatedRoute.snapshot.paramMap.get('key');     
+    this.Facebook = "";
+    this.WhatsApp = "";
+    this.Instagram = "";
 
     //  Listamos todas las categorias existentes.
     this.ProductService.returnListCategory(key)
@@ -35,7 +41,7 @@ export class FooterwebComponent implements OnInit {
         this.listCategory.push(x as Category);
       });
     });
-
+    
     //  Listamos toda la informacion del dueño de la tienda.
     this.dashboard.returnListClients()
     .snapshotChanges()
@@ -47,6 +53,10 @@ export class FooterwebComponent implements OnInit {
         if(x["$key"] === key)
         this.listClients.push(x);
       });
+      
+      this.Facebook = this.listClients[0].web.facebook;
+      this.WhatsApp = this.listClients[0].web.whatsapp;
+      this.Instagram = this.listClients[0].web.instagram;
     });
   }
 }

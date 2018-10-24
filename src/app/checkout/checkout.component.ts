@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService } from '../services/pedido.service';
-import { DashboardService } from '../dashboard.service';
 import { ProductoService } from '../services/producto.service';
-import { AnunciosService } from '../anuncios.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Carrito } from '../interfaces/carrito';
-import { Http } from '@angular/http';
 import { Cliente } from 'app/interfaces/cliente';
 
 @Component({
@@ -31,7 +28,7 @@ export class CheckoutComponent implements OnInit {
   AcessToken;
   Telefono : string = "";
   Email : string = "";
-
+  key : string; 
   constructor(
     private PedidoService : PedidoService,
     private ProductService: ProductoService,
@@ -40,14 +37,15 @@ export class CheckoutComponent implements OnInit {
   ){}
   
   
-  ngOnInit() {    
-  
+  ngOnInit() {  
+    this.key = "";  
+    this.Marca = "";
     this.buttonEdit = false;
     let auxBool = true;
     let listClient : Cliente[]
     listClient = [];
-    
     const key = this._activatedRoute.snapshot.paramMap.get('key');
+    this.key = key;
     const producto = this._activatedRoute.snapshot.paramMap.get('producto');     
     let clienteOnline = localStorage.getItem("cliente-chango");    
     this.numberPedido = localStorage.getItem('numero-pedido');
@@ -66,7 +64,7 @@ export class CheckoutComponent implements OnInit {
           listClient.push(x as Cliente);
         }
       });
-      
+    
       //Usamos el auxBool para que si llega a ver algun cambio en el listado de clientes, no se vuelva a actualizar esta información.
       if(auxBool){
         carrito.snapshotChanges()

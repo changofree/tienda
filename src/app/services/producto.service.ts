@@ -65,7 +65,6 @@ export class ProductoService {
     return of(json.find((product => product.keyClient === keyClient)));
   }
   SearchProductByName(name: string, json)  {
-    console.log(json);
     return of(json.find((product => product.name === name)));
   }
 
@@ -101,7 +100,6 @@ export class ProductoService {
       clientObject.web.carrito = null;
     }
     
-    console.log(clientObject);
     this.listClient.update(clientObject.$key, {
       web:{
         product: clientObject.web.product,
@@ -204,7 +202,6 @@ export class ProductoService {
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
         // in progress
-        console.log(fileUpload.file);
         const snap = snapshot as firebase.storage.UploadTaskSnapshot;
         progress.percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
       },
@@ -235,8 +232,6 @@ export class ProductoService {
     .subscribe(data => {
       let array = [];
       arrayAux = [];
-      console.log("toto");
-      console.log(data);
       
       data.forEach(element => {
           let x = element.payload.toJSON();

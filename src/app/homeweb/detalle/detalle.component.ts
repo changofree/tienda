@@ -42,14 +42,28 @@ export class DetalleComponent implements OnInit {
   buttonEdit : boolean = true;
   keyPedido : string;
   newPedido : Carrito[];
-
+  WhatsApp : string;
   constructor(
     private PedidoService : PedidoService, 
     private dashboard : DashboardService,
     private ProductService: ProductoService,
     private AnuncioService : AnunciosService,
     private _activatedRoute: ActivatedRoute,
-  ) { }
+  ) 
+  {
+    this.product = {
+      name:"",
+      code:"",
+      price:"",
+      offer:"",
+      category:"",
+      description:"",
+      stock:null,
+      img:["","","",""],
+      keyClient: "",
+      data:""
+    }
+  }
 
   
   changeBoolean(event){
@@ -57,6 +71,8 @@ export class DetalleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.Marca = "";
+    this.WhatsApp = "";
     let clienteOnline = localStorage.getItem("cliente-chango");
     const key = this._activatedRoute.snapshot.paramMap.get('key');
     const producto = this._activatedRoute.snapshot.paramMap.get('producto');     
@@ -68,6 +84,7 @@ export class DetalleComponent implements OnInit {
     this.view = true;
     let aux : Cliente[];
     aux = [];
+    this.arrayImg = ["", "", "" ,""]; //  Guardamos toda las url en este array.
     
     //  Si el cliente no se logeo, no se muestra boton de configuracion
     if(clienteOnline === undefined || clienteOnline === null){
@@ -88,7 +105,6 @@ export class DetalleComponent implements OnInit {
       data.forEach(element => {
         let y = element.payload.toJSON();
         y["$key"] = element.key;
-        console.log()
         if(y["numeroPedido"] === parseInt(numeroPedido)){
           this.Carrito.push(y);
         }
@@ -100,7 +116,6 @@ export class DetalleComponent implements OnInit {
           this.PedidoService.insertNewCarrito(key);
         }else{
         this.Carrito.forEach(element => {
-          console.log(element)
           if(element.keyfb !== this.keyPedido){
             this.PedidoService.insertNewCarrito(key);
             boolaux = false;
@@ -131,6 +146,8 @@ export class DetalleComponent implements OnInit {
 
       // Actualizamos la cantidad de visitas      
       this.client = aux[0];
+      this.WhatsApp = this.client.web.whatsapp;
+      this.Marca = aux[0].marca;
       if(aux[0].web.view !== undefined){
         aux[0].web.view = aux[0].web.view + 1;
       }else{

@@ -55,6 +55,7 @@ export class HomewebComponent implements OnInit {
     this.listAnuncios = [];
     this.listFilter = [];
     this.listProducts = [];
+    this.arrayImg = ["","",""];
     
     /* ClientOnline is in cokie or ls */
     if(clienteOnline === null){
@@ -75,9 +76,7 @@ export class HomewebComponent implements OnInit {
     this.key = key;
     this.view = true;
     
-    let aux : Cliente[];
-    aux = [];
-    
+    let cliente : Cliente;
     this.dashboard.returnListClients()
     .snapshotChanges()
     .subscribe(data => {
@@ -85,7 +84,7 @@ export class HomewebComponent implements OnInit {
         let x = element.payload.toJSON();
         x["$key"] = element.key;
         if(x["$key"] === key){
-          aux.push(x);
+          cliente = x;
           this.Marca = x["marca"];
           //  Si el email es igual al que está guardado en localstorage, se muestra el boton, en caso contrario, no.
           if(x["email"] === clienteOnline){
@@ -93,20 +92,19 @@ export class HomewebComponent implements OnInit {
           }else{
             this.buttonEdit = false;
           }
-          //BUGEADO -> Se genera visitas.
           if(x["web"]["view"] !== undefined || x["web"]["view"] !== null){
-            aux[0].web.view++;
+            cliente.web.view++;
           }else{
-            aux[0].web.view = 1;
+            cliente.web.view = 1;
+          }
+          // Update de visitas
+          if(this.view){
+            this.dashboard.updateVisitas(key, cliente);
+            this.view = false;
           }
         }
       });
       
-      // Update de visitas
-      if(this.view){
-        this.dashboard.updateVisitas(key, aux[0]);
-        this.view = false;
-      }
     });
     
     //  Traemos todos los anuncion cargados por el cliente para mostrarlos en el carrusel.
@@ -119,9 +117,20 @@ export class HomewebComponent implements OnInit {
         this.listAnuncios.push(x as Anuncio);
       });
       this.arrayImg = [];
-      Object.keys(this.listAnuncios[0].img).forEach(element => {
-        this.arrayImg.push(this.listAnuncios[0].img[element]);
-      }); 
+    
+      if(this.listAnuncios[0].img === undefined || this.listAnuncios[0].img === null){  
+      }else{
+        let cont = true;
+        Object.keys(this.listAnuncios[0].img).forEach(element => {
+          if(this.listAnuncios[0].img[element] !== ""){
+            this.arrayImg.push(this.listAnuncios[0].img[element]);
+            cont = false;
+          }
+        }); 
+        if(cont){
+          this.arrayImg = ["","",""];
+        }
+      }
     });
 
     //  Traemos todos los productos
