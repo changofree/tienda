@@ -9,6 +9,7 @@ import 'firebase/storage';
 import { Imgupload } from '../imgupload';
 import { Category } from '../interfaces/category';
 import { Anuncio } from '../anuncio';
+import { WebTemplate } from 'app/interfaces/web-template';
 
 // objects
 
@@ -86,7 +87,35 @@ export class ProductoService {
   getListClientsWithSnap(){
     return this.listClient = this.fireBase.list('cliente');
   }
-
+  editClient(clientObject : Cliente){
+    if(clientObject.web.product === undefined){
+      clientObject.web.product = null;
+    }
+    if(clientObject.web.anuncios === undefined){
+      clientObject.web.anuncios = null;
+    }
+    if(clientObject.web.categoria === undefined){
+      clientObject.web.categoria = null;
+    }
+    if(clientObject.web.carrito === undefined){
+      clientObject.web.carrito = null;
+    }
+    
+    console.log(clientObject);
+    this.listClient.update(clientObject.$key, {
+      web:{
+        product: clientObject.web.product,
+        anuncios: clientObject.web.anuncios,
+        categoria: clientObject.web.categoria,
+        plataforma: clientObject.web.plataforma,
+        facebook: clientObject.web.facebook,
+        whatsapp: clientObject.web.whatsapp,
+        instagram: clientObject.web.instagram,
+        view: clientObject.web.view,
+        carrito: clientObject.web.carrito
+      }
+    });
+  }
 
   returnListProducts(keyClient : string){
     return this.products = this.fireBase.list("cliente/"+keyClient+"/web/product");

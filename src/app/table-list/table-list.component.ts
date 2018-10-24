@@ -3,7 +3,6 @@ import { MatSnackBar } from '@angular/material';
 import { ProductoService } from '../services/producto.service';
 import { Product } from '../interfaces/product';
 import { Cliente } from '../interfaces/cliente';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-table-list',
@@ -12,9 +11,13 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 })
 export class TableListComponent implements OnInit {
 
+  /****************************** LISTADO DE PRODUCTOS ******************************/
   listProducts : Product[];
 
-  constructor(private ProductService : ProductoService, public snackBar: MatSnackBar) { }
+  constructor(
+    private ProductService : ProductoService,
+    public snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     let email = localStorage.getItem("cliente-chango");

@@ -28,9 +28,9 @@
                           <div class="row mt-3">
                               <div class="col-12 text-center" *ngFor="let x of arrayImg">
                                 <div class="img-container">
+                                  <span class="cerrar-img" (click)="closeImg(x)"><b>X</b></span>
                                   <img src="{{x}}">
                                 </div>
-                                <span class="cerrar-img" (click)="closeImg(x)"><b>X</b></span>
                               </div>
                             </div>
                       </form>

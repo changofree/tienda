@@ -1,0 +1,133 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title "> Pedidos realizados </h4>
+                      <p class="card-category"> Este es el listado de todos los pedidos que se han procesado con mercadopago. Los pedidos que dicen acreditados, una vez entregado el producto se deben pasar a la seccion de ventas concretadas.
+                        Los pedidios no acreditados o con error, significa que en el momento de realizar el pago hubo un problema, recomendamos hablar con el cliente y verificar tu cuenta de mercadopago por posibles confusiones.
+                      </p>
+                    </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                <th  class="text-center">#</th>
+                                  <th>
+                                      Numero de pedido (MercadoPago)
+                                  </th>
+                                  <th>
+                                      N° Pedido interno
+                                  </th>
+                                  <th>
+                                      Monto
+                                  </th>
+                                  <th>
+                                      Telofono
+                                  </th>
+                                  <th>
+                                      Estado
+                                  </th>
+                            
+                                  <th>
+                                    Concretar
+                                  </th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let x of listPedido">
+                                    <td class="text-primary td-button">
+                                        <button mat-raised-button color="primary" data-toggle="modal" data-target="#registroModal" (click)="changeInfo(x)"><i class="material-icons">visibility </i></button>
+                                  </td>
+                                      <td>
+                                        {{x.idpedido}}
+                                      </td>
+                                      <td>
+                                        {{x.pedido}}
+                                      </td>
+                                      <td class="text-primary">
+                                        $ {{x.total}}
+                                      </td>
+                                      <td>
+                                        {{x.telefono}}
+                                      </td>
+                                      <td>
+                                        <b>{{x.estado | uppercase}}</b>
+                                      </td>
+                               
+                                            <td class="">
+                                                <button class="btn-ok" mat-raised-button color="primary" (click)="GoVenta(x)">
+                                                  <i class="material-icons">done_outline</i>
+                                                </button>
+                                          </td>
+                                         
+                                  </tr>
+                                  
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel"><b>Información avanzada</b></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12 mt-1">
+                  <h3><b>Datos del pedido</b></h3>
+                  <p><b>Numero de pedido MercadoPago:</b> {{moreIfno.idpedido}}</p>
+                </div>
+                <div class="col-12">
+                    <p><b>Numero de pedido:</b> {{moreIfno.pedido}}</p>                  
+                </div>
+                <div class="col-12 mt-2">
+                  <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <th>Producto</th>
+                      <th>Cantidad</th>
+                      <th>Precio</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let x of infoPedido">
+                        <td>{{x.nombreProducto}}</td>
+                        <td>{{x.cantidad}}</td>
+                        <td>$ {{x.precioUnitario}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+                <div class="col-12 mt-3">
+                  <h3><b>Datos del comprador</b></h3>
+                  <p><b>Telefono:</b> {{moreIfno.telefono}}</p>
+                  <p><b>Email:</b> {{moreIfno.email}}</p>
+                  <p><b>Nombre:</b> {{moreIfno.nombres}}</p>
+                  <p><b>DNI:</b> {{moreIfno.DNI}}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>                
+        </div>
+        <div class="modal-footer">
+          <h4><b>Estado: {{moreIfno.estado}}</b></h4>
+        </div>
+      </div>
+    </div>
+  </div>

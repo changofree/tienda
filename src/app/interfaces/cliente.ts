@@ -7,4 +7,7 @@ export interface Cliente {
     password?:string;
     marca?:string;
     web?:  WebTemplate;    
+    fecha?:string;
+    pedido?:any;
+    mercadopago?:any;
 }

@@ -4,6 +4,7 @@ import { ProductoService } from '../services/producto.service';
 import { Anuncio } from '../anuncio';
 import { Cliente } from '../interfaces/cliente';
 import { Imgupload } from '../imgupload';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -12,6 +13,7 @@ import { Imgupload } from '../imgupload';
   templateUrl: './anuncios.component.html',
   styleUrls: ['./anuncios.component.scss']
 })
+
 export class AnunciosComponent implements OnInit {
 
   arrayImg : string[];
@@ -22,27 +24,38 @@ export class AnunciosComponent implements OnInit {
   progress: { percentage: number } = { percentage: 0 };
   as: any[];
 
-  constructor(private anuncioService : AnunciosService, private ProductService : ProductoService) { }
+  constructor(private anuncioService : AnunciosService, private ProductService : ProductoService, public snackBar : MatSnackBar) { }
 
   ngOnInit() {
-    localStorage.setItem("chango-cliente", "toto");
-
-    const email = localStorage.getItem("chango-cliente");
-    console.log(email);
-    this.arrayImg;    
+    
+    //  Agarramos el email guardado en localstorage.
+    const email = localStorage.getItem("cliente-chango");
+    
     this.anuncioService.returnListCliente()
     .snapshotChanges()
     .subscribe(data => {
+    
+      //  Inicializamos las variables
       this.clients = [];
       let aux : Cliente[];
       aux = [];
+      this.arrayImg = [];           
+
+      //  Generamos el listado de clientes filtrando por el mail obtenido con localStorage.
       data.forEach(element => {
         let x = element.payload.toJSON();
         x["$key"] = element.key;
-        if(x["email"] === email)
-        this.clients.push(x as Cliente);
-        aux.push(x as Cliente);
+        if(x["email"] === email){
+          this.clients.push(x as Cliente);
+          aux.push(x as Cliente);
+        }
       });
+
+      /*  
+      * Aux[0] es el cliente que esta logeado. Aux[0].$key es su respectiva key.  
+      * Aux se define en el ForEach de arriba.
+      */
+     
       this.anuncioService.returnListAnuncios(aux[0].$key)
       .snapshotChanges()
       .subscribe(data => {
@@ -52,62 +65,78 @@ export class AnunciosComponent implements OnInit {
           y["$key"] = element.key;
           this.anuncio.push(y as Anuncio);
         });
-console.log(this.anuncio)
-        if(this.anuncio.length === 0){
+        if(this.anuncio.length === 0){          //  Si no existe ningun anuncio configurado generamos 3 espacios null en firebase.
           this.anuncioService.initialAnuncio();
         }else{
-          this.arrayImg = [];
-          Object.keys(this.anuncio[0].img).forEach(element => {
+          Object.keys(this.anuncio[0].img).forEach(element => {     //Usar forEach dentro de un objecto, todas las urls guardadas en firebase se guanda en el arrayImg.
             this.arrayImg.push(this.anuncio[0].img[element]);
           });
         }
       }); 
-    });
+    }); // Fin de subscribe general.
   }
 
 
+  /**
+   * Seleccionamos el archivo tomado en el input type file
+   * @param event Variable tomada con el evento (change) en html
+   */
   selectFile(event) {
     this.selectedFiles = event.target.files;
     this.upload();
   }
 
+  //  Funcion generica para abrir errores y/o advertencias.
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
+
+  // Generamos una mini validacion de cada archivo seleccionado en selectFile(). Y lo subimos si esta todo OK.
   upload(){
-    let x = true; 
-    let i = 0;
+    let x = true;  // Lo usamos para tomar la posicon del espacio vacio o para terminar el While.
+    let i = 0;     // Posicion del arrayImg.
   
     while(x){
-      if(this.arrayImg[i] === ""){ 
+      if(this.arrayImg[i] === ""){  // Si alguna posicion del array tiene una imagen vacia se guarda esa posicion en la variable i para luego remplazar el espacio vacio por una img.
         x = false;
       }else{
         i++
       }
       if(i>3){
-        x = false;
+        x = false;  // Si hay 3 images
       }
     }
 
-    if (i<=2) {
-      let aux;
-      // this.ProductService.SearchKeyByKeyClient(this.myKey, this.productTemp)
-      // .subscribe(data => {
-      //   aux = data.$key;
-      // });
-      this.ProductService.SearchRegistForEmail(localStorage.getItem("chango-cliente"), this.clients )
-      .subscribe(data => {
-        console.log(data)
-        aux = data.$key;
-      });
-
-      const file = this.selectedFiles.item(0);
-      this.selectedFiles = undefined;
-      this.currentFileUpload = new Imgupload(file);
-      this.currentFileUpload.$key = Math.random();
-      this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress, aux, i,false, false, this.anuncio[0].$key);
+    if (i<=2) { //  Si hay menos de 3 imagenes ya subidas.
+      let aux;     
+      if(this.selectedFiles.item(0).type === 'image/png' || this.selectedFiles.item(0).type === 'image/jpeg' || this.selectedFiles.item(0).type === 'image/jpg' ){  //Validacion de tipos.
+        if(this.selectedFiles.item(0).size < 4000000){          // Si el archivo seleccionado pesa menos de 4mb.
+          this.ProductService.SearchRegistForEmail(localStorage.getItem("cliente-chango"), this.clients )
+          .subscribe(data => {
+            aux = data.$key;
+            const file = this.selectedFiles.item(0);
+            this.selectedFiles = undefined;
+            this.currentFileUpload = new Imgupload(file);
+            this.currentFileUpload.$key = Math.random();
+            this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress, aux, i,false, false, this.anuncio[0].$key);  //Subimos la imagen.
+          });
+        }else{
+          this.openSnackBar("La imagen seleccionada pesa más de 4MB, por favor editala.","ok!");
+        }
+      }else{
+        this.openSnackBar("Solo se aceptan formatos png y jpg.","ok!");
+      }
     }else{
-      console.log("Debe borrar una imagen para poder agregar otra.", "Ok!");
+      this.openSnackBar("Debe borrar la foto que desea cambiar","ok!");
     }
 }
 
+  /**
+   * Borramos la imagen seleccionada en html.
+   * @param url Tomada por el evento (click)
+   */
   closeImg(url){
     let x;
     this.arrayImg.forEach(element => {

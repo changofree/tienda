@@ -12,6 +12,8 @@ import { StoreProductComponent } from '../../store-product/store-product.compone
 import { TableCategoriaComponent } from '../../table-categoria/table-categoria.component';
 import { EditProductComponent } from '../../edit-product/edit-product.component';
 import { AnunciosComponent } from '../../anuncios/anuncios.component';
+import { ListadopedidosComponent } from 'app/listadopedidos/listadopedidos.component';
+import { ListadoventasComponent } from 'app/listadoventas/listadoventas.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -52,20 +54,22 @@ export const AdminLayoutRoutes: Routes = [
     // }, {
     //     path: '',
     //     children: [ {
-    //         path: 'upgrade',
+    //         path: 'upgrade', 
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'listado-productos',     component: TableListComponent },
-    { path: 'listado-categorias', component:TableCategoriaComponent},
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'inicio',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
-    { path: 'listado-productos/agregar',        component: StoreProductComponent },
-    { path: 'listado-productos/editar/:key', component: EditProductComponent},
-    { path: 'anuncios', component: AnunciosComponent }
+    { path: 'backend/panel',      component: DashboardComponent },
+    { path: 'backend/configuracion',   component: UserProfileComponent },
+    { path: 'backend/listado-productos',     component: TableListComponent },
+    { path: 'backend/listado-categorias', component:TableCategoriaComponent},
+    { path: 'backend/typography',     component: TypographyComponent },
+    { path: 'backend/icons',          component: IconsComponent },
+    { path: 'backend/maps',           component: MapsComponent },
+    { path: 'backend/inicio',  component: NotificationsComponent },
+    { path: 'backend/upgrade',        component: UpgradeComponent },
+    { path: 'backend/listado-productos/agregar',        component: StoreProductComponent },
+    { path: 'backend/listado-productos/editar/:key', component: EditProductComponent},
+    { path: 'backend/listado-pedidos', component: ListadopedidosComponent},
+    { path: 'backend/listado-ventas', component: ListadoventasComponent},
+    { path: 'backend/anuncios', component: AnunciosComponent }
 ];

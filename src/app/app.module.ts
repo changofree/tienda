@@ -45,6 +45,11 @@ import { DetalleComponent } from './homeweb/detalle/detalle.component';
 import { PedidoService } from './services/pedido.service';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { NavbarHomeComponent } from './homeweb/navbar-home/navbar-home.component';
+import { FooterwebComponent } from './homeweb/footerweb/footerweb.component';
+import { OrdenComponent } from './orden/orden.component';
+import { ListadopedidosComponent } from './listadopedidos/listadopedidos.component';
+import { ListadoventasComponent } from './listadoventas/listadoventas.component';
 
 
 @NgModule({
@@ -85,6 +90,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
     DetalleComponent,
     CarritoComponent,
     CheckoutComponent,
+    NavbarHomeComponent,
+    FooterwebComponent,
+    OrdenComponent,
   ],
   providers: [AnunciosService, ProductoService, DashboardService, PedidoService],
   bootstrap: [AppComponent]

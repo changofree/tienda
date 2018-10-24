@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
+import { PedidoService } from 'app/services/pedido.service';
+import { ProductoService } from 'app/services/producto.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +10,17 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+
+  cantPedido : number;
+  totalAcumulado : number;
+  listVentas  : any[];
+
+  constructor(
+    private pedidoService : PedidoService,
+    private clientService : ProductoService
+  ) { }
+
+  //  Funciones para generar los Graficos.
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -66,7 +78,7 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
   ngOnInit() {
-      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
+      /* ----------==========     Valores de los graficos.    ==========---------- */
 
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -80,7 +92,7 @@ export class DashboardComponent implements OnInit {
               tension: 0
           }),
           low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 50, 
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
       }
 
@@ -89,7 +101,7 @@ export class DashboardComponent implements OnInit {
       this.startAnimationForLineChart(dailySalesChart);
 
 
-      /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
+      /* ----------==========   Movida extraña   ==========---------- */
 
       const dataCompletedTasksChart: any = {
           labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
@@ -103,18 +115,17 @@ export class DashboardComponent implements OnInit {
               tension: 0
           }),
           low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          high: 1000, 
           chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
       }
 
       var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
 
-      // start animation for the Completed Tasks Chart - Line Chart
+      // Crea la animacion.
       this.startAnimationForLineChart(completedTasksChart);
 
 
 
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
       var datawebsiteViewsChart = {
         labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
@@ -143,8 +154,64 @@ export class DashboardComponent implements OnInit {
       ];
       var websiteViewsChart = new Chartist.Bar('#websiteViewsChart', datawebsiteViewsChart, optionswebsiteViewsChart, responsiveOptions);
 
-      //start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(websiteViewsChart);
-  }
+      
+
+      //  Codigo leible
+
+      let email = localStorage.getItem("cliente-chango");
+      let aux = [];
+      let aux2 = [];
+
+      //  Filtramos los clientes por el que esta online y lo guardamos en aux.
+      this.clientService.getListClientsWithSnap()
+      .snapshotChanges()
+      .subscribe(data => {
+        data.forEach(element => {
+          let x = element.payload.toJSON();
+          x["$key"] = element.key;
+          if(email === x["email"]){
+            aux.push(x);
+          }
+        });
+
+        //  Tomamos todos los pedidos guardados en la key de nuestro cliente online.
+        this.pedidoService.getPedidos(aux[0].$key)
+        .snapshotChanges()
+        .subscribe(data => {
+          this.listVentas = []; //Va a guardar un resumen de ventas concretadas para mostrarlas en el html. status 2
+          let aux3 = [];        //Usamos para filtrar el valor total de todas las ventas. status 2
+          aux2 = [];            //Si el status del pedido es 1, se considera pedido para concretar y se guarda en CantPedido para informar el cliente de nuevos pedidos.
+
+          data.forEach(element => {
+            let y = element.payload.toJSON();
+            y["$key"] = element.key;
+            if(y["status"] === 1){
+              aux2.push(y);
+            }else{
+              this.listVentas.push(y);
+              aux3.push(y)
+            }
+          });
+
+          this.cantPedido = aux2.length;  // Cantidad de pedidos
+          if(this.cantPedido === undefined || this.cantPedido === 0){
+            this.cantPedido = 0;  
+          }
+
+          this.totalAcumulado = 0; // Dinero concretado
+          aux3.forEach(element => {
+            this.totalAcumulado = parseInt(element.total) + this.totalAcumulado;
+          });
+        });
+      });
+    }
+
+
+
+
+
+
+
 
 }

@@ -7,12 +7,21 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { HomewebComponent } from './homeweb/homeweb.component';
 import { DetalleComponent } from './homeweb/detalle/detalle.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { OrdenComponent } from './orden/orden.component';
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '',
     pathMatch: 'full',
   }, 
+  {
+    path: '',
+    component: CheckoutComponent
+  },
+  {
+    path: 'orden/:status',
+    component: OrdenComponent
+  },
   {
     path: 'home/:key',
     component: HomewebComponent

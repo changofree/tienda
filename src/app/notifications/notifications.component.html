@@ -4,18 +4,24 @@
           <div class="card-header card-header-danger">
               <h3 class="card-title">Primeros pasos</h3>
               <p class="card-category">En esta pagina vas a encontrar una mini guia de como empezar a usar tu ecommerce</p>
+              <p class="card-category">Tu sitio web es el siguiente: <b class="weblink" routerLink="/home/{{keyClient}}">tienda.changofree.com/home/{{keyClient}} </b></p>
           </div>
-          <div class="card-body">
+          <div class="card-body"> 
               <div class="row">
                   <div class="col-md-6">
                       <h4 class="card-title">Objetivos</h4>
+
+                      <div class="alert alert-warning alert-with-icon" data-notify="container">
+                            <span><i class="material-icons" data-notify="icon">add_alert</i><b>IMPORTANTE</b> 
+                                Antes de traer clientes, tenes que configurar mercadopago. <a routerLink="/backend/configuracion">CLICK ACÁ</a>   </span>
+                        </div>
                       <div class="alert alert-warning alert-with-icon" data-notify="container">
                           <span><i class="material-icons" data-notify="icon">add_alert</i><b *ngIf='boolView'>En curso:</b><b *ngIf="!boolView">¡Completado!</b> Visitas en tu pagina {{listViews}}/1000</span>
                       </div>
                       <div class="alert alert-warning alert-with-icon" data-notify="container">
                             <span><i class="material-icons" data-notify="icon">add_alert</i><b *ngIf="boolProduct">En curso:</b><b *ngIf="!boolProduct">¡Completado!</b> 
                                 Productos subidos {{listProductsLenght}}/10   
-                                <button mat-button-raised mat-raised-button color="primary" class="ml-5">Subir productos</button></span>
+                                <button mat-button-raised mat-raised-button color="primary" class="mt-2" routerLink="/backend/listado-productos">Subir productos</button></span>
                         </div>
                         <div class="alert alert-warning alert-with-icon" data-notify="container">
                                 <span><i class="material-icons" data-notify="icon">add_alert</i><b>En curso:</b> Concretar una venta 0/1</span>

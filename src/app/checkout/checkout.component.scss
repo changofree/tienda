@@ -23,6 +23,9 @@
 .header-cart{
     right: 0!important;
 }
+.icon-header-noti[_ngcontent-c1]::after {
+    display: none; 
+}
 .wrap-header-cart{
     visibility: visible!important;
     background-color: rgba(0, 0, 0, 0.51)!important;
@@ -30,6 +33,18 @@
 #demo{
     height: 100vh;
     
+}
+.edit-web{
+    cursor: pointer;
+    background: #e4eaefcc;
+    position: fixed;
+    padding: 20px;
+    z-index: 9999;
+    top: 100px;
+    box-shadow: 1px 2px 7px grey;
+    border: 1px solid #cacaca4d;
+    border-radius: 0px 7px 7px 0px;
+    font-weight: initial;
 }
 .block2-pic{
     height: 220px!important;

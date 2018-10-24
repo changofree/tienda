@@ -22,6 +22,8 @@ import { TableCategoriaComponent } from '../../table-categoria/table-categoria.c
 import {MatTableModule} from '@angular/material/table';
 import { EditProductComponent } from '../../edit-product/edit-product.component';
 import { AnunciosComponent } from '../../anuncios/anuncios.component';
+import { ListadopedidosComponent } from 'app/listadopedidos/listadopedidos.component';
+import { ListadoventasComponent } from 'app/listadoventas/listadoventas.component';
 
 
 @NgModule({
@@ -45,9 +47,11 @@ import { AnunciosComponent } from '../../anuncios/anuncios.component';
     IconsComponent,
     TableCategoriaComponent,
     MapsComponent,
+    ListadopedidosComponent,
     NotificationsComponent,
     UpgradeComponent,
-    StoreProductComponent
+    StoreProductComponent,
+    ListadoventasComponent
   ]
 })
 

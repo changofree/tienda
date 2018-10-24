@@ -4,80 +4,41 @@
           <div class="col-md-8">
               <div class="card">
                   <div class="card-header card-header-danger">
-                      <h4 class="card-title">Edit Profile</h4>
-                      <p class="card-category">Complete your profile</p>
+                      <h4 class="card-title">Informacion de tu web</h4>
+                      <p class="card-category">Acá podes ver y configurar tu información.</p>
                   </div>
                   <div class="card-body">
                       <form>
                           <div class="row">
-                              <div class="col-md-5">
-                                <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Company (disabled)" disabled>
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-3">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Username">
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email address" type="email">
-                                  </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Fist Name" type="text">
-                                </mat-form-field>
+                                    <input matInput placeholder="{{client.marca}}" disabled>
+                                  </mat-form-field>
                               </div>
-                              <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Last Name" type="text">
-                                </mat-form-field>
-                              </div>
+                          
+                              
                           </div>
                           <div class="row">
                               <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Adress" type="text">
+                                  <input matInput placeholder="WhatsApp" type="text" value="{{client.web.whatsapp}}" name="wp" [(ngModel)]="client.web.whatsapp">
                                 </mat-form-field>
                               </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="City" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Country" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Postal Code" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
                               <div class="col-md-12">
-                                <label>About Me</label>
                                 <mat-form-field class="example-full-width">
-                                   <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>
-                                 </mat-form-field>
-                                  <!-- <div class="form-group">
-
-                                      <div class="form-group">
-                                          <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                                          <textarea class="form-control" rows="5"></textarea>
-                                      </div>
-                                  </div> -->
+                                  <input matInput placeholder="Usuario de Instagram" type="text" value="{{client.web.instagram}}" name="inst" [(ngModel)]="client.web.instagram">
+                                </mat-form-field>
                               </div>
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Usuario de Facebook" type="text" value="{{client.web.facebook}}" name="facebook" [(ngModel)]="client.web.facebook">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-12 mt-2">
+                                        <a  color="primary" class="btn-mp" href="https://auth.mercadopago.com.ar/authorization?client_id=1396909180508686&response_type=code&platform_id=mp&redirect_uri=https://changofree.com/tienda/assets/php/validate.php?key={{client.$key}}" target="_blank">Configurar mercadopagos</a>
+                                </div>
                           </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                          <button mat-raised-button type="button" class="btn btn-danger pull-right" (click)="updateUser()">Editar perfil</button>
                           <div class="clearfix"></div>
                       </form>
                   </div>
@@ -86,17 +47,17 @@
           <div class="col-md-4">
               <div class="card card-profile">
                   <div class="card-avatar">
-                      <a href="#pablo">
-                          <img class="img" src="../assets/img/faces/marc.jpg" />
+                      <a href="www.instagram.com/changofree">
+                          <img class="img" src="../assets/img/chango.jpg" />
                       </a>
                   </div>
                   <div class="card-body">
-                      <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                      <h4 class="card-title">Alec Thompson</h4>
+                      <h6 class="card-category text-gray">Equipo de Marketing y Desarrollo digital</h6>
+                      <h4 class="card-title">ChangoFree</h4>
                       <p class="card-description">
-                          Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                      </p>
-                      <a href="#pablo" class="btn btn-danger btn-round">Follow</a>
+                        ChangoFree es una aplicación que se creo en busca de la agilización y automatización de la ventas de diversos productos. ¡Nuestro objetivo es que tu negocio sea cada día más grande!
+                    </p>
+                      <a href="wwww.instagram.com/changofree" class="btn btn-danger btn-round">Ver instagram</a>
                   </div>
               </div>
           </div>

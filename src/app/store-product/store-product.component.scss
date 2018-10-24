@@ -45,9 +45,17 @@
 
 .cerrar-img{
     cursor: pointer;
-    position: relative;
-    bottom: 200px;
-    left: 65px;
+    position: absolute;
+    background: #ffffff;
+    height: 30px;
+    padding: 4px;
+    top: 5px;
+    box-shadow: 1px 1px 1px #8080805c;
+    border-radius: 9px;
+    left: 170px;
+    z-index: 9999999;
+    padding-right: 6px;
+    padding-left: 6px;
 }
 
 

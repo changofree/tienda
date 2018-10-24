@@ -6,10 +6,8 @@ import { AnunciosService } from '../anuncios.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Carrito } from '../interfaces/carrito';
 import { Http } from '@angular/http';
-declare function require(name:string);
+import { Cliente } from 'app/interfaces/cliente';
 
-// declare var MP : any;
-// import MP from 'mercadopago'
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -19,140 +17,120 @@ declare function require(name:string);
 export class CheckoutComponent implements OnInit {
 
   viewCart : boolean = false;
-
+  
   precioTotal : number;
   Carrito : Carrito[];
-
-
-  constructor(private http : Http, private PedidoService : PedidoService, private dashboard : DashboardService, private ProductService: ProductoService, private AnuncioService : AnunciosService, private router: Router, private _activatedRoute: ActivatedRoute) {}
+  linkMercadopago;
+  buttonEdit : boolean = true;
   mp : any;
   preference : any;
-  ngOnInit() {
-    var MP = require ("mercadopago");
-    MP.configure({  
-      access_token: 'TEST-2407374069045658-112114-d0a018fae58454e2267bb9a5d813f2d8__LB_LC__-220000424'
-    });
-    // Create a preference structure
-    var preference = {
-      "items" : [
-        {
-          title: 'Lightweight Rubber Car',
-          quantity: 4,
-          currency_id: 'ARS',
-          unit_price: 26.39
-        }
-      ]
-    };
-   
-    MP.preferences.create(preference)
-      .then(function (preference) {
-        // Do something if preference has been created successfully
-        console.log("SE ENVIO");
-      }).catch(function (error) {
-        console.log(error);
-        // If an error has occurred
-      });
+  numberPedido;
+  keyPedido : string;
+  Marca : string;
   
+  AcessToken;
+  Telefono : string = "";
+  Email : string = "";
+
+  constructor(
+    private PedidoService : PedidoService,
+    private ProductService: ProductoService,
+    private router: Router,
+    private _activatedRoute: ActivatedRoute
+  ){}
+  
+  
+  ngOnInit() {    
+  
+    this.buttonEdit = false;
+    let auxBool = true;
+    let listClient : Cliente[]
+    listClient = [];
+    
     const key = this._activatedRoute.snapshot.paramMap.get('key');
     const producto = this._activatedRoute.snapshot.paramMap.get('producto');     
-    let numeroPedido = localStorage.getItem('numero-pedido');
+    let clienteOnline = localStorage.getItem("cliente-chango");    
+    this.numberPedido = localStorage.getItem('numero-pedido');
+    this.keyPedido = localStorage.getItem('key-pedido');
     const carrito = this.PedidoService.returnListCarrito(key);
     
-    if(numeroPedido === undefined || numeroPedido === null){
-      this.PedidoService.insertNewCarrito(key);
-    }
-
-    carrito.snapshotChanges()
+    
+    this.ProductService.getListClientsWithSnap()
+    .snapshotChanges()
     .subscribe(data => {
-      this.Carrito = [];
+      
       data.forEach(element => {
-        let y = element.payload.toJSON();
-        y["$key"] = element.key;
-        if(parseInt(y["numeroPedido"]) === parseInt(numeroPedido)){
-          this.Carrito.push(y);
+        let x = element.payload.toJSON();
+        x["$key"] = element.key;
+        if(x["$key"] ===  key){
+          listClient.push(x as Cliente);
         }
       });
-      this.precioTotal = 0;
-      this.Carrito.forEach(element => {
-        this.precioTotal = this.precioTotal + element.cantidad * element.precioUnitario;
-      });
+      
+      //Usamos el auxBool para que si llega a ver algun cambio en el listado de clientes, no se vuelva a actualizar esta información.
+      if(auxBool){
+        carrito.snapshotChanges()
+        .subscribe(data => {
+          this.Carrito = [];
+          data.forEach(element => {
+            let y = element.payload.toJSON();
+            y["$key"] = element.key;
+            if(parseInt(y["numeroPedido"]) === parseInt(this.numberPedido)){  //  Guardamos todos los pedidos con el numero de pedido guardado en localStorage.
+              this.Carrito.push(y);
+            }
+          });
+          
+          if(this.numberPedido === undefined || this.numberPedido === null || this.keyPedido === undefined || this.keyPedido === undefined || this.Carrito.length === 0){
+            this.router.navigateByUrl("/home/"+key);  //  Si queremos entrar al checkout sin ningun producto agregado o algun numeroPedido generado, volvemos a la home.
+          }
+
+          this.AcessToken = listClient[0].mercadopago.access_token; //  Datos de mercadoPago para generar la venta.
+          this.precioTotal = 0; // Precio total de todos los productos en el carrito.
+          this.Carrito.forEach(element => {
+            this.precioTotal = this.precioTotal + element.cantidad * element.precioUnitario;
+          });
+          this.Marca = listClient[0].marca; //  Marca del ecommerce.
+        });
+        auxBool = false;  //  Cerramos el ciclo.
+      }
+    });
+  
+  }
+
+  /**
+   * Funcion que se ejecuta al hacer click Realizar Compra
+   */
+  goMercado(){  
+    const key = this._activatedRoute.snapshot.paramMap.get('key');
+    //  Juntamos toda la informacion necesaria para enviar a mercadopago y nos devuelve la url de pago.
+    this.PedidoService.preferenceMP(this.Marca,this.precioTotal,key,this.numberPedido,this.Telefono, this.Email, this.AcessToken)
+      .subscribe(data => {
+      this.linkMercadopago = data.text();
+      console.log(this.linkMercadopago);
+      location.href = this.linkMercadopago;
     });
   }
 
+  //  Borramos algun item del carrito.
   deleteItem(key){
     this.PedidoService.removePedido(key);
   }
-  changeBoolean(event){
-    this.viewCart = false;
+
+
+
+
+  /**
+   * Agregamos uno mas a la cantidad o sacamos uno con las funciones updateMenos updateMas
+   */
+
+  updateMenos(item : Carrito){
+    if(item.cantidad > 1){
+      this.PedidoService.menosCantidad(item);
+    } 
   }
-
-/* 
-mercadopago.configure({
-  client_id: '2407374069045658',
-  client_secret: '7pAGZkoZYEnM2EiLPyKCkRwx0mhdgrjV'
-});
-------------------------------------------------------------
-// Create a preference structure
-    var preference = {
-    items: [
-      item = {
-        id: '1234',
-        title: 'Lightweight Rubber Car',
-        quantity: 4,
-        currency_id: 'ARS',
-        unit_price: 26.39
-      }
-    ],
-    payer = {
-      email: 'callie.roob@hotmail.com'
-    }
-  };
- 
-  mercadopago.preferences.create(preference)
-    .then(function (preference) {
-      // Do something if preference has been created successfully
-    }).catch(function (error) {
-      // If an error has occurred
-    }
----------------------------------------------
-// ...
-var payer = {
-  name: "Charles",
-  surname: "Montez",
-  email: "charles@yahoo.com",
-  date_created: "2015-06-02T12:58:41.425-04:00",
-  phone: {
-    area_code: "",
-    number: "920-333-556"
-  },
-  identification: {
-    type: "DNI",
-    number: "12345678"
-  },
-  address: {
-    street_name: "Carretera José Luis Suárez",
-    street_number: "1878",
-    zip_code: "20325"
+  updateMas(item : Carrito){
+    this.PedidoService.masCantidad(item);
   }
-}
---------------------------------------------------
-// ...
-var shipments = {
-    receiver_address: {
-        zip_code: 20325",
-        street_number: 1878,
-        street_name: "Carretera José Luis Suárez",
-        floor: 20,
-        apartment: "C"
-    }
-};
-// ...
--------------------------------------------------
-
-*/
-  
-
-
 
 }
 

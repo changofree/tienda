@@ -160,18 +160,27 @@ export class StoreProductComponent implements OnInit {
     }
 
     if (i<=3) {
-      let aux;
-      this.ProductService.SearchKeyByKeyClient(this.myKey, this.productTemp)
-      .subscribe(data => {
-        aux = data.$key;
-      });
       const file = this.selectedFiles.item(0);
-      this.selectedFiles = undefined;
-      this.currentFileUpload = new Imgupload(file);
-      this.currentFileUpload.$key = Math.random();
-      this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress, aux, i,false,true);
+      if(file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg' ){
+        if(file.size < 4000000){
+          let aux;
+          this.ProductService.SearchKeyByKeyClient(this.myKey, this.productTemp)
+          .subscribe(data => {
+            aux = data.$key;
+          });
+          const file = this.selectedFiles.item(0);
+          this.selectedFiles = undefined;
+          this.currentFileUpload = new Imgupload(file);
+          this.currentFileUpload.$key = Math.random();
+          this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress, aux, i,false,true);
+        }else{
+          this.openSnackBar("Debe subir una foto con menor tamaño a 4MB", "Ok!");
+        }
+      }else{
+        this.openSnackBar("Solo se permiten imagenes de formato png y jpg.", "Ok!");
+      }
     }else{
-      this.snackBar.open("Debe borrar una imagen para poder agregar otra.", "Ok!");
+      this.openSnackBar("Debe borrar una imagen para poder agregar otra.", "Ok!");
     }
 }
 
@@ -194,7 +203,7 @@ export class StoreProductComponent implements OnInit {
       if(x){
         this.ProductService.insertProd(this.StoreProduct);
         this.ProductService.deleteTempProduct(this.productTempKEY);
-
+        this.arrayImg = ["","",""];
         x = false;
       }
     });

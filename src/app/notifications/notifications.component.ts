@@ -15,12 +15,18 @@ export class NotificationsComponent implements OnInit {
   listViews : number;
   boolView : boolean = false;
   boolProduct : boolean = false;
-  constructor(private productoService : ProductoService, private dashboard : DashboardService) { }
+  keyClient : string;
+
+  constructor(
+    private productoService : ProductoService,
+  ){}
 
   ngOnInit() {
-
     let jsonClient = [];
-    let email = localStorage.getItem("chango-cliente");
+    
+    let email = localStorage.getItem("cliente-chango");
+    
+    //  Listado de clientes
     this.productoService.getListClientsWithSnap()
     .snapshotChanges()
     .subscribe(info => {
@@ -29,6 +35,7 @@ export class NotificationsComponent implements OnInit {
         y["$key"] = element.key;
         jsonClient.push(y);
       });
+    //  Filtramos el cliente. UX  
     this.productoService.SearchRegistForEmail(email, jsonClient)
       .subscribe(data => {
         this.listViews = data.web.view;
@@ -37,7 +44,7 @@ export class NotificationsComponent implements OnInit {
         }else{
           false;
         }
-
+        this.keyClient = data.$key;
         this.productoService.returnListProducts(data.$key)
         .snapshotChanges()
         .subscribe(data => {

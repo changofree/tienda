@@ -8,12 +8,14 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [ 
-    { path: '/inicio', title: 'Inicio',  icon:'home', class: '' },
-    { path: '/dashboard', title: 'Panel central',  icon: 'dashboard', class: '' },
-    { path: '/listado-productos', title: 'Productos',  icon:'content_paste', class: '' },
-    { path: '/listado-categorias', title: 'Categorias',  icon:'content_paste', class: '' },
-    { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-    { path: '/anuncios', title: 'Anuncios',  icon:'content_paste', class: '' },
+    { path: '/backend/inicio', title: 'Inicio',  icon:'home', class: '' },
+    { path: '/backend/panel', title: 'Panel central',  icon: 'dashboard', class: '' },
+    { path: '/backend/listado-productos', title: 'Productos',  icon:'style', class: '' },
+    { path: '/backend/listado-categorias', title: 'Categorias',  icon:'category', class: '' },
+    { path: '/backend/listado-pedidos', title: 'Pedidos',  icon:'import_contacts', class: '' },
+    { path: '/backend/listado-ventas', title: 'Ventas',  icon:'equalizer', class: '' },
+    { path: '/backend/anuncios', title: 'Anuncios',  icon:'layers', class: '' },
+    { path: '/backend/configuracion', title: 'Datos de cuenta',  icon:'settings', class: '' },
 ];
 
 @Component({
@@ -29,7 +31,10 @@ export class SidebarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.clienteOnline = localStorage.getItem("cliente-chango")
+    this.clienteOnline = localStorage.getItem("cliente-chango");
+    if(this.clienteOnline === null || this.clienteOnline === undefined){
+        // location.href="http://changofree.com/home";
+    }
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
   isMobileMenu() {

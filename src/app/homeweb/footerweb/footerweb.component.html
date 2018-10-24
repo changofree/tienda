@@ -1,0 +1,81 @@
+  <!-- Footer -->
+  <footer class="bg3 p-t-75 p-b-32">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-lg-4 p-b-50">
+            <h4 class="stext-301 cl0 p-b-30">
+              Categorias
+            </h4>
+  
+            <ul>
+              <li class="p-b-10" *ngFor="let x of listCategory">
+                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                  {{x.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+  
+          <div class="col-sm-12 col-lg-4 p-b-50">
+            <h4 class="stext-301 cl0 p-b-30">
+              Contacto
+            </h4>
+  
+            <ul>
+              <li class="p-b-10">
+                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                  <i class="fa ic fa-whatsapp"></i>
+                  {{listClients[0].web.whatsapp}}
+                </a>
+              </li>
+
+              <li class="p-b-10">
+                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                  
+                  <i class="fa ic fa-facebook-square"></i>   {{listClients[0].web.facebook}}
+                </a>
+              </li>
+  
+              <li class="p-b-10">
+                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                    <i class="fa ic fa-instagram	
+                    "></i>
+                  {{listClients[0].web.instagram}}
+                </a>
+              </li>
+            </ul>
+          </div>
+  
+          <div class="col-sm-12 col-lg-4 p-b-50">
+            <h4 class="stext-301 cl0 p-b-30">
+              Información
+            </h4>
+  
+            <p class="stext-107 cl7 size-201">
+              Web hecha por el equipo de Tostore. Contestamos consultas y damos asersoria sin cargo por redes sociales.
+            </p>
+  
+            <div class="p-t-27">
+              <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                <i class="fa fa-facebook"></i>
+              </a>
+  
+              <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                <i class="fa fa-instagram"></i>
+              </a>
+  
+              <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                <i class="fa fa-pinterest-p"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+  
+        <div class="p-t-40">
+  
+          <p class="stext-107 cl6 txt-center">
+            Web Ecommerce creada con ChangoFree - 2018
+          </p>
+        </div>
+      </div>
+    </footer>

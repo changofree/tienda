@@ -15,10 +15,16 @@ export class TableCategoriaComponent implements OnInit {
   listCategory : Category[];
   nameCategory : string;
   Clients : Cliente[];
-  constructor(private ProductService: ProductoService, public snackBar: MatSnackBar) { }
+
+  constructor(
+    private ProductService: ProductoService,
+    public snackBar: MatSnackBar
+  ){}
 
   ngOnInit() {
-    const email = localStorage.getItem("chango-cliente");
+    const email = localStorage.getItem("cliente-chango");
+    
+    //  Listamos los clientes y filtramos por el que esta online.
     this.ProductService.getListClientsWithSnap()
     .snapshotChanges()
     .subscribe(data => {
@@ -30,6 +36,8 @@ export class TableCategoriaComponent implements OnInit {
           this.Clients.push(x);
         } 
       });
+
+      //  Listamos todas las categorias
       this.ProductService.returnListCategory(this.Clients[0].$key)
       .snapshotChanges()
       .subscribe(dataTwo => {
@@ -46,6 +54,7 @@ export class TableCategoriaComponent implements OnInit {
   addCategory(){
     this.ProductService.insertCategory(this.nameCategory);
   }
+
   borrarCategoria(key){
     this.listCategory.forEach(element => {
       if(element.$key === key){

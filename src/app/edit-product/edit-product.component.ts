@@ -5,6 +5,7 @@ import { Product } from '../interfaces/product';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Imgupload } from '../imgupload';
 import { Category } from '../interfaces/category';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-edit-product',
@@ -22,11 +23,14 @@ export class EditProductComponent implements OnInit {
   selectedFiles: FileList;
   currentFileUpload: Imgupload;
   progress: { percentage: number } = { percentage: 0 };
-  as: any[];
   listFilter : string[];
   listCategory : Category[];
 
-  constructor(private ProductService : ProductoService, private router: Router, private _activatedRoute: ActivatedRoute) { }
+  constructor(
+    private ProductService : ProductoService,
+    private _activatedRoute: ActivatedRoute,
+    public snackBar : MatSnackBar
+  ){}
 
   ngOnInit() {
     this.Clientes = [];
@@ -38,26 +42,34 @@ export class EditProductComponent implements OnInit {
           x['$key'] = element.key;
           this.Clientes.push(x as Cliente);
         });
+        
+        //  Filtramos los cientes por el cliente actual.
         this.ProductService.SearchRegistForEmail(localStorage.getItem("cliente-chango"), this.Clientes)
         .subscribe(data => {
           this.myKey = data.$key;
         });
+
+        //  Generamos el listado de productos.
         this.ProductService.returnListProducts(this.myKey)
         .snapshotChanges()
         .subscribe(data => {
-          const key = this._activatedRoute.snapshot.paramMap.get('key');     
+          const key = this._activatedRoute.snapshot.paramMap.get('key');  //key del producto 
+
           data.forEach(element => {
             let x = element.payload.toJSON();
             x["$key"] = element.key;
             if(x["$key"] === key){
-              this.ProductToEdit = x;
+              this.ProductToEdit = x; //  Guardamos el producto que vamos a editar en ProductToEdit;
             }
           });
-          this.arrayImg = []; 
+
+          this.arrayImg = []; //Si existen imagenes, se guardan en este array. 
           Object.keys(this.ProductToEdit.img).forEach(element => {
             this.arrayImg.push(this.ProductToEdit.img[element]);
           }); 
         });
+
+        //  Gurdar el listado de todas las categorias pertenecientes a este cliente.
         this.ProductService.returnListCategory(this.myKey)
         .snapshotChanges()
         .subscribe(data => {
@@ -69,37 +81,21 @@ export class EditProductComponent implements OnInit {
           });
         });
      });
-      
-
-
-    var hoy = new Date();
-    var dd = hoy.getDate();
-    var mm = hoy.getMonth()+1; //hoy es 0!
-    var yyyy = hoy.getFullYear();
-    var h = hoy.getHours();
-    this.hora = dd + "/" + mm + "/" + yyyy + "-" + h;
   }
 
   updateTemp(){
     this.ProductService.updateProd(this.ProductToEdit, this.ProductToEdit.$key);
   }
-
-  
-  applyFilter(filterValue: string) {
-    this.listFilter = [];
-    // this..forEach(element => {
-      // if (element.name.toUpperCase().match(filterValue.toUpperCase())){
-      //   this.listFilter.push(element.name);
-      // }
-    // });
-  }
-
-
+  /**
+   * Tomamos el archivo seleccionado por el usuario
+   * @param event Valor tomado por evento (change)
+   */
   selectFile(event) {
     this.selectedFiles = event.target.files;
     this.upload();
   }
 
+  // Validamos el archivo seleccionado por el usuario en selectFile y lo subimos si todo esta ok.
   upload(){
     let x = true; 
     let i = 0;
@@ -124,17 +120,23 @@ export class EditProductComponent implements OnInit {
         this.currentFileUpload.$key = Math.random();
         this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress,this.ProductToEdit.$key , i, true,true);  
         }else{
-
+          this.openSnackBar("Debe subir una foto con menor tamaño a 4MB", "Ok!");
         }
       }else{
-
+        this.openSnackBar("Solo se permiten imagenes de formato png y jpg.", "Ok!");
       }
     }else{
-      // this.snackBar.open("Debe borrar una imagen para poder agregar otra.", "Ok!");
+      this.openSnackBar("Debe borrar una imagen para poder agregar otra.", "Ok!");
     }
   }
 
+  openSnackBar(message, action) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
 
+  //  Borramos la imagen seleccionada.
   closeImg(url){
     let x;
     this.arrayImg.forEach(element => {

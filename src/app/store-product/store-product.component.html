@@ -5,11 +5,10 @@
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h2 class="card-title text-center"> Agregar un producto</h2> 
-                        <button mat-raised-button color="primary" class="pull-right mr-1">Volver</button>
+                        <button mat-raised-button color="primary" class="pull-right mr-1" routerLink="/backend/listado-productos">Volver</button>
                       </div>
                     <div class="card-body">
                       <form>
-                        {{hora}}
                       <mat-form-field>
                         <input matInput type="text" placeholder="Nombre del producto" name="name" (change)="updateTemp()" [(ngModel)]="StoreProduct.name">
                       </mat-form-field>
@@ -31,7 +30,7 @@
                             <option value="0">Seleccionar una categoria</option>
                             <option *ngFor="let x of listCategory" value="{{x.name}}">{{x.name}}</option>
                           </select>
-                          <a routerLink="/listado-categorias">+ Agregar otra categoria</a>
+                          <a routerLink="/backend/listado-categorias">+ Agregar otra categoria</a>
                         </div>
                       </div>
                      
@@ -51,16 +50,16 @@
                         </div>
                       </div>
                       <div class="row mt-3">
-                          <div class="col-3 text-center" *ngFor="let x of arrayImg">
+                          <div class="col-12 col-md-6 col-lg-3 col-xs-12 col-sm-12 text-center" *ngFor="let x of arrayImg">
                             <div class="img-container">
+                              <span *ngIf="x"class="cerrar-img" (click)="closeImg(x)"><b>X</b></span>
                               <img src="{{x}}">
                             </div>
-                            <span class="cerrar-img" (click)="closeImg(x)"><b>X</b></span>
                           </div>
                         </div>
                     </form>
                     <div class="row mt-2">
-                      <div class="col-12 text-center">
+                      <div class="col-12 text-center mt-2">
                         <button mat-raised-button color="primary" (click)="storeProducto()">Agregar producto</button>
                       </div>
                     </div>
