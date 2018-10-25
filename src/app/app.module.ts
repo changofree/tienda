@@ -48,6 +48,7 @@ import { FooterwebComponent } from './homeweb/footerweb/footerweb.component';
 import { OrdenComponent } from './orden/orden.component';
 import { ListadopedidosComponent } from './listadopedidos/listadopedidos.component';
 import { ListadoventasComponent } from './listadoventas/listadoventas.component';
+import { ValidacionComponent } from './validacion/validacion.component';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import { ListadoventasComponent } from './listadoventas/listadoventas.component'
     NavbarHomeComponent,
     FooterwebComponent,
     OrdenComponent,
+    ValidacionComponent,
   ],
   providers: [AnunciosService, ProductoService, DashboardService, PedidoService],
   bootstrap: [AppComponent]

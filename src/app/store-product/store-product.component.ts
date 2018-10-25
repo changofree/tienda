@@ -5,6 +5,7 @@ import { Cliente } from '../interfaces/cliente';
 import { Imgupload } from '../imgupload';
 import {MatSnackBar} from '@angular/material';
 import { Category } from '../interfaces/category';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-store-product',
@@ -26,7 +27,12 @@ export class StoreProductComponent implements OnInit {
   arrayImg : string[];
   listCategory : Category[];
 
-  constructor(private ProductService : ProductoService, public snackBar: MatSnackBar) { 
+  constructor(
+    private ProductService : ProductoService,
+    public snackBar: MatSnackBar,
+    private router : Router
+  )
+  { 
     this.StoreProduct = {
       name: "",
       code: "",
@@ -196,18 +202,14 @@ export class StoreProductComponent implements OnInit {
     }else if(this.StoreProduct.price === ""){
       this.openSnackBar("Su producto debe tener un precio", "Ok!");            
     }else{
-    let x = true;
-    this.ProductService.returnListProducts(this.myKey)
-    .snapshotChanges()
-    .subscribe(data => {
-      if(x){
-        this.ProductService.insertProd(this.StoreProduct);
-        this.ProductService.deleteTempProduct(this.productTempKEY);
-        this.arrayImg = ["","",""];
-        x = false;
-      }
-    });
+      let x = true;
+      this.ProductService.returnListProducts(this.myKey)
+      this.ProductService.insertProd(this.StoreProduct);
+      this.ProductService.deleteTempProduct(this.productTempKEY);    
+      this.arrayImg = ["","",""];
+      this.router.navigateByUrl("/backend/listado-productos");
+    }
   }
-  }
+
 
 }

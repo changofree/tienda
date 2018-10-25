@@ -8,6 +8,7 @@ import { HomewebComponent } from './homeweb/homeweb.component';
 import { DetalleComponent } from './homeweb/detalle/detalle.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrdenComponent } from './orden/orden.component';
+import { ValidacionComponent } from './validacion/validacion.component';
 const routes: Routes =[
   {
     path: '',
@@ -15,20 +16,20 @@ const routes: Routes =[
     pathMatch: 'full',
   }, 
   {
-    path: '',
-    component: CheckoutComponent
-  },
-  {
     path: 'orden/:status',
     component: OrdenComponent
   },
   {
-    path: 'home/:key',
+    path: ':key',
     component: HomewebComponent
   },
   {
     path: 'detalle/:key/:producto',
     component: DetalleComponent
+  },
+  {
+    path: 'validacion',
+    component: ValidacionComponent
   },
   {
     path: 'checkout/:key',

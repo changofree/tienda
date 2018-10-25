@@ -124,16 +124,7 @@ export class ProductoService {
   }
 
   deleteTempProduct(key){
-    this.tempProducto.update(key,{
-      name: "",
-      code: "",
-      offer: "",
-      price: "",
-      description: "",
-      stock:0,
-      img:["","","",""],
-      category:"",
-    });
+    this.tempProducto.remove(key);
   }
 
   insertProd(storeProduct : Product){

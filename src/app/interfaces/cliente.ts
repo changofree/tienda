@@ -4,6 +4,7 @@ export interface Cliente {
     $key?:string;
     name?:string;
     email?:string;
+    hasta?:string;
     password?:string;
     marca?:string;
     web?:  WebTemplate;    

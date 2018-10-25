@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductoService } from 'app/services/producto.service';
+import { Router } from '@angular/router';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -28,13 +30,40 @@ export class SidebarComponent implements OnInit {
   menuItems: any[];
   clienteOnline : string;
 
-  constructor() { }
+  constructor(
+    private productService : ProductoService,
+    private router : Router
+  ) { }
 
   ngOnInit() {
     this.clienteOnline = localStorage.getItem("cliente-chango");
     if(this.clienteOnline === null || this.clienteOnline === undefined){
-        // location.href="http://changofree.com/home";
+        location.href="http://changofree.com/home";
     }
+    this.productService.getListClientsWithSnap()
+    .snapshotChanges()
+    .subscribe(data => {
+        data.forEach(element => {
+            let x = element.payload.toJSON();
+            x["$key"] = element.key;
+            if(x["email"] === this.clienteOnline){
+                let fechaTotal = x["hasta"].split("/");  // 0 = dia , 1 = mes , 2 = año
+            
+                let f = new Date();        
+            
+                let diaActual = Number(f.getDate());
+                let mesActual = Number(f.getMonth()); 
+                let anoActual = Number(f.getFullYear());
+                if(Number(fechaTotal[2]) < anoActual){
+                  this.router.navigateByUrl("/validacion");
+                }else if(Number(fechaTotal[1]) < mesActual){
+                  this.router.navigateByUrl("/validacion")        
+                }else if(Number(fechaTotal[0]) < diaActual && Number(fechaTotal[1]) === mesActual){
+                  this.router.navigateByUrl("/validacion")        
+                }
+            }
+        });
+    });
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
   isMobileMenu() {

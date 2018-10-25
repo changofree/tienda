@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
 import { Category } from '../../interfaces/category';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from '../../dashboard.service';
 import { Cliente } from '../../interfaces/cliente';
 
@@ -21,7 +21,8 @@ export class FooterwebComponent implements OnInit {
   constructor(
     private dashboard : DashboardService,
     private ProductService : ProductoService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private router : Router
   ){}
 
   ngOnInit() {
@@ -53,7 +54,23 @@ export class FooterwebComponent implements OnInit {
         if(x["$key"] === key)
         this.listClients.push(x);
       });
+
+      let fechaTotal = this.listClients[0].hasta.split("/");  // 0 = dia , 1 = mes , 2 = año
+
+      let f = new Date();        
+
+      let diaActual = Number(f.getDate());
+      let mesActual = Number(f.getMonth()); 
+      let anoActual = Number(f.getFullYear());
       
+      if(Number(fechaTotal[2]) < anoActual){
+        this.router.navigateByUrl("/validacion");
+      }else if(Number(fechaTotal[1]) < mesActual){
+        this.router.navigateByUrl("/validacion")        
+      }else if(Number(fechaTotal[0]) < diaActual && Number(fechaTotal[1]) === mesActual){
+        this.router.navigateByUrl("/validacion")        
+      }
+
       this.Facebook = this.listClients[0].web.facebook;
       this.WhatsApp = this.listClients[0].web.whatsapp;
       this.Instagram = this.listClients[0].web.instagram;
