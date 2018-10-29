@@ -30,16 +30,18 @@ export class AnunciosComponent implements OnInit {
     
     //  Agarramos el email guardado en localstorage.
     const email = localStorage.getItem("cliente-chango");
+    this.arrayImg = [];           
+    
     
     this.anuncioService.returnListCliente()
     .snapshotChanges()
     .subscribe(data => {
-    
+      
+      let boolAux = true; 
       //  Inicializamos las variables
       this.clients = [];
       let aux : Cliente[];
       aux = [];
-      this.arrayImg = [];           
 
       //  Generamos el listado de clientes filtrando por el mail obtenido con localStorage.
       data.forEach(element => {
@@ -55,7 +57,8 @@ export class AnunciosComponent implements OnInit {
       * Aux[0] es el cliente que esta logeado. Aux[0].$key es su respectiva key.  
       * Aux se define en el ForEach de arriba.
       */
-     
+      // if(boolAux){
+ 
       this.anuncioService.returnListAnuncios(aux[0].$key)
       .snapshotChanges()
       .subscribe(data => {
@@ -67,12 +70,17 @@ export class AnunciosComponent implements OnInit {
         });
         if(this.anuncio.length === 0){          //  Si no existe ningun anuncio configurado generamos 3 espacios null en firebase.
           this.anuncioService.initialAnuncio();
-        }else{
+        }
+        
+          this.arrayImg = [];
           Object.keys(this.anuncio[0].img).forEach(element => {     //Usar forEach dentro de un objecto, todas las urls guardadas en firebase se guanda en el arrayImg.
             this.arrayImg.push(this.anuncio[0].img[element]);
           });
-        }
-      }); 
+        
+      });
+ 
+      // boolAux = false;
+      // } 
     }); // Fin de subscribe general.
   }
 
@@ -138,14 +146,14 @@ export class AnunciosComponent implements OnInit {
    * @param url Tomada por el evento (click)
    */
   closeImg(url){
-    let x;
+    let x = 0;
     this.arrayImg.forEach(element => {
         if(element === url){
           x = this.arrayImg.indexOf(url)
-          this.arrayImg.splice(x, 1, "");
-          this.anuncioService.updateImg(this.arrayImg, this.anuncio[0].$key);
         }
-    });
+      });
+      this.arrayImg.splice(x, 1, "");
+      this.anuncioService.updateImg(this.arrayImg, this.anuncio[0].$key);
   }
 
 

@@ -199,9 +199,17 @@ export class DashboardComponent implements OnInit {
             this.cantPedido = 0;  
           }
 
+          let f = new Date();        
+          let anoActual = (f.getFullYear()).toString();
+          let mesActual = (f.getMonth()).toString();
+          
           this.totalAcumulado = 0; // Dinero concretado
-          aux3.forEach(element => {
-            this.totalAcumulado = parseInt(element.total) + this.totalAcumulado;
+          aux3.forEach(element => { 
+            let arrayImg = element.fechacreacion.split("/");
+            console.log(arrayImg);
+            if(arrayImg[1] === mesActual && arrayImg[2] === anoActual ){ 
+              this.totalAcumulado = parseInt(element.total) + this.totalAcumulado;
+            }
           });
         });
       });

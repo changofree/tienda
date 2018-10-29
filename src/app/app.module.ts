@@ -49,6 +49,7 @@ import { OrdenComponent } from './orden/orden.component';
 import { ListadopedidosComponent } from './listadopedidos/listadopedidos.component';
 import { ListadoventasComponent } from './listadoventas/listadoventas.component';
 import { ValidacionComponent } from './validacion/validacion.component';
+import { SoporteComponent } from './soporte/soporte.component';
 
 
 @NgModule({

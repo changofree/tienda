@@ -13,6 +13,7 @@ export class NotificationsComponent implements OnInit {
   listProducts : Product[];
   listProductsLenght : number;
   listViews : number;
+  listNotificaciones : any[];
   boolView : boolean = false;
   boolProduct : boolean = false;
   keyClient : string;
@@ -23,9 +24,21 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit() {
     let jsonClient = [];
-    
+    this.listNotificaciones = [];
     let email = localStorage.getItem("cliente-chango");
     
+    this.productoService.notificacionList()
+    .snapshotChanges()
+    .subscribe(data => {
+      this.listNotificaciones = [];
+      data.forEach(element => {
+        let x = element.payload.toJSON();
+        x["$key"] = element.key;
+        this.listNotificaciones.push(x);
+      });
+    });
+
+
     //  Listado de clientes
     this.productoService.getListClientsWithSnap()
     .snapshotChanges()

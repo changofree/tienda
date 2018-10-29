@@ -21,6 +21,8 @@ export class ProductoService {
 
   listClient: AngularFireList<Cliente>;
   listCategory: AngularFireList<Category>;
+  listNotificacion: AngularFireList<any>;
+
   products : AngularFireList<Product>;
   tempProducto : AngularFireList<Product>;
   
@@ -31,6 +33,11 @@ export class ProductoService {
   
   getListTempProductsWithSnapchotChange(){
     return this.tempProducto = this.fireBase.list('tempe');
+  }
+
+
+  notificacionList(){
+    return this.listNotificacion = this.fireBase.list('notificacion');
   }
 
   returnListCategory(key){
@@ -187,7 +194,7 @@ export class ProductoService {
 
   // this methods listed beside are for storing the img of the section
 
-  pushFileToStorage(fileUpload: Imgupload, progress: { percentage: number }, keyTemp : string, posision, bool?, proudctOrAnuncio?, keyAnuncio?) {
+  pushFileToStorage(fileUpload: Imgupload, progress: { percentage: number, estado?: string }, keyTemp : string, posision, bool?, proudctOrAnuncio?, keyAnuncio?, label?, input?) {
     const storageRef = firebase.storage().ref();
     const uploadTask = storageRef.child(`${this.basePath}/${fileUpload.$key}`).put(fileUpload.file);
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
@@ -195,6 +202,13 @@ export class ProductoService {
         // in progress
         const snap = snapshot as firebase.storage.UploadTaskSnapshot;
         progress.percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+        if(progress.percentage === 100){
+          progress.estado = "Carga completa";
+          label.style.background = "blue";
+          input.target.disabled = false;
+        }else{
+          progress.estado = null;
+        }
       },
       (error) => {
         // fail
@@ -218,6 +232,7 @@ export class ProductoService {
   }
   updateAnuncio(key, url, position, keyAnuncio){
     let arrayAux : Anuncio[];
+    let bool = true;
     this.fireBase.list('cliente/'+key+'/web/anuncios')
     .snapshotChanges()
     .subscribe(data => {
@@ -229,6 +244,7 @@ export class ProductoService {
           x["$key"] = element.key;
           arrayAux.push(x as Anuncio);
         });
+        if(bool){
             arrayAux.forEach(element => {
               Object.keys(element.img).forEach(elemento => {
                 array.push(element.img[elemento]);
@@ -238,6 +254,8 @@ export class ProductoService {
             this.fireBase.list('cliente/'+key+'/web/anuncios').update(keyAnuncio, {
               img: array
             }); 
+            bool = false;
+        }
     });
 
    
@@ -250,6 +268,7 @@ export class ProductoService {
     
 
     if(tempOrProduct){
+      let bool = true;
     this.products.snapshotChanges()
     .subscribe(item => {
       item.forEach(element => {
@@ -258,18 +277,22 @@ export class ProductoService {
         if( x["$key"] === key)
         arrayAux.push(x as Product);
       });
-      arrayAux.forEach(element => {
+      if(bool){
+        arrayAux.forEach(element => {
           array = [];
           Object.keys(element.img).forEach(elemento => {
               array.push(element.img[elemento]);
           });
           array.splice(posision, 1, url)
-      });
+        });
         this.products.update(key, {
           img: array
         });
+        bool = false;
+      }
       });
-    }else{    
+    }else{
+      let bool = true;    
     this.tempProducto.snapshotChanges()
     .subscribe(item => {
       item.forEach(element => {
@@ -278,6 +301,7 @@ export class ProductoService {
         if( x["$key"] === key)
         arrayAux.push(x as Product);
       });
+      if(bool){
       arrayAux.forEach(element => {
           array = [];
           Object.keys(element.img).forEach(elemento => {
@@ -288,7 +312,8 @@ export class ProductoService {
         this.tempProducto.update(key, {
           img: array
         });
-        
+        bool = false;
+      }
       });
     }
   }

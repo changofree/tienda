@@ -20,10 +20,23 @@ export class PedidoService {
 
   listCarrito: AngularFireList<Carrito>;
   listPedidos: AngularFireList<any>;
+  listSoporte: AngularFireList<any>;
 
   returnListCarrito(key){
     return this.listCarrito= this.fireBase.list('cliente/'+key+'/web/carrito');
   }  
+
+  soporteList(key){
+    return this.listSoporte = this.fireBase.list('soporte/'+key+'/mensaje');
+  }
+
+  inserNewSoporte(mensaje){
+    this.listSoporte.push({
+      mensaje: mensaje,
+      quien: "yo"
+    });
+  }
+
 
   getPedidos(key){
     return this.listPedidos = this.fireBase.list('cliente/'+key+'/pedido');
@@ -115,6 +128,10 @@ export class PedidoService {
     return this.http.get("assets/php/mp.php?marca="+marca+"&precio="+precioTotal+"&key="+keyFB+"&pedido="+pedido+"&tel="+telefono+"&email="+email+"&access_token="+at);
   }
 
+  preferenceMPus(email){
+    return this.http.get("assets/php/linkcf.php?&email="+email);  
+  }
+
   masCantidad(item : Carrito){
     item.cantidad++;
     this.listCarrito.update(item.$key, {
@@ -151,7 +168,7 @@ export class PedidoService {
       fechacreacion:x.fechacreacion,
       idpedido: x.idpedido,
       nombres:x.nombres,
-      pedido:x.pedido,
+      product:x.product,
       status:2,
       telefono:x.telefono,
       total: x.total

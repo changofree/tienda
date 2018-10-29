@@ -31,11 +31,13 @@ require_once '../vendor/autoload.php';
     }
     
     
+    
     # Setting my access token to get the pedido
     
     MercadoPago\SDK::setAccessToken("APP_USR-1396909180508686-100619-3bcc4155ec271254474a2cf93ce42474-242652951");
     $payment = MercadoPago\Payment::find_by_id($id);
-
+    echo $payment->external_reference;
+    
 
     # Getting a access token of the seller
     $ExternalInfo = explode("|", $payment->external_reference);

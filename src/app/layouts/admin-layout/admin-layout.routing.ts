@@ -14,6 +14,7 @@ import { EditProductComponent } from '../../edit-product/edit-product.component'
 import { AnunciosComponent } from '../../anuncios/anuncios.component';
 import { ListadopedidosComponent } from 'app/listadopedidos/listadopedidos.component';
 import { ListadoventasComponent } from 'app/listadoventas/listadoventas.component';
+import { SoporteComponent } from 'app/soporte/soporte.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -71,5 +72,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'backend/listado-productos/editar/:key', component: EditProductComponent},
     { path: 'backend/listado-pedidos', component: ListadopedidosComponent},
     { path: 'backend/listado-ventas', component: ListadoventasComponent},
+    { path: 'backend/soporte', component: SoporteComponent},
     { path: 'backend/anuncios', component: AnunciosComponent }
 ];

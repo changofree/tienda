@@ -11,9 +11,8 @@ import { OrdenComponent } from './orden/orden.component';
 import { ValidacionComponent } from './validacion/validacion.component';
 const routes: Routes =[
   {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
+    path: 'validacion',
+    component: ValidacionComponent
   }, 
   {
     path: 'orden/:status',
@@ -26,10 +25,6 @@ const routes: Routes =[
   {
     path: 'detalle/:key/:producto',
     component: DetalleComponent
-  },
-  {
-    path: 'validacion',
-    component: ValidacionComponent
   },
   {
     path: 'checkout/:key',

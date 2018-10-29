@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
+import { ProductoService } from 'app/services/producto.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,13 +15,26 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
-
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    listNotificaciones : any[];
+    aux ;
+    constructor(location: Location,  private element: ElementRef, private router: Router, private productoService : ProductoService) {
       this.location = location;
           this.sidebarVisible = false;
     }
 
     ngOnInit(){
+        this.aux = 0;
+        this.productoService.notificacionList()
+        .snapshotChanges()
+        .subscribe(data => {
+          this.listNotificaciones = [];
+          data.forEach(element => {
+            let x = element.payload.toJSON();
+            x["$key"] = element.key;
+            this.listNotificaciones.push(x);
+          });
+          this.aux = this.listNotificaciones.length;
+        });
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];

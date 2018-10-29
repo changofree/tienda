@@ -43,6 +43,7 @@ export class DetalleComponent implements OnInit {
   keyPedido : string;
   newPedido : Carrito[];
   WhatsApp : string;
+
   constructor(
     private PedidoService : PedidoService, 
     private dashboard : DashboardService,
@@ -147,7 +148,7 @@ export class DetalleComponent implements OnInit {
       // Actualizamos la cantidad de visitas      
       this.client = aux[0];
       this.WhatsApp = this.client.web.whatsapp;
-      this.Marca = aux[0].marca;
+      this.Marca = aux[0].$key;
       if(aux[0].web.view !== undefined){
         aux[0].web.view = aux[0].web.view + 1;
       }else{

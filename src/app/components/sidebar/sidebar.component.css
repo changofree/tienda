@@ -1,3 +1,6 @@
 .simple-text{
     font-size:12px!important;
 }
+.sidebar-wrapper{
+    overflow: auto!important;
+}

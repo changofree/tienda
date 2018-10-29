@@ -73,7 +73,7 @@ ngOnInit() {
     this.infoPedido = [];
     this.moreIfno = pedidoObject;
     this.listCarrito.forEach(element => {
-      if(parseInt(element.numeroPedido) === parseInt(pedidoObject.pedido)){
+      if(parseInt(element.numeroPedido) === parseInt(pedidoObject.product)){
         this.infoPedido.push(element);
       }
     });

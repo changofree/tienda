@@ -63,11 +63,7 @@ export class FooterwebComponent implements OnInit {
       let mesActual = Number(f.getMonth()); 
       let anoActual = Number(f.getFullYear());
       
-      if(Number(fechaTotal[2]) < anoActual){
-        this.router.navigateByUrl("/validacion");
-      }else if(Number(fechaTotal[1]) < mesActual){
-        this.router.navigateByUrl("/validacion")        
-      }else if(Number(fechaTotal[0]) < diaActual && Number(fechaTotal[1]) === mesActual){
+      if(Number(fechaTotal[1]) <= mesActual && Number(fechaTotal[2]) <= anoActual && Number(fechaTotal[0]) <= diaActual){
         this.router.navigateByUrl("/validacion")        
       }
 

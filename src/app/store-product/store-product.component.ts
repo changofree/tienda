@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { ProductoService } from '../services/producto.service';
 import { Cliente } from '../interfaces/cliente';
@@ -18,7 +18,7 @@ export class StoreProductComponent implements OnInit {
   Clientes : Cliente[];
   selectedFiles: FileList;
   currentFileUpload: Imgupload;
-  progress: { percentage: number } = { percentage: 0 };
+  progress: { percentage: number, estado?: string } = { percentage: 0, estado: null };
   as: any[];
   hora : string;
   myKey : string;
@@ -26,6 +26,7 @@ export class StoreProductComponent implements OnInit {
   productTempKEY : string;
   arrayImg : string[];
   listCategory : Category[];
+  nameCategory : string;
 
   constructor(
     private ProductService : ProductoService,
@@ -46,6 +47,7 @@ export class StoreProductComponent implements OnInit {
   }
  
   ngOnInit() {
+    this.nameCategory = "";
     this.productTemp = [];
     this.Clientes = [];
     this.ProductService.getListTempProductsWithSnapchotChange()
@@ -132,6 +134,10 @@ export class StoreProductComponent implements OnInit {
     });
   }
 
+  addCategoria(){
+    this.ProductService.insertCategory(this.nameCategory);
+    this.nameCategory = "";
+  }
   openSnackBar(message, action) {
     this.snackBar.open(message, action, {
       duration: 5000,
@@ -146,11 +152,15 @@ export class StoreProductComponent implements OnInit {
   }
 
   selectFile(event) {
+    let label = document.getElementById("labelFile");
+    label.style.background = "grey";
+    event.target.disabled = true; 
+
     this.selectedFiles = event.target.files;
-    this.upload();
+    this.upload(label, event);
   }
 
-  upload(){
+  upload(label, input){
     let x = true; 
     let i = 0;
   
@@ -178,7 +188,7 @@ export class StoreProductComponent implements OnInit {
           this.selectedFiles = undefined;
           this.currentFileUpload = new Imgupload(file);
           this.currentFileUpload.$key = Math.random();
-          this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress, aux, i,false,true);
+          this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress, aux, i,false,true,null,label, input);
         }else{
           this.openSnackBar("Debe subir una foto con menor tamaño a 4MB", "Ok!");
         }

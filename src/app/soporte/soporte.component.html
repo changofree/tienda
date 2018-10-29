@@ -1,0 +1,29 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="card">
+          <div class="card-header card-header-danger">
+              <h3 class="card-title">¡Hola! Por cualquier consulta o inconveniente podes comunicarte con el equipo de soporte de ChangoFree</h3>
+              <p class="card-category">Cuando el equipo se ponga en linea contestará lo más rapido posible, no desesperes! :)</p>
+          </div>
+          <div class="card-body"> 
+            <div class="row cont">
+              <div class="col-12" *ngFor="let x of mensajes">
+                        <div class="alert alert-info {{x.quien}}">
+                          <span>
+                            <b>{{x.quien}}:</b>
+                              {{x.mensaje}}    
+                            </span>
+                        </div>
+              </div>
+            </div>
+              <div class="col-12">
+                <form>
+                <mat-form-field>
+                  <input matInput type="text" placeholder="Tu mensaje" name="msj" [(ngModel)]="mensaje">
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="enviar()">Enviar</button>
+              </form>
+              </div>
+          </div>
+    </div>
+  </div>

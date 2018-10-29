@@ -20,7 +20,7 @@
     }
   </style>
     <!-- To work in server  -->
-    <!-- <base href='https://tienda.changofree.com/'>  -->
+    <!-- <base href='https://tienda.changofree.com'>  -->
 
     <!-- To work in localhost -->
     <base href='/'> 
@@ -44,9 +44,17 @@
     <div class="loader">
       <svg class="circular" viewBox="25 25 50 50">
           <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-      </svg>
+        </svg>
     </div>
   </app-root>
+  <script>
+  window.onbeforeunload = function (e) {
+    var e = e || window.event;
+      if (e) {
+      localStorage.clear();
+    }
+  }
+  </script>
 </body>
 
 

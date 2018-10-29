@@ -21,10 +21,10 @@ export class TableListComponent implements OnInit {
 
   ngOnInit() {
     let email = localStorage.getItem("cliente-chango");
-    const listClients = [];
     this.ProductService.getListClientsWithSnap()
     .snapshotChanges()
     .subscribe(data => {
+      const listClients = [];
       let keyClient;
       data.forEach(element => {
         let x = element.payload.toJSON();
@@ -37,10 +37,10 @@ export class TableListComponent implements OnInit {
           keyClient = element.$key;
         } 
       });
-      this.listProducts = [];
-          this.ProductService.returnListProducts(keyClient)
-          .snapshotChanges()
-          .subscribe(data => {
+      this.ProductService.returnListProducts(keyClient)
+      .snapshotChanges()
+      .subscribe(data => {
+        this.listProducts = [];
           data.forEach(element => {
             let y = element.payload.toJSON();
             y["$key"] = element.key;

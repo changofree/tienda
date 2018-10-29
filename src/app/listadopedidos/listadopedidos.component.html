@@ -7,6 +7,7 @@
                       <h4 class="card-title "> Pedidos realizados </h4>
                       <p class="card-category"> Este es el listado de todos los pedidos que se han procesado con mercadopago. Los pedidos que dicen acreditados, una vez entregado el producto se deben pasar a la seccion de ventas concretadas.
                         Los pedidios no acreditados o con error, significa que en el momento de realizar el pago hubo un problema, recomendamos hablar con el cliente y verificar tu cuenta de mercadopago por posibles confusiones.
+                        Si hubo una confunsión y el proceso de compra ya fue procesado, debes entrar a tu cuenta de mercadopago para devolver el dinero al comprador.
                       </p>
                     </div>
                   <div class="card-body">
@@ -43,7 +44,7 @@
                                         {{x.idpedido}}
                                       </td>
                                       <td>
-                                        {{x.pedido}}
+                                        {{x.product}}
                                       </td>
                                       <td class="text-primary">
                                         $ {{x.total}}
@@ -93,7 +94,7 @@
                   <p><b>Numero de pedido MercadoPago:</b> {{moreIfno.idpedido}}</p>
                 </div>
                 <div class="col-12">
-                    <p><b>Numero de pedido:</b> {{moreIfno.pedido}}</p>                  
+                    <p><b>Numero de pedido:</b> {{moreIfno.product}}</p>                  
                 </div>
                 <div class="col-12 mt-2">
                   <div class="table-responsive">

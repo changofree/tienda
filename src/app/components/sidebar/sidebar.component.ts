@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/backend/listado-pedidos', title: 'Pedidos',  icon:'import_contacts', class: '' },
     { path: '/backend/listado-ventas', title: 'Ventas',  icon:'equalizer', class: '' },
     { path: '/backend/anuncios', title: 'Anuncios',  icon:'layers', class: '' },
+    { path: '/backend/soporte', title: 'Soporte',  icon:'message', class: '' },
     { path: '/backend/configuracion', title: 'Datos de cuenta',  icon:'settings', class: '' },
 ];
 
@@ -38,7 +39,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     this.clienteOnline = localStorage.getItem("cliente-chango");
     if(this.clienteOnline === null || this.clienteOnline === undefined){
-        location.href="http://changofree.com/home";
+        // location.href="http://changofree.com/home";
     }
     this.productService.getListClientsWithSnap()
     .snapshotChanges()
@@ -54,11 +55,8 @@ export class SidebarComponent implements OnInit {
                 let diaActual = Number(f.getDate());
                 let mesActual = Number(f.getMonth()); 
                 let anoActual = Number(f.getFullYear());
-                if(Number(fechaTotal[2]) < anoActual){
-                  this.router.navigateByUrl("/validacion");
-                }else if(Number(fechaTotal[1]) < mesActual){
-                  this.router.navigateByUrl("/validacion")        
-                }else if(Number(fechaTotal[0]) < diaActual && Number(fechaTotal[1]) === mesActual){
+                
+                if(Number(fechaTotal[1]) <= mesActual && fechaTotal[2] <= anoActual && fechaTotal[0] <= diaActual){
                   this.router.navigateByUrl("/validacion")        
                 }
             }
@@ -66,6 +64,12 @@ export class SidebarComponent implements OnInit {
     });
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
+
+  cerrarSesion(){
+      localStorage.clear();
+      location.href = "https://changofree.com/";
+  }
+
   isMobileMenu() {
       if ($(window).width() > 991) {
           return false;

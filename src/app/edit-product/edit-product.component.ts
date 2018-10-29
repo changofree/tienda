@@ -25,6 +25,7 @@ export class EditProductComponent implements OnInit {
   progress: { percentage: number } = { percentage: 0 };
   listFilter : string[];
   listCategory : Category[];
+  nameCategory: string;
 
   constructor(
     private ProductService : ProductoService,
@@ -33,7 +34,9 @@ export class EditProductComponent implements OnInit {
   ){}
 
   ngOnInit() {
+    this.nameCategory = "";
     this.Clientes = [];
+    let first = true;
       this.ProductService.getListClientsWithSnap()
       .snapshotChanges()
       .subscribe(data => {
@@ -62,7 +65,7 @@ export class EditProductComponent implements OnInit {
               this.ProductToEdit = x; //  Guardamos el producto que vamos a editar en ProductToEdit;
             }
           });
-
+          if(first)
           this.arrayImg = []; //Si existen imagenes, se guardan en este array. 
           Object.keys(this.ProductToEdit.img).forEach(element => {
             this.arrayImg.push(this.ProductToEdit.img[element]);
@@ -91,12 +94,16 @@ export class EditProductComponent implements OnInit {
    * @param event Valor tomado por evento (change)
    */
   selectFile(event) {
+    let label = document.getElementById("labelFile");
+    label.style.background = "grey";
+    event.target.disabled = true; 
+
     this.selectedFiles = event.target.files;
-    this.upload();
+    this.upload(label, event);
   }
 
   // Validamos el archivo seleccionado por el usuario en selectFile y lo subimos si todo esta ok.
-  upload(){
+  upload(label, input){
     let x = true; 
     let i = 0;
   
@@ -118,7 +125,7 @@ export class EditProductComponent implements OnInit {
         this.selectedFiles = undefined;
         this.currentFileUpload = new Imgupload(file);
         this.currentFileUpload.$key = Math.random();
-        this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress,this.ProductToEdit.$key , i, true,true);  
+        this.ProductService.pushFileToStorage(this.currentFileUpload, this.progress,this.ProductToEdit.$key , i, true,true,null,label, input);  
         }else{
           this.openSnackBar("Debe subir una foto con menor tamaño a 4MB", "Ok!");
         }
@@ -135,18 +142,23 @@ export class EditProductComponent implements OnInit {
       duration: 5000,
     });
   }
-
+  addCategoria(){
+    this.ProductService.insertCategory(this.nameCategory);
+    this.nameCategory = "";
+  }
   //  Borramos la imagen seleccionada.
   closeImg(url){
-    let x;
+    let x = 0;
     this.arrayImg.forEach(element => {
-        if(element === url){
+   
+       if(element === url){
           x = this.arrayImg.indexOf(url)
-          this.arrayImg.splice(x, 1, "");
-          this.ProductToEdit.img = this.arrayImg;
-          this.ProductService.updateProd(this.ProductToEdit, this.ProductToEdit.$key);
         }
-    });
-  }
+      });
+
+      this.arrayImg.splice(x, 1, "");
+      this.ProductToEdit.img = this.arrayImg;
+      this.ProductService.updateProd(this.ProductToEdit, this.ProductToEdit.$key);
+    }
 
 }

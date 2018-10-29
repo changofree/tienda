@@ -25,13 +25,19 @@ require_once '../vendor/autoload.php';
         $estado = "Pago pendiente";
     }
 
+    $dia = date("d");
+    $mes = date("m")-1;
+    $ano = date("Y");
+
+    $fecha_actual = $dia."/".$mes."/".$ano;
+
 
     # Information for send to FireBase
     
     $data = '{"estado":"'.$estado.'",
             "idpedido":"'.$_POST["idpedido"].'",
             "email":"'.$payment->payer->email.'",
-            "fechacreacion":"'.$payment->date_created.'",
+            "fechacreacion":"'.$fecha_actual.'",
             "telefono":"'.$payment->payer->phone->number.'",
             "DNI":"'.$payment->card->cardholder->identification->number.'",
             "nombres":"'.$payment->card->cardholder->name.'",
