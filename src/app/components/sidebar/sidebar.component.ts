@@ -30,6 +30,7 @@ export class SidebarComponent implements OnInit {
   
   menuItems: any[];
   clienteOnline : string;
+    Marca : string;
 
   constructor(
     private productService : ProductoService,
@@ -37,6 +38,7 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.Marca = "";
     this.clienteOnline = localStorage.getItem("cliente-chango");
     if(this.clienteOnline === null || this.clienteOnline === undefined){
         // location.href="http://changofree.com/home";
@@ -49,7 +51,7 @@ export class SidebarComponent implements OnInit {
             x["$key"] = element.key;
             if(x["email"] === this.clienteOnline){
                 let fechaTotal = x["hasta"].split("/");  // 0 = dia , 1 = mes , 2 = año
-            
+                this.Marca = x["$key"];
                 let f = new Date();        
             
                 let diaActual = Number(f.getDate());

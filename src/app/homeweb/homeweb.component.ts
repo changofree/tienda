@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AnunciosService } from '../anuncios.service';
 import { Anuncio } from '../anuncio';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Product } from '../interfaces/product';
 import { ProductoService } from '../services/producto.service';
 import { DashboardService } from '../dashboard.service';
@@ -32,7 +32,7 @@ export class HomewebComponent implements OnInit {
   key : string;
 
   viewMore : boolean = false;
-  buttonEdit : boolean = true;
+  buttonEdit : boolean = false;
 
   constructor(
     private dashboard : DashboardService,
@@ -40,18 +40,30 @@ export class HomewebComponent implements OnInit {
     private AnuncioService : AnunciosService,
     private _activatedRoute: ActivatedRoute,
     private PedidoService : PedidoService,
-  ){}
+    private router : Router
+  ){
+    this.buttonEdit = false;
+  }
 
 
   changeBoolean(event){
     this.viewCart = false;
   }
-  
+  reload(){
+    location.reload();
+  }
   ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0)
+    });
+  
     const key = this._activatedRoute.snapshot.paramMap.get('key');     
     let numeroPedido = localStorage.getItem('numero-pedido');
     let clienteOnline = localStorage.getItem("cliente-chango");
-
+    console.log(numeroPedido);
     this.listAnuncios = [];
     this.listFilter = [];
     this.listProducts = [];

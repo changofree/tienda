@@ -1,6 +1,13 @@
-
-
-
+<div class="f-width py-3" *ngIf="buttonEdit">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 bt-c">
+					<button type="button" class="btn btn-outline-light ov text-white ml-4" routerLink="/backend/inicio">Configurar web</button>
+					<button type="button" class="btn btn-outline-light ov text-white ml-4" (click)="reload()">Cerrar sesión</button>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- Header -->
 	<header>
 		<!-- Header desktop -->
@@ -76,9 +83,9 @@
 
 					<!-- Indicators -->
 					<ul class="carousel-indicators">
-					  <li data-target="#demo" data-slide-to="0" class="active"></li>
-					  <li data-target="#demo" data-slide-to="1"></li>
-					  <li data-target="#demo" data-slide-to="2"></li>
+					  <li data-target="#demo" data-slide-to="0" class="active" *ngIf="arrayImg[0]"></li>
+					  <li data-target="#demo" data-slide-to="1" *ngIf="arrayImg[1]"></li>
+					  <li data-target="#demo" data-slide-to="2" *ngIf="arrayImg[2]"></li>
 					</ul>
 				  
 					<!-- The slideshow -->
@@ -184,9 +191,7 @@
 		</div>
 
 	</section>
-	<div class="edit-web" *ngIf="buttonEdit" routerLink="/backend/inicio">
-		<p>Configuración de la web</p>
-	</div>
+	
 <app-footerweb>
 </app-footerweb>
 

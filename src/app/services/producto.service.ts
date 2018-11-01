@@ -204,7 +204,7 @@ export class ProductoService {
         progress.percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
         if(progress.percentage === 100){
           progress.estado = "Carga completa";
-          label.style.background = "blue";
+          label.style.background = "transparent";
           input.target.disabled = false;
         }else{
           progress.estado = null;

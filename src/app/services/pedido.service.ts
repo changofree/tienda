@@ -87,10 +87,12 @@ export class PedidoService {
       data.forEach(element => {
         let y = element.payload.toJSON();
         y["$key"] = element.key;
-        if(parseInt(y["numero-pedido"]) === parseInt(numeroPedido)){
+        if(parseInt(y["numeroPedido"]) === parseInt(numeroPedido)){
           x.push(y);
         }
       });
+      console.log("ASDA");
+      console.log(numeroPedido);
       if(bool){ 
         console.log(x);
         if(x.length === 0){

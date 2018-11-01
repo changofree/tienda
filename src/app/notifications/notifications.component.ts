@@ -17,12 +17,14 @@ export class NotificationsComponent implements OnInit {
   boolView : boolean = false;
   boolProduct : boolean = false;
   keyClient : string;
+  Nombre : string;
 
   constructor(
     private productoService : ProductoService,
   ){}
 
   ngOnInit() {
+    this.Nombre  = "";
     let jsonClient = [];
     this.listNotificaciones = [];
     let email = localStorage.getItem("cliente-chango");
@@ -51,6 +53,7 @@ export class NotificationsComponent implements OnInit {
     //  Filtramos el cliente. UX  
     this.productoService.SearchRegistForEmail(email, jsonClient)
       .subscribe(data => {
+        this.Nombre = data.marca;
         this.listViews = data.web.view;
         if(this.listViews < 1000){
           this.boolView = true;

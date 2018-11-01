@@ -1,53 +1,58 @@
-	<!-- Header -->
-	<header class="header-v4">
-		<!-- Header desktop -->
-		<div class="container-menu-desktop">
-			<!-- Topbar -->
-			<div class="wrap-menu-desktop how-shadow1">
-				<nav class="limiter-menu-desktop container">
-					
-		
-					<!-- Menu desktop -->
-					<div class="menu-desktop">
-						<ul class="main-menu">
-							<li>
-								<a routerLink="/home/{{key}}"> {{Marca}}</a>
-							</li>
-						</ul>
-					</div>	
 
-					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
 
-					</div>
-				</nav>
-			</div>	
+
+<!-- Header -->
+<header>
+	<!-- Header desktop -->
+	<div class="container-menu-desktop">
+		<!-- Topbar -->
+
+		<div class="wrap-menu-desktop">
+			<nav class="limiter-menu-desktop container">
+				
+				<!-- Logo desktop -->		
+			
+
+				<!-- Menu desktop -->
+				<div class="menu-desktop">
+					<ul class="main-menu">
+						<li>
+							<a>{{Marca}}</a>
+						</li>
+					</ul>
+				</div>	
+
+				<!-- Icon header -->
+			
+			</nav>
+		</div>	
+	</div>
+
+	<!-- Header Mobile -->
+	<div class="wrap-header-mobile">
+		<!-- Logo moblie -->		
+		<div class="logo-mobile">
+			<a>{{Marca}}</a>
 		</div>
 
-		<!-- Header Mobile -->
-		<div class="wrap-header-mobile">
-			<!-- Logo moblie -->		
-
-			<!-- Icon header -->
-			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-
+		<!-- Icon header -->
 	
-			</div>
 
-		</div>
+	</div>
 
 
-		<!-- Menu Mobile -->
-		<div class="menu-mobile">
-			<ul class="main-menu-m">
-				<li>
-					<a href="contact.html">MarcaDePagina</a>
-				</li>
-			</ul>
-		</div>
-
-		
-	</header>
+	<!-- Menu Mobile -->
+	<div class="menu-mobile">
+		<ul class="main-menu-m">
+			<li>
+				<a href="index.html">Home</a>
+				<span class="arrow-main-menu-m">
+					<i class="fa fa-angle-right" aria-hidden="true"></i>
+				</span>
+			</li>
+		</ul>
+	</div>
+</header>
 
   
 	<span *ngIf="viewCart">
@@ -56,11 +61,11 @@
 		
 
 	<!-- Shoping Cart -->
-	<form class="bg0 p-t-75 p-b-85">
+	<form class="bg0 p-t-75 p-b-85 pt-3">
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
-						<button mat-raised-button color="primary" routerLink="/{{Marca}}">Volver al inicio</button>
+				<div class="col-12 my-5 text-succes ts">
+					<a routerLink="/{{Marca}}" >Volver al inicio</a>
 				</div>
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
@@ -133,7 +138,7 @@
 								<div class="p-t-15">
 									<form>
 									<div class="bor8 bg0 m-b-22">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Telefono" [(ngModel)]="Email">
+										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Email" [(ngModel)]="Email">
 									</div>
 									<div class="bor8 bg0 m-b-22">
 										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Telefono" [(ngModel)]="Telefono">
@@ -157,7 +162,7 @@
 								</span>
 							</div>
             </div>
-			<a class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" (click)="goMercado()">
+			<a class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer text-white" (click)="goMercado()">
               Realizar compra
             </a>
 					</div>

@@ -81,3 +81,45 @@
     height: 110px;
     cursor: pointer;
 }
+
+
+@media  screen and (max-width: 767px) {
+    .mobilt{
+        width: 100%!important;
+    }
+    .b-tc{
+        text-align: center!important;
+    }
+    .ts{
+        margin-top: 0px!important;
+        margin-bottom: 30px!important;
+    }
+    .inp{
+        margin: 0px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px!important;
+    }
+    .size-101{
+        min-width: auto!important;
+        margin-left: auto;
+        margin-right: auto;
+    }    
+    .size-204{
+        width: initial!important;
+    }
+}
+
+.f-width{
+    background: #1a374a;
+    height: auto;
+
+}
+.bt-c{
+    text-align: right!important;
+}
+.ov:hover{
+    color:black!important;
+}
+

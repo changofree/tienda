@@ -54,12 +54,14 @@
 
 .labelFile{
     cursor: pointer;
-    background: #4054b5;
+    border: 1px solid #00bcd4;
     display: block;
+    border-radius: 4px!important;
     width: 198px;
+    color: #18bcd4!important;
     border-radius: 0px;
+    -webkit-box-shadow: 0px 2px 1.5px #a5a5a5;
     box-shadow: 0px 2px 1.5px #a5a5a5;
-    color: white;
     padding: 11px;
     margin-top: 20px;
     font-size: 14px;

@@ -9,3 +9,11 @@
     cursor: pointer;
 
 }
+.point{
+    background: white;
+    box-shadow: 3px 1px 14px #8080806b;
+    color: #3C4858;
+}
+.rbld{
+    font-weight: bold;
+}

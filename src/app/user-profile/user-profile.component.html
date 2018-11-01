@@ -3,8 +3,8 @@
       <div class="row">
           <div class="col-md-8">
               <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title">Información de tu web</h4>
+                  <div class="card-header card-header-info">
+                      <h3 class="card-title"> <b>Información de tu web</b></h3>
                       <p class="card-category">Acá podes ver y configurar tu información.</p>
                   </div>
                   <div class="card-body">
@@ -34,11 +34,9 @@
                                   <input matInput placeholder="Usuario de Facebook" type="text" value="{{client.web.facebook}}" name="facebook" [(ngModel)]="client.web.facebook">
                                 </mat-form-field>
                               </div>
-                              <div class="col-md-12 mt-2">
-                                        <a  color="primary" class="btn-mp" href="https://auth.mercadopago.com.ar/authorization?client_id=1396909180508686&response_type=code&platform_id=mp&redirect_uri=https://changofree.com/tienda/assets/php/validate.php?key={{client.$key}}" target="_blank">Configurar mercadopagos</a>
-                                </div>
+                              
                           </div>
-                          <button mat-raised-button type="button" class="btn btn-danger pull-right" (click)="updateUser()">Editar perfil</button>
+                          <button mat-raised-button type="button" class="btn btn-info pull-right" (click)="updateUser()">Editar perfil</button>
                           <div class="clearfix"></div>
                       </form>
                   </div>
@@ -57,7 +55,7 @@
                       <p class="card-description">
                         ChangoFree es una aplicación que se creo en busca de la agilización y automatización de la ventas de diversos productos. ¡Nuestro objetivo es que tu negocio sea cada día más grande!
                     </p>
-                      <a href="wwww.instagram.com/changofree" class="btn btn-danger btn-round">Ver instagram</a>
+                      <a href="wwww.instagram.com/changofree" class="btn btn-info btn-round">Ver instagram</a>
                   </div>
               </div>
           </div>

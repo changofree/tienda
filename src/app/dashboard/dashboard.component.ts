@@ -14,11 +14,13 @@ export class DashboardComponent implements OnInit {
   cantPedido : number;
   totalAcumulado : number;
   listVentas  : any[];
-
+  listNotificaciones : any[];
   constructor(
     private pedidoService : PedidoService,
     private clientService : ProductoService
-  ) { }
+  ) { 
+    this.listNotificaciones = [];
+  }
 
   //  Funciones para generar los Graficos.
   startAnimationForLineChart(chart){
@@ -78,7 +80,21 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
   ngOnInit() {
-      /* ----------==========     Valores de los graficos.    ==========---------- */
+    
+
+    this.clientService.notificacionList()
+    .snapshotChanges()
+    .subscribe(data => {
+      this.listNotificaciones = [];
+      data.forEach(element => {
+        let x = element.payload.toJSON();
+        x["$key"] = element.key;
+        this.listNotificaciones.push(x);
+      });
+    });
+    
+    
+    /* ----------==========     Valores de los graficos.    ==========---------- */
 
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],

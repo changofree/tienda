@@ -50,6 +50,7 @@ export class DetalleComponent implements OnInit {
     private ProductService: ProductoService,
     private AnuncioService : AnunciosService,
     private _activatedRoute: ActivatedRoute,
+    private router : Router
   ) 
   {
     this.product = {
@@ -72,6 +73,12 @@ export class DetalleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0)
+  });
     this.Marca = "";
     this.WhatsApp = "";
     let clienteOnline = localStorage.getItem("cliente-chango");
@@ -80,13 +87,15 @@ export class DetalleComponent implements OnInit {
     let numeroPedido = localStorage.getItem('numero-pedido');
     this.keyPedido = localStorage.getItem('key-pedido');
     const carrito = this.PedidoService.returnListCarrito(key);
-    
+    this.Marca = key;
     this.cantProd = 1;
+    this.Carrito = null;
     this.view = true;
     let aux : Cliente[];
     aux = [];
     this.arrayImg = ["", "", "" ,""]; //  Guardamos toda las url en este array.
     
+    console.log(localStorage.getItem('numero-pedido'));
     //  Si el cliente no se logeo, no se muestra boton de configuracion
     if(clienteOnline === undefined || clienteOnline === null){
       this.buttonEdit = false;
@@ -97,7 +106,9 @@ export class DetalleComponent implements OnInit {
     if(numeroPedido === undefined || numeroPedido === null || this.keyPedido === null || this.keyPedido === undefined){
       this.PedidoService.insertNewCarrito(key);
       boolauxtwo = false;
+      console.log("se inserto nuevo pedido")
     }
+    console.log(localStorage.getItem('numero-pedido'));
 
     let boolaux = true;
     carrito.snapshotChanges()
@@ -106,15 +117,17 @@ export class DetalleComponent implements OnInit {
       data.forEach(element => {
         let y = element.payload.toJSON();
         y["$key"] = element.key;
-        if(y["numeroPedido"] === parseInt(numeroPedido)){
+        console.log(y);
+        if(parseInt(y["numeroPedido"]) === parseInt(numeroPedido)){
           this.Carrito.push(y);
         }
       });
 
       //Si no se agrego ningun nuevo pedido anteriormente, se genera ahora.
       if(boolaux && boolauxtwo){
-        if(this.Carrito.length === 0){
+        if(this.Carrito.length === 0 || this.Carrito === undefined){
           this.PedidoService.insertNewCarrito(key);
+          console.log("nuevo pedido");
         }else{
         this.Carrito.forEach(element => {
           if(element.keyfb !== this.keyPedido){
@@ -148,14 +161,12 @@ export class DetalleComponent implements OnInit {
       // Actualizamos la cantidad de visitas      
       this.client = aux[0];
       this.WhatsApp = this.client.web.whatsapp;
-      this.Marca = aux[0].$key;
       if(aux[0].web.view !== undefined){
         aux[0].web.view = aux[0].web.view + 1;
       }else{
         aux[0].web.view = 1;
       }
 
-      this.Marca = aux[0].web.name; //  Marca en html navbar
 
       //  Update de visistas.
       if(this.view){
@@ -196,6 +207,8 @@ export class DetalleComponent implements OnInit {
         this.product = data;
       });
     });
+    console.log(localStorage.getItem('numero-pedido'));
+
   }
 
   menos(){  //Uno menos a la cantidad
@@ -213,7 +226,10 @@ export class DetalleComponent implements OnInit {
     const producto = this._activatedRoute.snapshot.paramMap.get('producto');     
     const key = this._activatedRoute.snapshot.paramMap.get('key');
     let numeroPedido = localStorage.getItem('numero-pedido');
+    console.log(localStorage.getItem('numero-pedido'));
+
     this.PedidoService.insertCarrito(key,numeroPedido,this.product, this.cantProd);    
     this.viewCart = true;
+    
   }
 }

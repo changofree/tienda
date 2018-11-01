@@ -1,43 +1,31 @@
-<div class="main-content">
+<div class="main-content mt-2">
   <div class="container-fluid">
       <div class="card">
-          <div class="card-header card-header-danger">
-              <h3 class="card-title">Primeros pasos</h3>
-              <p class="card-category">En esta pagina vas a encontrar una mini guia de como empezar a usar tu ecommerce</p>
-              <p class="card-category">Tu sitio web es el siguiente: <b class="weblink" routerLink="/{{keyClient}}">tienda.changofree.com/{{keyClient}} </b></p>
+          <div class="card-header card-header-info">
+              <h3 class="card-title"><b>¡Hola {{Nombre}}!</b></h3>
+              <h4 class="card-title">Tenes que preparar tu tienda para poder empezar a vender. Acá tenes una mini guia de lo que hay que hacer.</h4>
           </div>
           <div class="card-body"> 
               <div class="row">
-                  <div class="col-md-6">
-                      <h4 class="card-title">Objetivos</h4>
+                  <div class="col-md-12">
 
-                      <div class="alert alert-warning alert-with-icon" data-notify="container">
-                            <span><i class="material-icons" data-notify="icon">add_alert</i><b>IMPORTANTE</b> 
-                                Antes de traer clientes, tenes que configurar mercadopago. <a routerLink="/backend/configuracion"><b>CLICK ACÁ</b></a>   </span>
+                      <div class="alert alert-warning alert-with-icon mb-3 mt-5 px-3 point" data-notify="container">
+                         <h4 class="rbld mb-0">Vinculá tu cuenta de MercadoPago con ChangoFree</h4>
+                            Te recordamos quue MercadoPago cobra una comision del 4.5% por venta concretada. 
+                            <a  href="https://auth.mercadopago.com.ar/authorization?client_id=1396909180508686&response_type=code&platform_id=mp&redirect_uri=https://changofree.com/tienda/assets/php/validate.php?key={{Nombre}}" class="btn btn-outline-info text-dark ml-4"><i style="font-size:25px;" class=" text-dark material-icons">payment</i> Vincular MercadoPago</a>
                         </div>
-                      <div class="alert alert-warning alert-with-icon" data-notify="container">
-                          <span><i class="material-icons" data-notify="icon">add_alert</i><b *ngIf='boolView'>En curso:</b><b *ngIf="!boolView">¡Completado!</b> Visitas en tu pagina {{listViews}}/1000</span>
-                      </div>
-                      <div class="alert alert-warning alert-with-icon" data-notify="container">
-                            <span><i class="material-icons" data-notify="icon">add_alert</i><b *ngIf="boolProduct">En curso:</b><b *ngIf="!boolProduct">¡Completado!</b> 
-                                Productos subidos {{listProductsLenght}}/10   
-                                <button mat-button-raised mat-raised-button color="primary" class="mt-2" routerLink="/backend/listado-productos">Subir productos</button></span>
-                        </div>
-                        <div class="alert alert-warning alert-with-icon" data-notify="container">
-                                <span><i class="material-icons" data-notify="icon">add_alert</i><b>En curso:</b> Concretar una venta 0/1</span>
-                            </div>
+                        <div class="alert alert-warning alert-with-icon my-5 px-3 point" data-notify="container">
+                            <h4 class="rbld mb-0">Configura tus fotos de portada</h4>
+                               La primera impresión es sumamente importante, destacá tu tienda con unas buenas fotos. 
+                               <button routerLink="/backend/anuncios" type="button" class="btn btn-outline-info text-dark ml-4"><i style="font-size:25px;" class=" text-dark material-icons">camera</i> Subir portadas</button>
+                           </div>
+                           <div class="alert alert-warning alert-with-icon my-5 px-3 point" data-notify="container">
+                            <h4 class="rbld mb-0">Subí tus productos</h4>
+                               ¡Ya terminamos lo más importate! Es hora de publicar tus productos y salir a vender. 
+                               <button type="button" class="btn btn-outline-info text-dark ml-4" routerLink="/backend/listado-productos/agregar"><i style="font-size:25px;" class=" text-dark material-icons">event_seat</i> Subir productos</button>
+                           </div>
                   </div>
-                  <div class="col-md-6">
-                      <h4 class="card-title">Notificaciones</h4>
-                      <div class="alert alert-info" *ngFor="let x of listNotificaciones">
-                          <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <i class="material-icons">close</i>
-                          </button>
-                          <span>
-                              {{x.mensaje}} </span>
-                      </div>
-                      
-                  </div>
+           
               </div>
           </div>
       </div>

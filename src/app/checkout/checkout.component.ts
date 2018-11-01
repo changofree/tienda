@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService } from '../services/pedido.service';
 import { ProductoService } from '../services/producto.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Carrito } from '../interfaces/carrito';
 import { Cliente } from 'app/interfaces/cliente';
 
@@ -38,21 +38,28 @@ export class CheckoutComponent implements OnInit {
   
   
   ngOnInit() {  
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+          return;
+      }
+      window.scrollTo(0, 0)
+    });
+  
     this.key = "";  
-    this.Marca = "";
     this.buttonEdit = false;
     let auxBool = true;
     let listClient : Cliente[]
     listClient = [];
     const key = this._activatedRoute.snapshot.paramMap.get('key');
     this.key = key;
+    this.Marca = key;
     const producto = this._activatedRoute.snapshot.paramMap.get('producto');     
     let clienteOnline = localStorage.getItem("cliente-chango");    
     this.numberPedido = localStorage.getItem('numero-pedido');
     this.keyPedido = localStorage.getItem('key-pedido');
     const carrito = this.PedidoService.returnListCarrito(key);
     
-    
+
     this.ProductService.getListClientsWithSnap()
     .snapshotChanges()
     .subscribe(data => {
@@ -79,7 +86,7 @@ export class CheckoutComponent implements OnInit {
           });
           
           if(this.numberPedido === undefined || this.numberPedido === null || this.keyPedido === undefined || this.keyPedido === undefined || this.Carrito.length === 0){
-            this.router.navigateByUrl("/home/"+key);  //  Si queremos entrar al checkout sin ningun producto agregado o algun numeroPedido generado, volvemos a la home.
+            this.router.navigateByUrl("/"+key);  //  Si queremos entrar al checkout sin ningun producto agregado o algun numeroPedido generado, volvemos a la home.
           }
 
           this.AcessToken = listClient[0].mercadopago.access_token; //  Datos de mercadoPago para generar la venta.
@@ -87,7 +94,6 @@ export class CheckoutComponent implements OnInit {
           this.Carrito.forEach(element => {
             this.precioTotal = this.precioTotal + element.cantidad * element.precioUnitario;
           });
-          this.Marca = listClient[0].marca; //  Marca del ecommerce.
         });
         auxBool = false;  //  Cerramos el ciclo.
       }

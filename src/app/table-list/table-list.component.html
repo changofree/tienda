@@ -1,11 +1,10 @@
-<div class="main-content">
+<div class="main-content mt-2">
   <div class="container-fluid">
       <div class="row">
           <div class="col-md-12">
               <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title "> Tabla de productos </h4>
-                      <p class="card-category"> Administrá tus productos </p>
+                  <div class="card-header card-header-info">
+                      <h3 class="card-title "><b> Mis productos </b></h3>
                       <button mat-raised-button class="pull-right mr-1" style="color:black!important" routerLink="agregar">Agregar producto</button>
                     </div>
                   <div class="card-body">
@@ -43,7 +42,7 @@
                                           <button mat-raised-button color="primary" routerLink="editar/{{toto.$key}}" >Editar</button>
                                     </td>
                                     <td class="text-primary td-button">
-                                        <button mat-raised-button (click)="DestroyThis(toto.$key)">Borrar</button>                                            
+                                        <button mat-raised-button color="dangered" (click)="DestroyThis(toto.$key)">Borrar</button>                                            
                                       </td>
                                   </tr>
                                   
