@@ -9,6 +9,9 @@
   $Token = $_GET["access_token"];
   $Email = $_GET["email"];
   $Tel = $_GET["tel"];
+  $Nombre = $_GET["nombre"];
+  $DNI = $_GET["dni"];
+
 
   MercadoPago\SDK::setAccessToken($Token);
 
@@ -16,7 +19,7 @@
   
   # Setting item      
   $item = new MercadoPago\Item();
-  $item->title = "Chango Free Ecommerce";
+  $item->title = "Tienda ChangoFree - ".$NumeroPedido;
   $item->quantity = 1;
   $item->currency_id = "ARS";
   $item->unit_price = $Precio;
@@ -24,6 +27,11 @@
   # Setting payer
   $payer = new MercadoPago\Payer();
   $payer->email = $Email;
+  $payer->name = $Nombre;
+  $payer->identification = array(
+    "type" => "DNI",
+    "number" => $DNI
+  );
   $payer->phone = array(
     "area_code" => "",
     "number" => $Tel

@@ -25,6 +25,7 @@ import { AnunciosComponent } from '../../anuncios/anuncios.component';
 import { ListadopedidosComponent } from 'app/listadopedidos/listadopedidos.component';
 import { ListadoventasComponent } from 'app/listadoventas/listadoventas.component';
 import { SoporteComponent } from 'app/soporte/soporte.component';
+import { PlantillaComponent } from 'app/plantilla/plantilla.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { SoporteComponent } from 'app/soporte/soporte.component';
     EditProductComponent,
     UserProfileComponent,
     TableListComponent,
+    PlantillaComponent,
     TypographyComponent,
     IconsComponent,
     TableCategoriaComponent,

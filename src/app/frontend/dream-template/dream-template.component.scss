@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+@import 'assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
+
+
+nav{
+    height: 14vh;
+    font-family: 'PT Sans', sans-serif;
+    background: white !important;
+    color: #252525;
+    border-radius: 0px!important;
+}
+.nav-title{
+    font-size: 22px;
+    font-weight: bold;
+}
+#demo{
+    height: auto;
+    max-height: 86vh;
+}
+.carousel-inner{
+    height: 100%;
+}
+.carousel-item, {
+    position:relative;
+    max-height: -webkit-fill-available;
+    width: 100%;
+    object-fit: fill;
+}
+.carousel-item > img{
+    height: 100%;
+    width: 100%
+}
+.category{
+    border-bottom: 2px solid #4493fb;
+    width: 155px;
+    font-weight: bold;
+}
+.tarjeta{
+    background: white;
+    box-shadow: 1px 1px 19px -4px grey;
+    border-radius: 6px;
+    font-size: 20px;
+}

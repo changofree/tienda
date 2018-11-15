@@ -49,7 +49,7 @@ require_once '../vendor/autoload.php';
         $hasta = "";
         $fechaHasta = "";
     
-        # Getting a access token of the seller
+        # Getting a list
             $urlF = "https://changofreex.firebaseio.com/cliente.json";
             $cht = curl_init();
             curl_setopt($cht, CURLOPT_URL, $urlF);
@@ -91,7 +91,6 @@ require_once '../vendor/autoload.php';
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
     $response = curl_exec($ch);    
     curl_close ($ch);
-    echo $hasta;
 
 
     $dia = date("d");

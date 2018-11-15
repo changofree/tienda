@@ -14,7 +14,11 @@ import { Cliente } from 'app/interfaces/cliente';
 export class CheckoutComponent implements OnInit {
 
   viewCart : boolean = false;
-  
+  BoolEmail : boolean;
+  BoolTelefono : boolean;
+  BoolDNI : boolean;
+  BoolNombre : boolean;
+
   precioTotal : number;
   Carrito : Carrito[];
   linkMercadopago;
@@ -24,17 +28,29 @@ export class CheckoutComponent implements OnInit {
   numberPedido;
   keyPedido : string;
   Marca : string;
-  
   AcessToken;
+  key : string; 
+
   Telefono : string = "";
   Email : string = "";
-  key : string; 
+  Nombre : string;
+  DNI : string; 
+
   constructor(
     private PedidoService : PedidoService,
     private ProductService: ProductoService,
     private router: Router,
     private _activatedRoute: ActivatedRoute
-  ){}
+  ){
+    this.Telefono = "";
+    this.Email = "";
+    this.Nombre = "";
+    this.DNI = "";
+    this.BoolDNI = false;
+    this.BoolEmail = false;
+    this.BoolNombre = false;
+    this.BoolTelefono = false;
+  }
   
   
   ngOnInit() {  
@@ -105,14 +121,43 @@ export class CheckoutComponent implements OnInit {
    * Funcion que se ejecuta al hacer click Realizar Compra
    */
   goMercado(){  
+    if(this.Nombre === ""){
+      this.BoolNombre = true;
+    }else{
+      this.BoolNombre = false;
+    }
+    
+    if(this.Email === ""){
+      this.BoolEmail = true;
+    }else{
+      this.BoolEmail = false;
+    }
+    
+    if(this.DNI === ""){
+      this.BoolDNI = true;
+    }else{
+      this.BoolDNI = false;
+    }
+
+    if(this.Telefono === ""){
+      this.BoolTelefono = true;
+    }else{
+      this.BoolTelefono = false;
+    }
+
+    if(this.BoolDNI === false && this.BoolEmail === false && this.BoolNombre === false && this.BoolTelefono === false){
     const key = this._activatedRoute.snapshot.paramMap.get('key');
     //  Juntamos toda la informacion necesaria para enviar a mercadopago y nos devuelve la url de pago.
-    this.PedidoService.preferenceMP(this.Marca,this.precioTotal,key,this.numberPedido,this.Telefono, this.Email, this.AcessToken)
+    this.PedidoService.preferenceMP(this.Marca,this.precioTotal,key,this.numberPedido,this.Telefono, this.Email, this.AcessToken, this.Nombre, this.DNI)
       .subscribe(data => {
       this.linkMercadopago = data.text();
-      console.log(this.linkMercadopago);
+      localStorage.removeItem("numero-pedido");
+      localStorage.removeItem("key-pedido");
+
       location.href = this.linkMercadopago;
+
     });
+    }
   }
 
   //  Borramos algun item del carrito.

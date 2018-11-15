@@ -13,13 +13,18 @@
 @import 'assets/vendor/perfect-scrollbar/perfect-scrollbar.css';
 @import 'assets/css/util.css';
 @import 'assets/css/main.css';
-
-.wrap-menu-desktop{
-    position: absolute!important;
-    top:0px!important;
-    height: 65px;
-    background-color: #ffffffde;
+.grey{
+    background:#f3f3f3
 }
+
+.wrap-menu-desktop, .wrap-menu-mobile{
+    position: relative!important;
+    top:0px!important;
+    height: 15vh;
+    background-color: white;
+    border-bottom:1px solid #d8d8d8!important;
+}
+
 .header-cart{
     right: 0!important;
 }
@@ -130,7 +135,18 @@
         margin-left: auto;
         margin-right: auto;
     }    
-    .size-204{
+    .size-204{  
         width: initial!important;
+    }
+    .ss{
+        border-bottom:1px solid #d8d8d8!important;
+
+    }
+    .wrap-menu-desktop, .wrap-menu-mobile{
+        position: relative!important;
+        top:0px!important;
+        height: 15vh;
+        background-color: white;
+        border-bottom:1px solid #d8d8d8!important;
     }
 }

@@ -37,19 +37,20 @@ import {MatSortModule} from '@angular/material/sort';
 import { MatInputModule, MatFormFieldModule, MatButtonModule, MatToolbarModule, MatIconModule, MatMenuModule, MatProgressSpinnerModule, MatCardModule } from '@angular/material';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { AnunciosService } from './anuncios.service';
-import { HomewebComponent } from './homeweb/homeweb.component';
+import { HomewebComponent } from './frontend/homeweb/homeweb.component';
 import { DashboardService } from './dashboard.service';
-import { DetalleComponent } from './homeweb/detalle/detalle.component';
+import { DetalleComponent } from './frontend/homeweb/detalle/detalle.component';
 import { PedidoService } from './services/pedido.service';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { NavbarHomeComponent } from './homeweb/navbar-home/navbar-home.component';
-import { FooterwebComponent } from './homeweb/footerweb/footerweb.component';
+import { NavbarHomeComponent } from './frontend/homeweb/navbar-home/navbar-home.component';
+import { FooterwebComponent } from './frontend/homeweb/footerweb/footerweb.component';
 import { OrdenComponent } from './orden/orden.component';
 import { ListadopedidosComponent } from './listadopedidos/listadopedidos.component';
 import { ListadoventasComponent } from './listadoventas/listadoventas.component';
 import { ValidacionComponent } from './validacion/validacion.component';
 import { SoporteComponent } from './soporte/soporte.component';
+import { DreamTemplateComponent } from './frontend/dream-template/dream-template.component';
 
 
 @NgModule({
@@ -92,6 +93,7 @@ import { SoporteComponent } from './soporte/soporte.component';
     FooterwebComponent,
     OrdenComponent,
     ValidacionComponent,
+    DreamTemplateComponent,
   ],
   providers: [AnunciosService, ProductoService, DashboardService, PedidoService],
   bootstrap: [AppComponent]

@@ -15,7 +15,7 @@
   $item->title = "Plan ChangoFree Economico";
   $item->quantity = 1;
   $item->currency_id = "ARS";
-  $item->unit_price = 350;
+  $item->unit_price = 299;
 
   # Setting payer
   $payer = new MercadoPago\Payer();

@@ -1,0 +1,290 @@
+	
+	
+
+<div class="f-width py-3" *ngIf="buttonEdit">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 bt-c">
+            <button type="button" class="btn btn-outline-light ov text-white ml-4" routerLink="/backend/inicio">Configurar web</button>
+            <button type="button" class="btn btn-outline-light ov text-white ml-4" (click)="reload()">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Header -->
+<header>
+
+  <!-- Header desktop -->
+  <div class="container-menu-desktop">
+    <!-- Topbar -->
+
+    <div class="wrap-menu-desktop">
+      <nav class="limiter-menu-desktop container">
+        
+        <!-- Logo desktop -->		
+      
+
+        <!-- Menu desktop -->
+        <div class="menu-desktop">
+          <ul class="main-menu">
+            <li>
+              <a>{{Marca}}</a>
+            </li>
+          </ul>
+        </div>	
+
+        <!-- Icon header -->
+        <div class="wrap-icon-header flex-w flex-r-m">
+          <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart pr-0" (click)="viewCart = true">
+            <i class="material-icons">shopping_cart	
+            </i>
+                      </div>
+        </div>
+      </nav>
+    </div>	
+  </div>
+
+  <!-- Header Mobile -->
+  <div class="wrap-header-mobile ">
+    <!-- Logo moblie -->		
+   
+    <div class="logo-mobile">
+      <a><i class="material-icons pt-1" routerLink="/{{Marca}}">arrow_back_ios</i></a>
+    </div>
+
+    <!-- Icon header -->
+    <div class="wrap-icon-header flex-w flex-r-m m-r-15">
+      <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 pr-0 js-show-cart" (click)="viewCart = true">
+        <i class="material-icons pt-1">shopping_cart	
+        </i>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Menu Mobile -->
+  </header>
+  
+    
+	<!-- Cart -->
+	<span *ngIf="viewCart">
+      <app-carrito (viewCartd)="changeBoolean($event)"></app-carrito>
+    </span>
+  
+  
+   
+  
+    <!-- Product Detail -->
+    <section class="sec-product-detail bg0 p-t-65 pt-5 p-b-60 pt-4">
+      <div class="container fcont mt-5">
+        <div class="row">
+          <div class="col-md-6 col-lg-7 p-b-30">
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li *ngIf="product.img[0]" data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li *ngIf="product.img[1]" data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li *ngIf="product.img[2]" data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li *ngIf="product.img[3]" data-target="#carouselExampleIndicators" data-slide-to="3"></li>                  
+                  </ol>
+                  <div class="carousel-inner">
+                    <div *ngIf="product.img[0]" class="carousel-item cont active">
+                      <img class="d-block w-100" src="{{product.img[0]}}" alt="First slide">
+                    </div>
+                    <div *ngIf="product.img[1]" class="carousel-item cont">
+                      <img class="d-block w-100" src="{{product.img[1]}}" alt="Second slide">
+                    </div>
+                    <div *ngIf="product.img[2]" class="carousel-item cont">
+                      <img class="d-block w-100" src="{{product.img[2]}}" alt="Third slide">
+                    </div>
+                    <div *ngIf="product.img[3]" class="carousel-item cont">
+                        <img class="d-block w-100" src="{{product.img[3]}}" alt="Third slide">
+                      </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+          </div>
+            
+          <div class="col-md-6 col-lg-5 p-b-30">
+            <div class="p-r-50 p-t-5 p-lr-0-lg b-tc">
+              <h4 class="mtext-105 cl2 b-tc f-max js-name-detail p-b-14">
+                  {{product.name | uppercase}}
+              </h4>
+  
+              <span class="mtext-106 cl2 f-price">
+                ${{product.price}}
+              </span>
+  
+              
+              <div class="p-t-33">
+                  <div class="flex-w flex-r-m p-b-10 tapa">
+                    <div class="size-204 flex-w tapa flex-m respon6-next mt-3">
+                      <div class="wrap-num-product flex-w m-r-20 m-tb-10 inp">
+                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" (click)="menos()">
+                          <i class="fs-16 zmdi zmdi-minus"></i>
+                        </div>
+    
+                        <input class="mtext-104 cl3 num-product text-center" type="number" name="num-product" value="{{cantProd}}">
+    
+                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" (click)="mas()">
+                          <i class="fs-16 zmdi zmdi-plus"></i>
+                        </div>
+                      </div>
+                      <br>
+                      <button class=" mt-4 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" (click)="addToCart()">
+                        Agregar al carrito
+                      </button>
+                      <br>
+                      <p class="mt-4"><small>Información de contacto : {{WhatsApp}} </small></p>
+                      <p><small>Consultar por retiro y/o envios</small></p>
+                    </div>
+                  </div>	
+                </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="mt-3 p-t-43 p-b-40">
+          <!-- Tab01 -->
+          <div class="tab01">
+            <!-- Nav tabs -->
+            
+            <!-- Tab panes -->
+            <div class="tab-content pt-3">
+              <!-- - -->
+              <div class="tab-pane fade show active" id="description" role="tabpanel">
+                <div class="how-pos2 p-lr-15-md">
+                  <h3 class="ltext-106 cl5 pb-3 txt-center">
+                    Descripción
+                  </h3>
+                  <p class="stext-102 cl6">
+                    {{ product.description}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  
+    <!-- Related Products -->
+      
+ <app-footerweb></app-footerweb>
+  
+    <!-- Back to top -->
+    <div class="btn-back-to-top" id="myBtn">
+      <span class="symbol-btn-back-to-top">
+        <i class="zmdi zmdi-chevron-up"></i>
+      </span>
+    </div>
+  
+  <!--===============================================================================================-->	
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script>
+      $(".js-select2").each(function(){
+        $(this).select2({
+          minimumResultsForSearch: 20,
+          dropdownParent: $(this).next('.dropDownSelect2')
+        });
+      })
+    </script>
+  <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/slick/slick.min.js"></script>
+    <script src="js/slick-custom.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/parallax100/parallax100.js"></script>
+    <script>
+          $('.parallax100').parallax100();
+    </script>
+  <!--===============================================================================================-->
+    <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+    <script>
+      $('.gallery-lb').each(function() { // the containers for all your galleries
+        $(this).magnificPopup({
+              delegate: 'a', // the selector for gallery item
+              type: 'image',
+              gallery: {
+                enabled:true
+              },
+              mainClass: 'mfp-fade'
+          });
+      });
+    </script>
+  <!--===============================================================================================-->
+    <script src="vendor/isotope/isotope.pkgd.min.js"></script>
+  <!--===============================================================================================-->
+    <script src="vendor/sweetalert/sweetalert.min.js"></script>
+    <script>
+      $('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
+        e.preventDefault();
+      });
+  
+      $('.js-addwish-b2').each(function(){
+        var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+        $(this).on('click', function(){
+          swal(nameProduct, "is added to wishlist !", "success");
+  
+          $(this).addClass('js-addedwish-b2');
+          $(this).off('click');
+        });
+      });
+  
+      $('.js-addwish-detail').each(function(){
+        var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+  
+        $(this).on('click', function(){
+          swal(nameProduct, "is added to wishlist !", "success");
+  
+          $(this).addClass('js-addedwish-detail');
+          $(this).off('click');
+        });
+      });
+  
+      /*---------------------------------------------*/
+  
+      $('.js-addcart-detail').each(function(){
+        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+        $(this).on('click', function(){
+          swal(nameProduct, "is added to cart !", "success");
+        });
+      });
+    
+    </script>
+  <!--===============================================================================================-->
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+      $('.js-pscroll').each(function(){
+        $(this).css('position','relative');
+        $(this).css('overflow','hidden');
+        var ps = new PerfectScrollbar(this, {
+          wheelSpeed: 1,
+          scrollingThreshold: 1000,
+          wheelPropagation: false,
+        });
+  
+        $(window).on('resize', function(){
+          ps.update();
+        })
+      });
+    </script>
+  <!--===============================================================================================-->
+    <script src="js/main.js"></script>
+  

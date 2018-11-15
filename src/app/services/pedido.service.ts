@@ -120,14 +120,14 @@ export class PedidoService {
   
   }
 
-  preferenceMP(marca, precioTotal, keyFB, pedido, telefono, email, at){
+  preferenceMP(marca, precioTotal, keyFB, pedido, telefono, email, at, nombre, dni){
     if(telefono === undefined || telefono === null){
       telefono = "No disponible";
     }
     if(email === undefined || email === null){
       email = "No disponible";
     }
-    return this.http.get("assets/php/mp.php?marca="+marca+"&precio="+precioTotal+"&key="+keyFB+"&pedido="+pedido+"&tel="+telefono+"&email="+email+"&access_token="+at);
+    return this.http.get("assets/php/mp.php?marca="+marca+"&precio="+precioTotal+"&key="+keyFB+"&pedido="+pedido+"&tel="+telefono+"&email="+email+"&access_token="+at+"&nombre="+nombre+"&dni="+dni);
   }
 
   preferenceMPus(email){

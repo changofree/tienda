@@ -15,6 +15,7 @@ import { AnunciosComponent } from '../../anuncios/anuncios.component';
 import { ListadopedidosComponent } from 'app/listadopedidos/listadopedidos.component';
 import { ListadoventasComponent } from 'app/listadoventas/listadoventas.component';
 import { SoporteComponent } from 'app/soporte/soporte.component';
+import { PlantillaComponent } from 'app/plantilla/plantilla.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -68,6 +69,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'backend/maps',           component: MapsComponent },
     { path: 'backend/inicio',  component: NotificationsComponent },
     { path: 'backend/upgrade',        component: UpgradeComponent },
+    { path: 'backend/plantillas',        component: PlantillaComponent },
     { path: 'backend/listado-productos/agregar',        component: StoreProductComponent },
     { path: 'backend/listado-productos/editar/:key', component: EditProductComponent},
     { path: 'backend/listado-pedidos', component: ListadopedidosComponent},

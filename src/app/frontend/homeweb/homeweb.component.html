@@ -1,0 +1,302 @@
+<div class="f-width py-3" *ngIf="buttonEdit">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 bt-c">
+					<button type="button" class="btn btn-outline-light ov text-white ml-4" routerLink="/backend/inicio">Configurar web</button>
+					<button type="button" class="btn btn-outline-light ov text-white ml-4" (click)="reload()">Cerrar sesión</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Header -->
+	<header>
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+			<!-- Topbar -->
+
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop container">
+					
+					<!-- Logo desktop -->		
+				
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li>
+								<p class="boldext">{{Marca}}</p>
+							</li>
+						</ul>
+					</div>	
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart pr-0" (click)="viewCart = true">
+							<i class="material-icons">shopping_cart	
+							</i>
+												</div>
+					</div>
+				</nav>
+			</div>	
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap-header-mobile ">
+			<!-- Logo moblie -->		
+			<div class="logo-mobile">
+				<p class="pt-1 boldext">{{Marca}}</p>
+			</div>
+
+			<!-- Icon header -->
+			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10  js-show-cart pr-0" (click)="viewCart = true">
+					<i class="material-icons pt-1">shopping_cart	
+					</i>
+				</div>
+			</div>
+
+		</div>
+
+
+		<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="main-menu-m">
+				<li>
+					<a href="index.html">Home</a>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+				</li>
+			</ul>
+		</div>
+	</header>
+
+	<!-- Cart -->
+	<span *ngIf="viewCart">
+		<app-carrito (viewCartd)="changeBoolean($event)" ></app-carrito>
+	</span>
+		
+
+	<!-- Slider -->
+	<section class="section-slide" *ngIf="arrayImg[0]">
+			<div id="demo" class="carousel slide" data-ride="carousel">
+
+					<!-- Indicators -->
+					<ul class="carousel-indicators">
+					  <li data-target="#demo" data-slide-to="0" class="active" *ngIf="arrayImg[0]"></li>
+					  <li data-target="#demo" data-slide-to="1" *ngIf="arrayImg[1]"></li>
+					  <li data-target="#demo" data-slide-to="2" *ngIf="arrayImg[2]"></li>
+					</ul>
+				  
+					<!-- The slideshow -->
+					<div class="carousel-inner">
+					  <div class="carousel-item active" *ngIf="arrayImg[0]">
+						<img src="{{arrayImg[0]}}" alt="">
+					  </div>
+					  <div class="carousel-item" *ngIf="arrayImg[1]">
+						<img src="{{arrayImg[1]}}" alt="">
+					  </div>
+					  <div class="carousel-item" *ngIf="arrayImg[2]">
+						<img src="{{arrayImg[2]}}" alt="">
+					  </div>
+					</div>
+				  
+					<!-- Left and right controls -->
+					<a class="carousel-control-prev" href="#demo" data-slide="prev">
+					  <span class="carousel-control-prev-icon"></span>
+					</a>
+					<a class="carousel-control-next" href="#demo" data-slide="next">
+					  <span class="carousel-control-next-icon"></span>
+					</a>
+				  
+				  </div>
+	</section>
+
+
+	<!-- Product -->
+	<section class="bg0 p-t-23 p-b-140">
+		<div class="container pt-5">
+			<div class="p-b-10">
+				<h3 class="ltext-103 cl5">
+					Catalogo de productos
+				</h3>
+			</div>
+
+			<div class="flex-w flex-sb-m p-b-52">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" >
+						Categorias:
+					</button> 
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" (click)="clickFilter()">
+						Todos los productos
+					</button>
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" *ngFor=" let x of listCategory" (click)="clickFilter(x.name)">
+						{{ x.name | uppercase}}
+					</button>
+				</div>
+				
+				<!-- Search product -->
+				<div class="dis-none panel-search w-full p-t-10 p-b-15">
+					<div class="bor8 dis-flex p-l-15">
+						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+					</div>	
+				</div>
+
+				</div>
+				
+
+			<div class="row isotope-grid">
+				<div class="col-sm-6 col-md-4 col-6 col-lg-3 p-b-35 isotope-item women" *ngFor="let product of listFilter | slice : Desde : Hasta">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="{{product.img[0]}}" alt="IMG-PRODUCT">
+
+							<a routerLink="/detalle/{{key}}/{{product.name}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+								Ver más
+							</a>
+						</div>
+ 
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a routerLink="/detalle/{{key}}/{{product.name}}" class="stext-104 text-dark hov-cl1 trans-04 js-name-b2 p-b-6">
+									{{product.name | uppercase}}
+								</a>
+
+								<span class="stext-105 text-dark">
+									${{product.price}}
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			<!-- Load more -->
+			<div class="flex-c-m flex-w w-full p-t-45" (click)="loadMore()" *ngIf="viewMore">
+				<a  class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04" style="cursor:pointer">
+					Mostrar más
+				</a>
+			</div>
+		</div>
+		</div>
+
+	</section>
+	
+<app-footerweb>
+</app-footerweb>
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+	<!-- Modal1 -->
+	
+
+<!--===============================================================================================-->	
+	<script src="/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/assets/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/slick/slick.min.js"></script>
+	<script src="/assets/js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/parallax100/parallax100.js"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/isotope/isotope.pkgd.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
+	<script>
+		$('.js-addwish-b2').on('click', function(e){
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+	
+	</script>
+<!--===============================================================================================-->
+	<script src="/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="/assets/js/main.js"></script>

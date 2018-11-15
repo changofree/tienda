@@ -18,6 +18,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/backend/listado-ventas', title: 'Ventas',  icon:'equalizer', class: '' },
     { path: '/backend/anuncios', title: 'Anuncios',  icon:'layers', class: '' },
     { path: '/backend/soporte', title: 'Soporte',  icon:'message', class: '' },
+    { path: '/backend/plantillas', title: 'Plantillas',  icon:'important_devices', class: '' },
     { path: '/backend/configuracion', title: 'Datos de cuenta',  icon:'settings', class: '' },
 ];
 
@@ -38,10 +39,12 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    localStorage.removeItem('firebase:previous_websocket_failure');
+
     this.Marca = "";
     this.clienteOnline = localStorage.getItem("cliente-chango");
     if(this.clienteOnline === null || this.clienteOnline === undefined){
-        // location.href="http://changofree.com/home";
+        location.href="http://changofree.com/home";
     }
     this.productService.getListClientsWithSnap()
     .snapshotChanges()

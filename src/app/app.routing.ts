@@ -4,11 +4,12 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { HomewebComponent } from './homeweb/homeweb.component';
-import { DetalleComponent } from './homeweb/detalle/detalle.component';
+import { HomewebComponent } from './frontend/homeweb/homeweb.component';
+import { DetalleComponent } from './frontend/homeweb/detalle/detalle.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrdenComponent } from './orden/orden.component';
 import { ValidacionComponent } from './validacion/validacion.component';
+import { DreamTemplateComponent } from './frontend/dream-template/dream-template.component';
 const routes: Routes =[
   {
     path: 'validacion',
@@ -17,6 +18,10 @@ const routes: Routes =[
   {
     path: 'orden/:status',
     component: OrdenComponent
+  },
+  {
+    path: 'dream',
+    component: DreamTemplateComponent
   },
   {
     path: ':key',
