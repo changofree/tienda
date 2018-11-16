@@ -13,48 +13,32 @@
 @import 'assets/vendor/perfect-scrollbar/perfect-scrollbar.css';
 @import 'assets/css/util.css';
 @import 'assets/css/main.css';
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px');
+@import url('https://fonts.googleapis.com/css?family=Dosis');
 
-footer{
-    background: black!important;
+.fuente{
+    font-family: 'Dosis', sans-serif!important; //Alta fuente
 }
-.wrap-menu-desktop{
-    position: absolute!important;
-    top:0px!important;
-    height: 65px;
-    background-color: #ffffffde;
+.filt{
+   display: inline-block;
+
 }
-#demo{
-    height: 100vh;
-    
+section{
+    background: white;
 }
-.block2-pic{
-    height: 220px!important;
+select{
+    background: #00000014;
+    padding: 5px 31px 4px 31px;
 }
-.hov-img0 > img{
-    height: 100%; 
+.cp{
+    cursor: pointer;
 }
-.carousel-inner{
-    height: 100%;
+.pos{
+    float: right;
+    position: relative;
+    top: 7px;
+    left: 185px;
 }
-.tsts{
-    color: #b2b2b2!important;
-}
-.carousel-item, .carousel-item > img{
-    position:relative;
-    height: 100%; 
-    width: 100%;
-    object-fit: fill;
-}
-.buscar{
-    border-bottom: 1px solid grey!important;
-    height: 35px!important;
-}
-.header-cart{
-    right: 0!important;
-}
-.wrap-header-cart{
-    visibility: visible!important;
-}
-.ic{
-    font-size: 20px!important;  
+.nav-item > a {
+    cursor:pointer;
 }

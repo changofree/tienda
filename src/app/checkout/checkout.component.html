@@ -101,16 +101,16 @@
 						<h4 class="mtext-109 cl2 p-b-30">
                 			Terminá tu pedido
 						</h4>
-						<div class="row">
-							<div class="col-6">
-								Enviar mi pedido 
-							</div>
-							<div class="col-6">
-								<input type="checkbox">
-							</div>
-					
+						<div class="row">		
+						<div class="radio col-12">
+								<label><input type="radio" name="optradio" checked (change)="Envio = false"> Acordar retiro/entrega con el vendedor</label>
+							  </div>
+							  <div class="radio col-12">
+								<label><input type="radio" name="optradio" (change)="Envio = true"> Enviar mi pedido ( MercadoEnvios )</label>
+							  </div>	 
 						</div>
-						<div class="flex-w flex-t bor12 p-b-13">
+						
+						<div class="flex-w flex-t bor12 p-b-13 pt-3">
 							<div class="size-208">
 								<span class="stext-110 cl2">
 									Subtotal:
@@ -124,10 +124,10 @@
 							</div>
 						</div>
 
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
+						<div class="flex-w flex-t bor12 p-t-15 p-b-30" *ngIf="Envio">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
-									Información necesaria:
+ 									Información necesaria:
 								</span>
 							</div>
 
@@ -176,7 +176,8 @@
 				</div>
 			</div>
 		</div>
-	</form>
+
+		</form>
 		
 	
 	<div class="edit-web" *ngIf="buttonEdit" routerLink="/backend/inicio">

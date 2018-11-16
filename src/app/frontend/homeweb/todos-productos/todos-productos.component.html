@@ -1,0 +1,58 @@
+<app-navbar-home></app-navbar-home>
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="row ">
+          <div class="col-md-12 pb-4">
+            <h3>Categorias</h3>
+          </div>
+          <div class="col-md-12" *ngFor="let x of listCategory">
+            <a class="cp" (click)="clickFilter(x.name)">{{x.name}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-12">
+            <select class="pull-right" (change)="ordenMenor()">
+              <option>Ordernar por</option>
+              <option>Por mayor precio</option>
+              <option >Por menor precio</option>
+            </select>
+            <i class="material-icons pos">arrow_drop_down</i>
+          </div>
+          <div class="productos">
+            <div class="row pt-4">
+              <div class="col-sm-6 col-md-4 col-6 col-lg-3 p-b-35 isotope-item women" *ngFor="let product of listFilter | slice : Desde : Hasta">
+                  <!-- Block2 -->
+                  <div class="block2">
+                    <div class="block2-pic hov-img0">
+                      <img src="{{product.img[0]}}" alt="IMG-PRODUCT">
+        
+                      <a routerLink="/detalle/{{key}}/{{product.name}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                        Ver más
+                      </a>
+                    </div>
+         
+                    <div class="block2-txt flex-w flex-t p-t-14">
+                      <div class="block2-txt-child1 flex-col-l ">
+                        <a routerLink="/detalle/{{key}}/{{product.name}}" class="stext-104 text-dark hov-cl1 trans-04 js-name-b2 p-b-6">
+                          {{product.name | uppercase}}
+                        </a>
+        
+                        <span class="stext-105 text-dark">
+                          ${{product.price}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>    
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,90 @@
+@import 'assets/vendor/bootstrap/css/bootstrap.min.css';
+@import 'assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
+@import 'assets/fonts/iconic/css/material-design-iconic-font.min.css';
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+
+header{
+    background: white!important;
+}
+b{
+    color:black!important;
+}
+
+.container{
+    font-family: 'Dosis', sans-serif;
+    padding-top: 35px;
+    padding-bottom:35px;
+}
+.title{
+    position: relative;
+    top:7px;
+    text-transform: uppercase;
+    font-weight: bold!important;
+    font-size:35px;
+}
+.price > i{
+    position: relative;
+    top: 4px;
+}
+.price{
+    cursor: pointer;
+}
+.navbar{
+    background: black!important;
+    margin: 0px!important;
+    height: 8vh;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius: 0px;
+}
+.nav-item > a {
+    color:white!important;
+    cursor: pointer;
+}
+.buscar{
+    padding: 5px 81px 5px 30px;
+}
+.hide-note{
+    display: none!important;
+}
+.hide-mob{
+    display: block!important;
+}
+.lupa{
+    position: relative;
+    top: 7px;
+    left: 32px;
+}
+@media  screen and (max-width: 767px) {
+    .navbar-toggler{
+        color: white!important;
+    }
+    .container{
+        padding-top:10px!important;
+        padding-bottom:10px!important;
+        display: block!important;
+    }
+    .title-text{
+        text-align: justify!important;
+    }
+    .title{
+    top: 4px;
+    font-size: 27px;
+    }
+    .hide{
+        display: none;
+    }
+    .hide-note{
+        display: block!important;
+    }
+    .hide-mob{
+        display: none!important;
+    }
+    .imp{
+        color:white;
+        padding-left: 15px!important;
+        padding-right: 15px!important
+    }
+    
+}

@@ -51,6 +51,7 @@ import { ListadoventasComponent } from './listadoventas/listadoventas.component'
 import { ValidacionComponent } from './validacion/validacion.component';
 import { SoporteComponent } from './soporte/soporte.component';
 import { DreamTemplateComponent } from './frontend/dream-template/dream-template.component';
+import { TodosProductosComponent } from './frontend/homeweb/todos-productos/todos-productos.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { DreamTemplateComponent } from './frontend/dream-template/dream-template
     OrdenComponent,
     ValidacionComponent,
     DreamTemplateComponent,
+    TodosProductosComponent,
   ],
   providers: [AnunciosService, ProductoService, DashboardService, PedidoService],
   bootstrap: [AppComponent]

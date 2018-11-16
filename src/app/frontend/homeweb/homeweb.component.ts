@@ -66,7 +66,6 @@ export class HomewebComponent implements OnInit {
     const key = this._activatedRoute.snapshot.paramMap.get('key');     
     let numeroPedido = localStorage.getItem('numero-pedido');
     let clienteOnline = localStorage.getItem("cliente-chango");
-    console.log(numeroPedido);
     this.listAnuncios = [];
     this.listFilter = [];
     this.listProducts = [];

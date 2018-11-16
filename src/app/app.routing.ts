@@ -10,6 +10,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { OrdenComponent } from './orden/orden.component';
 import { ValidacionComponent } from './validacion/validacion.component';
 import { DreamTemplateComponent } from './frontend/dream-template/dream-template.component';
+import { TodosProductosComponent } from './frontend/homeweb/todos-productos/todos-productos.component';
 const routes: Routes =[
   {
     path: 'validacion',
@@ -26,6 +27,10 @@ const routes: Routes =[
   {
     path: ':key',
     component: HomewebComponent
+  },
+  {
+    path: 'productos/:key',
+    component: TodosProductosComponent
   },
   {
     path: 'detalle/:key/:producto',

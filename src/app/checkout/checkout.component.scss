@@ -24,7 +24,9 @@
     background-color: white;
     border-bottom:1px solid #d8d8d8!important;
 }
-
+.radio > label > input{
+    display:inline!important;
+}
 .header-cart{
     right: 0!important;
 }

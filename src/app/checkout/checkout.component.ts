@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
   BoolTelefono : boolean;
   BoolDNI : boolean;
   BoolNombre : boolean;
-
+  Envio : boolean;
   precioTotal : number;
   Carrito : Carrito[];
   linkMercadopago;
@@ -42,6 +42,7 @@ export class CheckoutComponent implements OnInit {
     private router: Router,
     private _activatedRoute: ActivatedRoute
   ){
+    this.Envio = false;
     this.Telefono = "";
     this.Email = "";
     this.Nombre = "";

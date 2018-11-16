@@ -1,0 +1,51 @@
+<header>
+<div class="container ">
+    <div class="row">
+<div class="col-4 col-md-4 hide">
+    <i class="material-icons lupa">search</i>
+    <input class="buscar" type="text" placeholder="Buscar producto">
+</div>  
+<div class="col-6 col-md-4 title-text text-center">
+    <b class="title ">
+        {{Marca}}
+    </b>
+</div> 
+<div class="col-6 col-md-4">
+    <b class="pull-right price" (click)="viewCart = true">
+            <i class="material-icons pt-1">shopping_cart	
+            </i>
+            Carrito
+    </b>
+</div>
+</div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container imp ">
+        <span class="hide-note">
+            <a class="mr-3" (click)="goHome()"> Inicio</a>
+            <a class="mr-3" (click)="goProduct()"> Productos</a>   
+            <a class="mr-3" routerLink="/contacto"> Contacto</a>   
+        </span>
+    <button class="hide navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="material-icons">menu</i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" (click)="goHome()">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="goProduct()">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" >Contacto</a>
+            </li>
+          </ul>
+        </div>
+    </div>
+    </nav>
+</header>
+<span *ngIf="viewCart">
+	<app-carrito (viewCartd)="changeBoolean($event)" ></app-carrito>
+</span>
+		
