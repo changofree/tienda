@@ -91,9 +91,25 @@
     height: 110px;
     cursor: pointer;
 }
+.btn-add{
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid grey;
+    border-radius: 8px!important;
+}
+.hide{
+    display: none!important;
+}
 
-
+// @media screen and (min-width: 767px){
+// }
 @media  screen and (max-width: 767px) {
+    .hide-mobile{
+        display: none!important;
+    }
+    .hide{
+        display: block!important;
+    }
     .sec-product-detail{
         margin-top:0px!important;
         padding-top: 0px;

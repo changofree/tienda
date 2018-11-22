@@ -53,6 +53,7 @@ export class DetalleComponent implements OnInit {
     private router : Router
   ) 
   {
+    this.viewCart = false;
     this.product = {
       name:"",
       code:"",
@@ -69,7 +70,9 @@ export class DetalleComponent implements OnInit {
 
   
   changeBoolean(event){
+    console.log("se cambio el valor");
     this.viewCart = false;
+    console.log(this.viewCart)
   }
 
   ngOnInit() {

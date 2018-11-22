@@ -19,13 +19,9 @@
 </div>
 </div>
 </div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container imp ">
-        <span class="hide-note">
-            <a class="mr-3" (click)="goHome()"> Inicio</a>
-            <a class="mr-3" (click)="goProduct()"> Productos</a>   
-            <a class="mr-3" routerLink="/contacto"> Contacto</a>   
-        </span>
+<nav class="navbar hide-mob navbar-expand-lg navbar-light bg-light">
+    <div class="container lg-pad">
+        
     <button class="hide navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <i class="material-icons">menu</i>
         </button>
@@ -43,7 +39,20 @@
           </ul>
         </div>
     </div>
-    </nav>
+</nav>
+    <div class="container imp cont-mobile hide-note">
+        <div class="row text-center">
+            <div class="col-4 cont-menu-mob {{Inicio}}">
+                    <a class="mr-3 w-33" (click)="goHome()"> Inicio</a>
+            </div>
+            <div class="col-4 cont-menu-mob {{Producto}}">
+                    <a class="mr-3 w-33" (click)="goProduct()"> Productos</a>   
+            </div>
+            <div class="col-4 cont-menu-mob {{Nosotros}}">
+                    <a class="mr-3 w-33" (click)="goHome()"> Nosotros</a>
+            </div>
+        </div>
+    </div>
 </header>
 <span *ngIf="viewCart">
 	<app-carrito (viewCartd)="changeBoolean($event)" ></app-carrito>

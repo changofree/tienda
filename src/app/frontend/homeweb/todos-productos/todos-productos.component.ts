@@ -15,6 +15,7 @@ export class TodosProductosComponent implements OnInit {
   listCategory : Category[];
   listProducts : Product[];
   listFilter : Product[];
+  key : string;
 
   constructor(
     private ProductService : ProductoService,
@@ -26,7 +27,8 @@ export class TodosProductosComponent implements OnInit {
 
   ngOnInit() {
     const key = this._activatedRoute.snapshot.paramMap.get('key');     
-
+    this.key = key; 
+    
     this.ProductService.returnListCategory(key)
     .snapshotChanges()
     .subscribe(data => {
@@ -63,16 +65,33 @@ export class TodosProductosComponent implements OnInit {
       }
     });
   }
-  ordenMenor(){
+  ordenar(event){
+    console.log(event);
     this.listFilter = this.listProducts;
     let l = this.listFilter.length;
+    
+    if(event === "mayor"){
 
-    for (let i = 0; i < l; i++ ) {
-      for (let j = 0; j < l - 1 - i; j++ ) {
-        if ( this.listFilter[ j ].price < this.listFilter[ j + 1 ].price ) {
-          [ this.listFilter[ j ], this.listFilter[ j + 1 ] ] = [ this.listFilter[ j + 1 ], this.listFilter[ j ] ];
-        }
+      for (let i = 0; i < l; i++ ) {
+        for (let j = 0; j < l - 1 - i; j++ ) {
+          if ( this.listFilter[ j ].price < this.listFilter[ j + 1 ].price ) {
+            [ this.listFilter[ j ], this.listFilter[ j + 1 ] ] = [ this.listFilter[ j + 1 ], this.listFilter[ j ] ];
+          }
+        }  
       }
+
+    }else if(event === "menor"){
+
+      for (let i = 0; i < l; i++ ) {
+        for (let j = 0; j < l - 1 - i; j++ ) {
+          if ( this.listFilter[ j ].price > this.listFilter[ j + 1 ].price ) {
+            [ this.listFilter[ j ], this.listFilter[ j + 1 ] ] = [ this.listFilter[ j + 1 ], this.listFilter[ j ] ];
+          }
+        }  
+      }
+
+    }else{
+      this.listFilter = this.listProducts;
     }
     console.log(this.listFilter);
   }
