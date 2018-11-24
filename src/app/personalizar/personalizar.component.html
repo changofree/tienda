@@ -1,0 +1,16 @@
+<div class="main-content mt-2">
+    <div class="container-fluid">
+        <div class="alert alert-info alert-with-icon mb-3 mt-5 px-3 point" data-notify="container">
+            <h3 class="rbld mb-1 mt-0">¡Personalizá el color de tu tienda!</h3>
+               El color debe ser escrito en codigo html de color, podes elegir cualquiera y copiar el codigo del siguiente link: 
+               <a target="_blank" href="https://html-color-codes.info/codigos-de-colores-hexadecimales/" ><b class="text-dark">Buscar colores</b></a>
+               <p>
+               <input type="text" placeholder="#fff" name="color" class="input-personalizado" [(ngModel)]="color">
+               <button class="btn btn-success" (click)="cambiarColor()">
+                  Cambiar color
+               </button>
+              </p>
+           </div>
+    </div>
+  </div>
+  

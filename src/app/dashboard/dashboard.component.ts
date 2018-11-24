@@ -15,11 +15,16 @@ export class DashboardComponent implements OnInit {
   totalAcumulado : number;
   listVentas  : any[];
   listNotificaciones : any[];
+  VisitasTotales : number;
+  ProductoTotales : number;
+
   constructor(
     private pedidoService : PedidoService,
     private clientService : ProductoService
   ) { 
     this.listNotificaciones = [];
+    this.VisitasTotales = 0;
+    this.ProductoTotales = 0;
   }
 
   //  Funciones para generar los Graficos.
@@ -188,9 +193,20 @@ export class DashboardComponent implements OnInit {
           x["$key"] = element.key;
           if(email === x["email"]){
             aux.push(x);
+            this.VisitasTotales = x["web"]["view"];
           }
         });
-
+        let aux4 = [];
+        this.clientService.returnListProductsOrderByStock(aux[0].$key)
+        .snapshotChanges()
+        .subscribe(data => {
+            data.forEach(element => {
+              let y = element.payload.toJSON();
+              y["$key"] = element.key;
+              aux4.push(y);
+            });
+            this.ProductoTotales = aux4.length;
+          });
         //  Tomamos todos los pedidos guardados en la key de nuestro cliente online.
         this.pedidoService.getPedidos(aux[0].$key)
         .snapshotChanges()

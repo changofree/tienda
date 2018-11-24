@@ -58,6 +58,29 @@
                           </div>
                         </div>
                     </form>
+                    <div class="row mb-2 mt-5">
+                        <div class="col-12">
+                          <h4>¿Este producto tiene envio?</h4>
+                          <button class="btn btn-info" (click)="Envio(true)">Si</button>
+                          <button class="btn btn-danger" (click)="Envio(false)">No</button>                      
+                        </div>
+                        <div class="col-12 " *ngIf="tieneEnvio">
+                          <div class="row">
+                          <mat-form-field class="col-md-3 col-6">
+                            <input matInput type="number" placeholder="Profundidad (cm)" name="precio" value="0" [(ngModel)]="ProductToEdit.profundidad" (change)="updateTemp()">
+                          </mat-form-field>
+                          <mat-form-field class="col-md-3 col-6">
+                              <input matInput type="number" placeholder="Altura (cm)" name="stock" [(ngModel)]="ProductToEdit.alto" (change)="updateTemp()">
+                          </mat-form-field>
+                          <mat-form-field class="col-md-3 col-6">
+                              <input matInput type="text" placeholder="Ancho (cm)" name="codigo" [(ngModel)]="ProductToEdit.ancho" (change)="updateTemp()">
+                          </mat-form-field>
+                          <mat-form-field class="col-md-3 col-6">
+                            <input matInput type="text" placeholder="Peso del producto (gr)" name="codigo" [(ngModel)]="ProductToEdit.peso" (change)="updateTemp()">
+                         </mat-form-field>
+                        </div>
+                        </div>
+                      </div>
                     <div class="row mt-2">
                       <div class="col-12 text-center">
                         <button mat-raised-button color="primary" routerLink="/backend/listado-productos">Editar</button>

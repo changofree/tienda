@@ -16,6 +16,7 @@ import { ListadopedidosComponent } from 'app/listadopedidos/listadopedidos.compo
 import { ListadoventasComponent } from 'app/listadoventas/listadoventas.component';
 import { SoporteComponent } from 'app/soporte/soporte.component';
 import { PlantillaComponent } from 'app/plantilla/plantilla.component';
+import { PersonalizarComponent } from 'app/personalizar/personalizar.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -70,6 +71,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'backend/inicio',  component: NotificationsComponent },
     { path: 'backend/upgrade',        component: UpgradeComponent },
     { path: 'backend/plantillas',        component: PlantillaComponent },
+    { path: 'backend/personalizar',        component: PersonalizarComponent },
     { path: 'backend/listado-productos/agregar',        component: StoreProductComponent },
     { path: 'backend/listado-productos/editar/:key', component: EditProductComponent},
     { path: 'backend/listado-pedidos', component: ListadopedidosComponent},

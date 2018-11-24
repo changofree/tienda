@@ -27,7 +27,7 @@ export class StoreProductComponent implements OnInit {
   arrayImg : string[];
   listCategory : Category[];
   nameCategory : string;
-
+  tieneEnvio : boolean;
   constructor(
     private ProductService : ProductoService,
     public snackBar: MatSnackBar,
@@ -43,7 +43,12 @@ export class StoreProductComponent implements OnInit {
       stock:0,
       img:["","","",""],
       category:"",
+      profundidad: 0,
+      ancho: 0,
+      alto:0,
+      peso: 0
     };
+    
   }
  
   ngOnInit() {
@@ -212,6 +217,7 @@ export class StoreProductComponent implements OnInit {
     }else if(this.StoreProduct.price === ""){
       this.openSnackBar("Su producto debe tener un precio", "Ok!");            
     }else{
+      this.StoreProduct.name = this.StoreProduct.name.replace(/ /g,"-");
       let x = true;
       this.ProductService.returnListProducts(this.myKey)
       this.ProductService.insertProd(this.StoreProduct);
@@ -221,5 +227,12 @@ export class StoreProductComponent implements OnInit {
     }
   }
 
+  Envio(val : any){
+    if(val){
+      this.tieneEnvio = val;
+    }else{
+      this.tieneEnvio = val;
+    }
+  }
 
 }

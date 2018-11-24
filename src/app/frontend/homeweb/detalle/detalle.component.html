@@ -52,7 +52,7 @@
           <div class="col-md-6 col-lg-5 p-b-30">
             <div class="p-r-50 p-t-5 p-lr-0-lg b-tc">
               <h4 class="mtext-105 cl2 b-tc f-max js-name-detail p-b-14">
-                  {{product.name | uppercase}}
+                  {{product.name | uppercase | changeLine}}
               </h4>
   
               <span class="mtext-106 cl2 f-price">
@@ -81,6 +81,8 @@
                       <br>
                       <p class="mt-4"><small>Información de contacto : {{WhatsApp}} </small></p>
                       <p><small>Consultar por retiro y/o envios</small></p>
+                      <p><small>Codigo de producto: {{product.code}}</small></p>
+
                 </div>
               </div>
 
@@ -99,12 +101,17 @@
                         </div>
                       </div>
                       <br>
-                      <button class=" mt-4 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail btn-add" (click)="addToCart()">
+                      <button *ngIf="product.stock !== 0" class=" mt-4 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail btn-add" (click)="addToCart()">
                         Agregar al carrito
+                      </button>
+                      <button *ngIf="product.stock === 0" class=" mt-4 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail btn-add" disabled>
+                          Sin stock
                       </button>
                       <br>
                       <p class="mt-4"><small>Información de contacto : {{WhatsApp}} </small></p>
                       <p><small>Consultar por retiro y/o envios</small></p>
+                      <p><small>Codigo de producto: {{product.code}}</small></p>
+
                     </div>
                   </div>	
                 </div>
@@ -123,11 +130,12 @@
               <div class="tab-pane fade show active" id="description" role="tabpanel">
                 <div class="how-pos2 p-lr-15-md">
                   <h3 class="ltext-106 cl5 pb-3 txt-center">
-                    Descripción
+                    Descripción 
                   </h3>
                   <p class="stext-102 cl6">
                     {{ product.description}}
                   </p>
+                  <p class="mt-3">Compartir  <a href="whatsapp://send?text=https://tienda.changofree.com/detalle/{{Key}}/{{product.name}}"> Enviar por WhatsApp</a></p>
                 </div>
               </div>
             </div>

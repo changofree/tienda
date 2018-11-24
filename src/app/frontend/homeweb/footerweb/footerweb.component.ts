@@ -14,7 +14,7 @@ export class FooterwebComponent implements OnInit {
 
   listCategory : Category[];
   listClients : Cliente[];
-
+  Color : string;
   WhatsApp : string;
   Facebook : string;
   Instagram: string;
@@ -53,7 +53,29 @@ export class FooterwebComponent implements OnInit {
         x["$key"] = element.key;
         if(x["$key"] === key)
         this.listClients.push(x);
+        this.Color = x["web"]["color"];
       });
+
+      let color = document.getElementsByClassName("colorCliente") as HTMLCollectionOf<HTMLElement>;
+
+      function setCssTextStyle(el, style, value) {
+        var result = el.style.cssText.match(new RegExp("(?:[;\\s]|^)(" +
+            style.replace("-", "\\-") + "\\s*:(.*?)(;|$))")),
+          idx;
+        if (result) {
+          idx = result.index + result[0].indexOf(result[1]);
+          el.style.cssText = el.style.cssText.substring(0, idx) +
+            style + ": " + value + ";" +
+            el.style.cssText.substring(idx + result[1].length);
+        } else {
+          el.style.cssText += " " + style + ": " + value + ";";
+        }
+      }
+		  for (var i=0; i<color.length; i++){
+        setCssTextStyle(color[i], "background", this.Color.toString() +"!important");
+      } 
+
+
 
       let fechaTotal = this.listClients[0].hasta.split("/");  // 0 = dia , 1 = mes , 2 = año
 

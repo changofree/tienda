@@ -125,6 +125,9 @@ export class ProductoService {
   returnListProducts(keyClient : string){
     return this.products = this.fireBase.list("cliente/"+keyClient+"/web/product");
   }
+  returnListProductsOrderByStock(keyClient : string){
+    return this.products = this.fireBase.list("cliente/"+keyClient+"/web/product", ref => ref.orderByChild('stock'));
+  }
 
   deleteProduct(key){
     this.products.remove(key);
@@ -135,7 +138,22 @@ export class ProductoService {
   }
 
   insertProd(storeProduct : Product){
+   
+    if(storeProduct.alto === undefined){
+      storeProduct.alto = 0;
+    }
+    if(storeProduct.ancho === undefined){
+      storeProduct.ancho = 0;
+    }
+    if(storeProduct.profundidad === undefined){
+      storeProduct.profundidad = 0;
+    }
+    if(storeProduct.peso === undefined){
+      storeProduct.peso = 0;
+    }
+
     this.products.push({
+
       name:storeProduct.name,
       code: storeProduct.code,
       price: storeProduct.price,
@@ -144,12 +162,30 @@ export class ProductoService {
       description: storeProduct.description,
       stock: storeProduct.stock,
       img: storeProduct.img,
+      profundidad: storeProduct.profundidad,
+      alto:storeProduct.alto,
+      ancho:storeProduct.ancho,
+      peso:storeProduct.peso
     });
   }
 
 
 
   updateProd(storeProduct : Product, key){
+    
+    if(storeProduct.alto === undefined){
+      storeProduct.alto = 0;
+    }
+    if(storeProduct.ancho === undefined){
+      storeProduct.ancho = 0;
+    }
+    if(storeProduct.profundidad === undefined){
+      storeProduct.profundidad = 0;
+    }
+    if(storeProduct.peso === undefined){
+      storeProduct.peso = 0;
+    }
+
     this.products.update(key, {
       name:storeProduct.name,
       code: storeProduct.code,
@@ -159,6 +195,10 @@ export class ProductoService {
       description: storeProduct.description,
       stock: storeProduct.stock,
       img: storeProduct.img,
+      profundidad: storeProduct.profundidad,
+      alto:storeProduct.alto,
+      ancho:storeProduct.ancho,
+      peso:storeProduct.peso
     });
   }
   

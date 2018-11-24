@@ -26,6 +26,9 @@ import { ListadopedidosComponent } from 'app/listadopedidos/listadopedidos.compo
 import { ListadoventasComponent } from 'app/listadoventas/listadoventas.component';
 import { SoporteComponent } from 'app/soporte/soporte.component';
 import { PlantillaComponent } from 'app/plantilla/plantilla.component';
+import { ChangeLinePipe } from 'app/change-line.pipe';
+import { ChangeLineDPipe } from 'app/change-line-d.pipe';
+import { PersonalizarComponent } from 'app/personalizar/personalizar.component';
 
 
 @NgModule({
@@ -55,8 +58,10 @@ import { PlantillaComponent } from 'app/plantilla/plantilla.component';
     NotificationsComponent,
     UpgradeComponent,
     StoreProductComponent,
-    ListadoventasComponent
-  ]
+    ListadoventasComponent,
+    ChangeLineDPipe,
+    PersonalizarComponent,
+  ],
 })
 
 export class AdminLayoutModule {}

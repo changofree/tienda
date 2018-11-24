@@ -14,12 +14,14 @@ export const ROUTES: RouteInfo[] = [
     { path: '/backend/panel', title: 'Panel central',  icon: 'dashboard', class: '' },
     { path: '/backend/listado-productos', title: 'Productos',  icon:'style', class: '' },
     { path: '/backend/listado-categorias', title: 'Categorias',  icon:'category', class: '' },
+    { path: '/backend/anuncios', title: 'Foto Portada',  icon:'layers', class: '' },
+    { path: '/backend/personalizar', title: 'Personalizar',  icon:'edit', class: '' },
+    { path: '/backend/plantillas', title: 'Plantillas',  icon:'important_devices', class: '' },
     { path: '/backend/listado-pedidos', title: 'Pedidos',  icon:'import_contacts', class: '' },
     { path: '/backend/listado-ventas', title: 'Ventas',  icon:'equalizer', class: '' },
-    { path: '/backend/anuncios', title: 'Foto Portada',  icon:'layers', class: '' },
-    { path: '/backend/soporte', title: 'Soporte',  icon:'message', class: '' },
-    { path: '/backend/plantillas', title: 'Plantillas',  icon:'important_devices', class: '' },
     { path: '/backend/configuracion', title: 'Datos de cuenta',  icon:'settings', class: '' },
+    { path: '/backend/soporte', title: 'Soporte',  icon:'message', class: '' },
+
 ];
 
 @Component({

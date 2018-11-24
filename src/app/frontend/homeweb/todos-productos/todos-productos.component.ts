@@ -55,6 +55,10 @@ export class TodosProductosComponent implements OnInit {
   }
 
   clickFilter(nameCategory?){
+    if(nameCategory === "0"){
+      this.listFilter = this.listProducts;
+    }else{
+
     this.listFilter = [];
     if(nameCategory === undefined){
       this.listFilter = this.listProducts
@@ -64,6 +68,8 @@ export class TodosProductosComponent implements OnInit {
         this.listFilter.push(element);
       }
     });
+  }
+
   }
   ordenar(event){
     console.log(event);

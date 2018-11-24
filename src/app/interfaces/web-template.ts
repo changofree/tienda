@@ -14,4 +14,5 @@ export interface WebTemplate {
     facebook?:string;
     view?:number;
     carrito?: Carrito;
+    color?:string;
 }

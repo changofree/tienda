@@ -15,27 +15,25 @@ export class NavbarHomeComponent implements OnInit {
   Inicio : string;
   Producto : string;
   Nosotros : string;
-
+  key : any;
 
 
   private value; // private property _item
 
   // use getter setter to define the property
   get bool(): any {
-    console.log("cambiando input");
     this.viewCart = this.value 
-    console.log(this.viewCart);
    return ;
   }
 
   @Input()
   set bool(val: any) {
-    console.log("inout");
     this.viewCart = (val == 'true');
-    console.log(this.viewCart);
   }
 
   @Output() boold = new EventEmitter<boolean>();
+
+  Color: string;
 
   constructor(
     private dashboard : DashboardService,
@@ -55,27 +53,37 @@ export class NavbarHomeComponent implements OnInit {
   }
 
   goProduct(){
-    this.router.navigateByUrl("/productos/"+this.Marca);
+    this.router.navigateByUrl("/productos/"+this.key);
   }
   goHome(){
-    this.router.navigateByUrl("/"+this.Marca);
+    this.router.navigateByUrl("/"+this.key);
+  }
+
+  goNosotros(){
+    this.router.navigateByUrl("/nosotros/"+this.key);    
   }
 
   ngOnInit() {
-    let component = this._activatedRoute.snapshot.component.toString();
-    let array = component.split("(");
-    if(array[0] === "function HomewebComponent"){
-      this.Inicio = "activo";
+    let href = this.router.url;
+    let search = "/productos/";
+    let searchtwo = "/nosotros/";
+
+    if(href.indexOf(search) !== -1){
+      this.Inicio = "false";
       this.Nosotros = "false";
+      this.Producto = "activo";
+    }else if(href.indexOf(searchtwo) !== -1){
+      this.Nosotros = "activo"
+      this.Inicio = "false";
       this.Producto = "false";
     }else{
-      this.Inicio = "false";
-      this.Producto = "activo";
+      this.Nosotros = "false";
+      this.Inicio = "activo";
+      this.Producto = "false";  
     }
-    
-    // console.log(this._activatedRoute.snapshot.component);
     this.viewCart = false;
     const key = this._activatedRoute.snapshot.paramMap.get('key');     
+    this.key = key;
     this.dashboard.returnListClients()
     .snapshotChanges()
     .subscribe(data => {
@@ -84,8 +92,27 @@ export class NavbarHomeComponent implements OnInit {
         x["$key"] = element.key;
         if(x["$key"] === key){
           this.Marca = x["marca"];          
+          this.Color = x["web"]["color"];
         }
       });
+      let color = document.getElementsByClassName("colorCliente") as HTMLCollectionOf<HTMLElement>;
+
+      function setCssTextStyle(el, style, value) {
+        var result = el.style.cssText.match(new RegExp("(?:[;\\s]|^)(" +
+            style.replace("-", "\\-") + "\\s*:(.*?)(;|$))")),
+          idx;
+        if (result) {
+          idx = result.index + result[0].indexOf(result[1]);
+          el.style.cssText = el.style.cssText.substring(0, idx) +
+            style + ": " + value + ";" +
+            el.style.cssText.substring(idx + result[1].length);
+        } else {
+          el.style.cssText += " " + style + ": " + value + ";";
+        }
+      }
+		  for (var i=0; i<color.length; i++){
+        setCssTextStyle(color[i], "background", this.Color.toString() +"!important");
+      } 
     });
 
   }

@@ -16,16 +16,16 @@
                         <textarea matInput type="text" placeholder="Descripcion del producto" style="min-height: 50px" (change)="updateTemp()" name="descripcion" [(ngModel)]="StoreProduct.description"></textarea>
                       </mat-form-field>
                       <div class="row">
-                      <mat-form-field class="col-3">
+                      <mat-form-field class="col-md-3 col-6">
                           <input matInput type="number" placeholder="Precio del producto" name="precio" value="00.00" [(ngModel)]="StoreProduct.price" (change)="updateTemp()">
                       </mat-form-field>
-                      <mat-form-field class="col-3">
+                      <mat-form-field class="col-md-3 col-6">
                           <input matInput type="number" placeholder="Cantidad de productos en stock" name="stock" [(ngModel)]="StoreProduct.stock" (change)="updateTemp()">
                       </mat-form-field>
-                      <mat-form-field class="col-3">
+                      <mat-form-field class="col-md-3 col-6">
                           <input matInput type="text" placeholder="Codigo del producto" name="codigo" [(ngModel)]="StoreProduct.code" (change)="updateTemp()">
                       </mat-form-field>
-                      <div class="form-group col-3">
+                      <div class="form-group col-md-3 col-6">
                           <select class="form-control" id="exampleFormControlSelect1" name="category" [(ngModel)]="StoreProduct.category" (change)="updateTemp()">
                             <option value="0">Seleccionar una categoria</option>
                             <option *ngFor="let x of listCategory" value="{{x.name}}">{{x.name}}</option>
@@ -65,6 +65,29 @@
                           </div>
                         </div>
                     </form>
+                    <div class="row mb-2 mt-5">
+                      <div class="col-12">
+                        <h4>¿Este producto tiene envio?</h4>
+                        <button class="btn btn-info" (click)="Envio(true)">Si</button>
+                        <button class="btn btn-danger" (click)="Envio(false)">No</button>                      
+                      </div>
+                      <div class="col-12 " *ngIf="tieneEnvio">
+                        <div class="row">
+                        <mat-form-field class="col-md-3 col-6">
+                          <input matInput type="number" placeholder="Profundidad (cm)" name="precio" value="0" [(ngModel)]="StoreProduct.profundidad" (change)="updateTemp()">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <input matInput type="number" placeholder="Altura (cm)" name="stock" [(ngModel)]="StoreProduct.alto" (change)="updateTemp()">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                            <input matInput type="text" placeholder="Ancho (cm)" name="codigo" [(ngModel)]="StoreProduct.ancho" (change)="updateTemp()">
+                        </mat-form-field>
+                        <mat-form-field class="col-md-3 col-6">
+                          <input matInput type="text" placeholder="Peso del producto (gr)" name="codigo" [(ngModel)]="StoreProduct.peso" (change)="updateTemp()">
+                       </mat-form-field>
+                      </div>
+                      </div>
+                    </div>
                     <div class="row mt-2">
                       <div class="col-12 text-center mt-2">
                         <button mat-raised-button color="primary" (click)="storeProducto()">Agregar producto</button>

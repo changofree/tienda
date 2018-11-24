@@ -11,6 +11,7 @@ import { OrdenComponent } from './orden/orden.component';
 import { ValidacionComponent } from './validacion/validacion.component';
 import { DreamTemplateComponent } from './frontend/dream-template/dream-template.component';
 import { TodosProductosComponent } from './frontend/homeweb/todos-productos/todos-productos.component';
+import { NosotrosComponent } from './frontend/homeweb/nosotros/nosotros.component';
 const routes: Routes =[
   {
     path: 'validacion',
@@ -39,6 +40,10 @@ const routes: Routes =[
   {
     path: 'checkout/:key',
     component: CheckoutComponent
+  },
+  {
+    path: 'nosotros/:key',
+    component: NosotrosComponent
   },
   {
     path: '',

@@ -46,3 +46,11 @@ select{
 .nav-item > a {
     cursor:pointer;
 }
+.hide-note{
+    display: none!important;
+}
+@media  screen and (max-width: 767px) {
+    .hide-mobile{
+        display: none!important;
+    }
+}

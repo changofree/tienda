@@ -90,11 +90,8 @@ export class PedidoService {
         if(parseInt(y["numeroPedido"]) === parseInt(numeroPedido)){
           x.push(y);
         }
-      });
-      console.log("ASDA");
-      console.log(numeroPedido);
+      });      
       if(bool){ 
-        console.log(x);
         if(x.length === 0){
           this.listCarrito.push({
             keyfb:key,
@@ -102,7 +99,11 @@ export class PedidoService {
             numeroPedido: numeroPedido,
             imagenProducto: product.img[0],
             precioUnitario: parseInt(product.price),
-            cantidad: cantidad
+            cantidad: cantidad,
+            peso: product.peso,
+            alto: product.alto,
+            ancho: product.ancho,
+            profundidad: product.profundidad
           });
         }else{
         this.listCarrito.push({
@@ -111,7 +112,11 @@ export class PedidoService {
           numeroPedido: numeroPedido,
           imagenProducto: product.img[0],
           precioUnitario: parseInt(product.price),
-          cantidad: cantidad
+          cantidad: cantidad,
+          peso: product.peso,
+          alto: product.alto,
+          ancho: product.ancho,
+          profundidad: product.profundidad
         });
       }
     bool = false;  
@@ -120,14 +125,14 @@ export class PedidoService {
   
   }
 
-  preferenceMP(marca, precioTotal, keyFB, pedido, telefono, email, at, nombre, dni){
+  preferenceMP(marca, precioTotal, keyFB, pedido, telefono, email, at, nombre, dni, envio, dimension){
     if(telefono === undefined || telefono === null){
       telefono = "No disponible";
     }
     if(email === undefined || email === null){
       email = "No disponible";
     }
-    return this.http.get("assets/php/mp.php?marca="+marca+"&precio="+precioTotal+"&key="+keyFB+"&pedido="+pedido+"&tel="+telefono+"&email="+email+"&access_token="+at+"&nombre="+nombre+"&dni="+dni);
+    return this.http.get("assets/php/mp.php?marca="+marca+"&precio="+precioTotal+"&key="+keyFB+"&pedido="+pedido+"&tel="+telefono+"&email="+email+"&access_token="+at+"&nombre="+nombre+"&dni="+dni+"&envio="+envio+"&dimension="+dimension);
   }
 
   preferenceMPus(email){

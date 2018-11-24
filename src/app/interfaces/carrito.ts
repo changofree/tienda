@@ -6,4 +6,8 @@ export interface Carrito {
     imagenProducto?:string;
     cantidad?:number;
     precioUnitario?:number;
+    peso?: number,
+    alto?: number,
+    ancho?: number,
+    profundidad?: number
 }

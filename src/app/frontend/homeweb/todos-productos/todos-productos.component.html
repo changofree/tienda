@@ -2,7 +2,7 @@
 <section class="py-5">
   <div class="container">
     <div class="row">
-      <div class="col-md-2 col-12">
+      <div class="col-md-2 col-12 hide-mobile">
         <div class="row ">
           <div class="col-md-12 pb-4">
             <h3>Categorias</h3>
@@ -11,6 +11,12 @@
             <a class="cp" (click)="clickFilter(x.name)">{{x.name}}</a>
           </div>
         </div>
+      </div>
+      <div class="col-12 mb-3 text-center hide-note">
+        <select class="pull-right" (change)="clickFilter($event.target.value)">
+          <option value="0">Categorias</option>
+          <option *ngFor="let x of listCategory" value="{{x.name}}">{{x.name}}</option>
+        </select>
       </div>
       <div class="col-md-10 col-12">
         <div class="row">
@@ -38,7 +44,7 @@
                     <div class="block2-txt flex-w flex-t p-t-14">
                       <div class="block2-txt-child1 flex-col-l ">
                         <a routerLink="/detalle/{{key}}/{{product.name}}" class="stext-104 text-dark hov-cl1 trans-04 js-name-b2 p-b-6">
-                          {{product.name | uppercase}}
+                          {{product.name | uppercase | changeLine}}
                         </a>
         
                         <span class="stext-105 text-dark">

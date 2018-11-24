@@ -18,7 +18,7 @@
                                       Producto
                                   </th>
                                   <th>
-                                      Cantidad
+                                      Stock
                                   </th>
                                   <th>
                                       Precio
@@ -30,11 +30,14 @@
                                           <img src="{{toto.img[0]}}">
                                       </td>
                                       <td class="td-name">
-                                          {{toto.name}}
+                                          {{toto.name  | changeLineD }}
                                       </td>
-                                      <td>
+                                      <td *ngIf="toto.stock !==0 ">
                                           {{toto.stock}}
                                       </td>
+                                      <td *ngIf="toto.stock ===0 ">
+                                            <b>SIN STOCK</b>
+                                        </td>
                                       <td class="text-primary">
                                           $ {{ toto.price }}
                                       </td>

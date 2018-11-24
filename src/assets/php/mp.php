@@ -12,7 +12,7 @@
   $Nombre = $_GET["nombre"];
   $DNI = $_GET["dni"];
   $Envio = $_GET["envio"];
-
+  $Dimension = $_GET["dimension"];
   MercadoPago\SDK::setAccessToken($Token);
 
   $preference = new MercadoPago\Preference();
@@ -36,13 +36,12 @@
       "area_code" => "",
     "number" => $Tel
   );
-
-  if(isset($Envio)){
+  if($Envio == 'true'){
 
   #Shipments data 
   $shipments = new MercadoPago\Shipments();
   $shipments->mode = "me2";
-  $shipments->dimensions = "40x40x40,5000";
+  $shipments->dimensions = $Dimension;
   $shipments->local_pickup = false;
   $preference->shipments = $shipments;
 
@@ -53,10 +52,8 @@
   $preference->payer = $payer;
   $preference->marketplace_fee = 0.50;
   // $preference->external_reference = $_GET["key"]."|".$NumeroPedido;
-  echo json_encode($item);
   $preference->notification_url = "https://changofree.com/tienda/assets/php/notification.php";
 
-  echo json_encode($shipments);
   # Save and posting preference
   $preference->save();
     

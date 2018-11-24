@@ -26,7 +26,8 @@ export class EditProductComponent implements OnInit {
   listFilter : string[];
   listCategory : Category[];
   nameCategory: string;
-
+  tieneEnvio;
+  
   constructor(
     private ProductService : ProductoService,
     private _activatedRoute: ActivatedRoute,
@@ -87,6 +88,7 @@ export class EditProductComponent implements OnInit {
   }
 
   updateTemp(){
+    this.ProductToEdit.name = this.ProductToEdit.name.replace(/ /g,"-");
     this.ProductService.updateProd(this.ProductToEdit, this.ProductToEdit.$key);
   }
   /**
@@ -161,4 +163,11 @@ export class EditProductComponent implements OnInit {
       this.ProductService.updateProd(this.ProductToEdit, this.ProductToEdit.$key);
     }
 
+    Envio(val : any){
+      if(val){
+        this.tieneEnvio = val;
+      }else{
+        this.tieneEnvio = val;
+      }
+    }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService } from 'app/services/pedido.service';
 import { ProductoService } from 'app/services/producto.service';
+import { Product } from 'app/interfaces/product';
 
 @Component({
   selector: 'app-listadopedidos',
@@ -13,7 +14,7 @@ export class ListadopedidosComponent implements OnInit {
   listCarrito: any[];
   infoPedido : any[];
   moreIfno : any;
-
+  keyCliente : string; 
   constructor(
     private pedidoService : PedidoService,
     private clientService : ProductoService,
@@ -33,6 +34,7 @@ ngOnInit() {
         let y = element.payload.toJSON();
         y["$key"] = element.key
         if(cliente === y["email"]){
+          this.keyCliente = y["$key"];
           clientArray.push(y);
         }
       });
@@ -83,6 +85,41 @@ ngOnInit() {
 
   //  Cambiar el pedido por venta.
   GoVenta(pedido){
+    this.clientService.returnListProductsOrderByStock(this.keyCliente)
+    .snapshotChanges()
+    .subscribe(data => {
+      let bool = true;
+      let aux = [];
+      data.forEach(element => {
+        let y = element.payload.toJSON();
+        y["$key"] = element.key;
+            aux.push(y);
+          });
+          this.infoPedido = [];
+          this.listCarrito.forEach(element => {
+            if(parseInt(element.numeroPedido) === parseInt(pedido.product)){
+              this.infoPedido.push(element);
+            }
+          });
+          
+          if(bool){
+          let productList : Product[];
+          productList = [];
+          this.infoPedido.forEach(carrito => {
+            aux.forEach(products => {
+              if(carrito.nombreProducto === products.name){
+                products.stock = Number(products.stock) - Number(carrito.cantidad);
+                console.log(products);
+                productList.push(products);
+              }
+            });
+          });
+            productList.forEach(element => {
+              this.clientService.updateProd(element, element.$key);   
+            });
+            bool = false;
+          }
+        });
     this.pedidoService.updatePedido(pedido);
   }
 

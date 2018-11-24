@@ -10,4 +10,8 @@ export interface Product {
     img?:string[];
     keyClient?:string;
     data?:string;
+    peso?:number;
+    profundidad?:number;
+    alto?:number;
+    ancho?:number;
 }

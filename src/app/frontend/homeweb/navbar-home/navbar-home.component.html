@@ -2,8 +2,8 @@
 <div class="container ">
     <div class="row">
 <div class="col-4 col-md-4 hide">
-    <i class="material-icons lupa">search</i>
-    <input class="buscar" type="text" placeholder="Buscar producto">
+    <!-- <i class="material-icons lupa">search</i> -->
+    <!-- <input class="buscar" type="text" placeholder="Buscar producto"> -->
 </div>  
 <div class="col-6 col-md-4 title-text text-center">
     <b class="title ">
@@ -19,7 +19,7 @@
 </div>
 </div>
 </div>
-<nav class="navbar hide-mob navbar-expand-lg navbar-light bg-light">
+<nav class="navbar hide-mob navbar-expand-lg navbar-light bg-light colorCliente">
     <div class="container lg-pad">
         
     <button class="hide navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,22 +34,22 @@
               <a class="nav-link" (click)="goProduct()">Productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" >Contacto</a>
+              <a class="nav-link" (click)="goNosotros()">Contacto</a>
             </li>
           </ul>
         </div>
     </div>
 </nav>
-    <div class="container imp cont-mobile hide-note">
+    <div class="container imp cont-mobile hide-note colorCliente">
         <div class="row text-center">
             <div class="col-4 cont-menu-mob {{Inicio}}">
-                    <a class="mr-3 w-33" (click)="goHome()"> Inicio</a>
+                    <a class="mr-3 w-33 ftn-k" (click)="goHome()"> Inicio</a>
             </div>
             <div class="col-4 cont-menu-mob {{Producto}}">
-                    <a class="mr-3 w-33" (click)="goProduct()"> Productos</a>   
+                    <a class="mr-3 w-33 ftn-k" (click)="goProduct()"> Productos</a>   
             </div>
             <div class="col-4 cont-menu-mob {{Nosotros}}">
-                    <a class="mr-3 w-33" (click)="goHome()"> Nosotros</a>
+                    <a class="mr-3 w-33 ftn-k" (click)="goNosotros()"> Nosotros</a>
             </div>
         </div>
     </div>

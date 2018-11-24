@@ -52,6 +52,10 @@ import { ValidacionComponent } from './validacion/validacion.component';
 import { SoporteComponent } from './soporte/soporte.component';
 import { DreamTemplateComponent } from './frontend/dream-template/dream-template.component';
 import { TodosProductosComponent } from './frontend/homeweb/todos-productos/todos-productos.component';
+import { NosotrosComponent } from './frontend/homeweb/nosotros/nosotros.component';
+import { ChangeLinePipe } from './change-line.pipe';
+import { ChangeLineDPipe } from './change-line-d.pipe';
+import { PersonalizarComponent } from './personalizar/personalizar.component';
 
 
 @NgModule({
@@ -96,6 +100,8 @@ import { TodosProductosComponent } from './frontend/homeweb/todos-productos/todo
     ValidacionComponent,
     DreamTemplateComponent,
     TodosProductosComponent,
+    NosotrosComponent,
+    ChangeLinePipe,
   ],
   providers: [AnunciosService, ProductoService, DashboardService, PedidoService],
   bootstrap: [AppComponent]

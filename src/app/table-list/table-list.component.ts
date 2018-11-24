@@ -37,7 +37,7 @@ export class TableListComponent implements OnInit {
           keyClient = element.$key;
         } 
       });
-      this.ProductService.returnListProducts(keyClient)
+      this.ProductService.returnListProductsOrderByStock(keyClient)
       .snapshotChanges()
       .subscribe(data => {
         this.listProducts = [];

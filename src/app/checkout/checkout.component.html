@@ -27,7 +27,7 @@
 											<img src="{{x.imagenProducto}}" alt="IMG">
 										</div>
 									</td>
-									<td class="column-2">{{x.nombreProducto}}</td>
+									<td class="column-2">{{x.nombreProducto | changeLine}}</td>
 									<td class="column-3">$ {{x.precioUnitario}}</td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
@@ -59,7 +59,7 @@
 						<div class="radio col-12">
 								<label><input type="radio" name="optradio" checked (change)="Envio = false"> Acordar retiro/entrega con el vendedor</label>
 							  </div>
-							  <div class="radio col-12">
+							  <div class="radio col-12" *ngIf="tieneEnvio">
 								<label><input type="radio" name="optradio" (change)="Envio = true"> Enviar mi pedido ( MercadoEnvios )</label>
 							  </div>	 
 						</div>
@@ -78,7 +78,7 @@
 							</div>
 						</div>
 
-						<div class="flex-w flex-t bor12 p-t-15 p-b-30" *ngIf="Envio">
+						<div class="flex-w flex-t bor12 p-t-15 p-b-30">
 							<div class="size-208 w-full-ssm">
 								<span class="stext-110 cl2">
  									Información necesaria:
@@ -106,22 +106,12 @@
 									<b class="text-danger" *ngIf="BoolDNI">* Debes completar este campo</b>
 									</form>		
                 				</div>
-                <span><small>Cuando realices la compra, el vendedor se contactará con vos por el telefono ingresado. Al email que ingresaste te <b>llegará</b> un email con el comprobante de compra cuando esta se haya realizado.</small></span>
+                <span><small>Una vez completes los campos y realices la compra, se te llevará al sitio de MercadoPago para que el proceso sea comodo y seguro. Si queres que te envien el producto por MercadoEnvios, ellos te cotizarán el envio.</small></span>
 							</div>
 						</div>
 
 						<div class="flex-w flex-t p-t-27 p-b-33">
-							<div class="size-208">
-								<span class="mtext-101 cl2">
-									Total:
-								</span>
-							</div>
-
-							<div class="size-209 p-t-1">
-								<span class="mtext-110 cl2">
-									$ {{precioTotal}}
-								</span>
-							</div>
+						
             </div>
 			<a class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer text-white" (click)="goMercado()">
               Realizar compra

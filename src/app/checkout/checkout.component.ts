@@ -30,12 +30,17 @@ export class CheckoutComponent implements OnInit {
   Marca : string;
   AcessToken;
   key : string; 
-
   Telefono : string = "";
   Email : string = "";
   Nombre : string;
   DNI : string; 
 
+  tieneEnvio : boolean;
+  PesoTotal: number;
+  AlturaTotal : number;
+  AnchoTotal : number;
+  ProfundidadTotal : number;  
+  Dimension : any;  
   constructor(
     private PedidoService : PedidoService,
     private ProductService: ProductoService,
@@ -108,9 +113,41 @@ export class CheckoutComponent implements OnInit {
 
           this.AcessToken = listClient[0].mercadopago.access_token; //  Datos de mercadoPago para generar la venta.
           this.precioTotal = 0; // Precio total de todos los productos en el carrito.
+          this.PesoTotal = 0;
+          this.AnchoTotal = 0;
+          this.AlturaTotal = 0;
+          this.ProfundidadTotal = 0;
+          this.tieneEnvio = true;
           this.Carrito.forEach(element => {
             this.precioTotal = this.precioTotal + element.cantidad * element.precioUnitario;
+            
+            if(Number(element.peso) === 0){
+              this.tieneEnvio = false;
+            }else{
+              this.PesoTotal = this.PesoTotal + Number(element.peso);
+            }
+
+            if(Number(element.alto) === 0){
+              this.tieneEnvio = false;
+            }else{
+              this.AlturaTotal = this.AlturaTotal + Number(element.alto);
+            }
+            
+            if(Number(element.ancho) === 0){
+              this.tieneEnvio = false;
+            }else{
+              this.AnchoTotal = this.AnchoTotal + Number(element.ancho);
+            }
+            if(Number(element.profundidad) === 0){
+              this.tieneEnvio = false;
+            }else{
+              this.ProfundidadTotal = this.ProfundidadTotal + Number(element.profundidad);
+            }
+            
+            
           });
+          let dimension = this.AlturaTotal +"x"+ this.AnchoTotal +"x"+ this.ProfundidadTotal + ","+this.PesoTotal;
+          this.Dimension = dimension; 
         });
         auxBool = false;  //  Cerramos el ciclo.
       }
@@ -149,15 +186,18 @@ export class CheckoutComponent implements OnInit {
     if(this.BoolDNI === false && this.BoolEmail === false && this.BoolNombre === false && this.BoolTelefono === false){
     const key = this._activatedRoute.snapshot.paramMap.get('key');
     //  Juntamos toda la informacion necesaria para enviar a mercadopago y nos devuelve la url de pago.
-    this.PedidoService.preferenceMP(this.Marca,this.precioTotal,key,this.numberPedido,this.Telefono, this.Email, this.AcessToken, this.Nombre, this.DNI)
+    if(this.Envio && this.tieneEnvio){
+      this.Envio = true;
+    }else{
+      this.Envio = false;
+    }
+    this.PedidoService.preferenceMP(this.Marca,this.precioTotal,key,this.numberPedido,this.Telefono, this.Email, this.AcessToken, this.Nombre, this.DNI, this.Envio, this.Dimension)
       .subscribe(data => {
       this.linkMercadopago = data.text();
       localStorage.removeItem("numero-pedido");
       localStorage.removeItem("key-pedido");
-
       location.href = this.linkMercadopago;
-
-    });
+      });
     }
   }
 

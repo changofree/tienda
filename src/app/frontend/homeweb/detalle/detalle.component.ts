@@ -35,6 +35,7 @@ export class DetalleComponent implements OnInit {
   viewCart : boolean = false;
   Carrito : Carrito[];
   
+  Key;
   positionInitial = 0;
   cantProd = 1;
   client : Cliente;
@@ -86,6 +87,7 @@ export class DetalleComponent implements OnInit {
     this.WhatsApp = "";
     let clienteOnline = localStorage.getItem("cliente-chango");
     const key = this._activatedRoute.snapshot.paramMap.get('key');
+    this.Key = key;
     const producto = this._activatedRoute.snapshot.paramMap.get('producto');     
     let numeroPedido = localStorage.getItem('numero-pedido');
     this.keyPedido = localStorage.getItem('key-pedido');
@@ -225,7 +227,6 @@ export class DetalleComponent implements OnInit {
     let numeroPedido = localStorage.getItem('numero-pedido');
 
     this.PedidoService.insertCarrito(key,numeroPedido,this.product, this.cantProd);    
-    this.viewCart = true;
-    
+    this.viewCart = true;    
   }
 }
