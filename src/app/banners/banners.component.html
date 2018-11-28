@@ -1,0 +1,45 @@
+
+<div class="main-content mt-2">
+
+    <div class="card">
+              <div class="card-header card-header-info">
+                  <h3 class="card-title"><b>¡Agregá un banner a tu web!</b></h3>
+              </div>
+              <div class="card-body"> 
+                  <div class="row mt-4">
+                    <div class="col-12 text-center">
+                      <h4>Los banners suelen usarse para destacar ofertas de algun producto o alguna temporada como seria el Black Friday.</h4>
+                    </div>
+                    <div class="col-12 text-center">
+                    <div *ngIf="currentFileUpload" class="progress">
+                      <div class="progress-bar progress-bar-info progress-bar-striped"
+                        role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                        aria-valuemin="0" aria-valuemax="100"
+                        [ngStyle]="{width:progress.percentage+'%'}">
+                        <a *ngIf="progress.estado === null">
+                          {{progress.percentage}}%
+                        </a>
+                        <a *ngIf="progress.estado !== null">
+                            {{progress.estado}}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <div class="cont-banner">
+                      <i class="material-icons" *ngIf="!banner">add_a_photo</i>
+                      <img *ngIf="banner" src="{{banner}}" class="banner">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="labelFile-t text-center" id="labelFile-t">
+                      Elegir Banner
+                      <input type="file" id="upload-file" (change)="selectFile($event)">
+                    </label>
+                  </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+      
+    

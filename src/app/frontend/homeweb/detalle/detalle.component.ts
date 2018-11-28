@@ -44,6 +44,7 @@ export class DetalleComponent implements OnInit {
   keyPedido : string;
   newPedido : Carrito[];
   WhatsApp : string;
+  banner : string;
 
   constructor(
     private PedidoService : PedidoService, 
@@ -59,7 +60,7 @@ export class DetalleComponent implements OnInit {
       name:"",
       code:"",
       price:"",
-      offer:"",
+      offer:0,
       category:"",
       description:"",
       stock:null,
@@ -77,6 +78,7 @@ export class DetalleComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;
@@ -160,6 +162,7 @@ export class DetalleComponent implements OnInit {
 
       // Actualizamos la cantidad de visitas      
       this.client = aux[0];
+      this.banner = this.client.web.banner;
       this.WhatsApp = this.client.web.whatsapp;
       if(aux[0].web.view !== undefined){
         aux[0].web.view = aux[0].web.view + 1;
@@ -205,6 +208,27 @@ export class DetalleComponent implements OnInit {
       this.ProductService.SearchProductByName(producto, this.listProducts)
       .subscribe(data => {
         this.product = data;
+    // let valueFB ="<div class='fb-share-button' data-href='https://tienda.changofree.com/detalle/"+this.Key+"/"+this.product.name+"' data-layout='button_count'></div>"
+    console.log("https://tienda.changofree.com/detalle/"+this.Key+"/"+this.product.name);
+    var buttonFB =  document.createElement("div") ;
+    buttonFB.setAttribute("class","fb-share-button");
+    buttonFB.setAttribute("data-href","https://tienda.changofree.com/detalle/"+this.Key+"/"+this.product.name);
+    buttonFB.setAttribute("data-layout","button_count")
+    document.getElementById('buttonFb').appendChild(buttonFB);
+    document.title = "Tienda Online - "+this.Key;
+    
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.2';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    
+    //     var midiv = document.createElement("div");
+		// midiv.setAttribute("id","id de mi div");
+		// midiv.setAttribute("otros atributos","otros");
+      
       });
     });
 

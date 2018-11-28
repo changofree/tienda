@@ -6,14 +6,120 @@
 </div>
 <div class="sidebar-wrapper">
   <div *ngIf="isMobileMenu()">
-    <form class="navbar-form">
-      <span class="bmd-form-group">
-        <div class="input-group no-border">
-        </div>
-      </span>
-    </form>
+
     </div>
     <ul class="nav menu-list">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/backend/inicio">
+                <i class="material-icons">home</i>
+                <p>Inicio</p>
+            </a>
+        </li>
+            
+        <li class="nav-item">
+            <a class="nav-link a-desp" (click)="changeDiseno()">
+                <i class="material-icons p-ri" *ngIf="Diseno">keyboard_arrow_up</i>
+                <i class="material-icons p-ri" *ngIf="!Diseno">keyboard_arrow_down</i>
+                <p>Diseño</p>
+            </a>
+        </li>
+        <span *ngIf="Diseno">
+        <li class="nav-item mt-1" routerLinkActive="active">
+            <a class="nav-link" routerLink="/backend/anuncios">
+                <i class="material-icons">layers</i>
+                <p>Portada</p>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/backend/personalizar">
+                <i class="material-icons">edit</i>
+                <p>Personalizar</p>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/backend/logo">
+                <i class="material-icons">face</i>
+                <p>Logo</p>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/backend/banners">
+                <i class="material-icons">loyalty</i>
+                <p>Banners</p>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/backend/ofertas">
+                <i class="material-icons">card_giftcard</i>
+                <p>Ofertas</p>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/backend/plantillas">
+                <i class="material-icons ">important_devices</i>
+                <p>Plantillas</p>
+            </a>
+        </li>
+        </span>
+        <li class="nav-item">
+            <a class="nav-link a-desp" (click)="changeAdm()">
+                <i class="material-icons p-ri" *ngIf="Adm">keyboard_arrow_up</i>
+                <i class="material-icons p-ri" *ngIf="!Adm">keyboard_arrow_down</i>
+                <p>Administración
+                    <span class="algo">{{cantPedido}}</span>
+                </p>
+            </a>
+        </li>
+        <span *ngIf="Adm">
+            <li class="nav-item mt-1" routerLinkActive="active">
+                <a class="nav-link" routerLink="/backend/listado-productos">
+                    <i class="material-icons">style</i>
+                    <p>Productos</p>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/backend/listado-categorias">
+                    <i class="material-icons">category</i>
+                    <p>Categorias</p>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/backend/listado-pedidos">
+                    <i class="material-icons ">import_contacts</i>
+                    <p>Pedidos
+                        <span class="algo">{{cantPedido}}</span>
+                    </p>
+                </a>
+            </li>
+        </span>
+        <li class="nav-item">
+            <a class="nav-link a-desp" (click)="changeEst()">
+                <i class="material-icons p-ri" *ngIf="Est">keyboard_arrow_up</i>
+                <i class="material-icons p-ri" *ngIf="!Est">keyboard_arrow_down</i>
+                <p>Estadisticas</p>
+            </a>
+        </li>
+        <span *ngIf="Est">
+            <li class="nav-item mt-1" routerLinkActive="active">
+                <a class="nav-link" routerLink="/backend/pixelfb">
+                    <i class="material-icons">label</i>
+                    <p>Pixel Facebook</p>
+                </a>
+            </li>   
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/backend/panel">
+                    <i class="material-icons">dashboard</i>
+                    <p>Resumen</p>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/backend/listado-ventas">
+                    <i class="material-icons">equalizer</i>
+                    <p>Ventas</p>
+                </a>
+            </li>
+        </span>
+        <hr>
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>

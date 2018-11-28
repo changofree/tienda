@@ -49,7 +49,16 @@ export class TableListComponent implements OnInit {
         });
     });
   }
-
+  updateDest(product : Product){
+    if(product.destacado === undefined){
+      product.destacado = "check_circle_outline";
+    }if(product.destacado === "check_circle_outline"){
+      product.destacado = "check_circle"
+    }else{
+      product.destacado = "check_circle_outline";      
+    }
+    this.ProductService.updateProd(product, product.$key); 
+  }
   DestroyThis(key){
     this.ProductService.deleteProduct(key);
   }

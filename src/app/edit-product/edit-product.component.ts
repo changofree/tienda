@@ -58,12 +58,12 @@ export class EditProductComponent implements OnInit {
         .snapshotChanges()
         .subscribe(data => {
           const key = this._activatedRoute.snapshot.paramMap.get('key');  //key del producto 
-
           data.forEach(element => {
             let x = element.payload.toJSON();
             x["$key"] = element.key;
             if(x["$key"] === key){
               this.ProductToEdit = x; //  Guardamos el producto que vamos a editar en ProductToEdit;
+              console.log(this.ProductToEdit.price);
             }
           });
           if(first)

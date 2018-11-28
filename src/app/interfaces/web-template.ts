@@ -15,4 +15,11 @@ export interface WebTemplate {
     view?:number;
     carrito?: Carrito;
     color?:string;
+    colorFuente?:string;
+    logo?:string;
+    informacion? : string;
+    banner? : string;
+    pixel?: string;
+    google?:string;
+    oferta?:string;
 }

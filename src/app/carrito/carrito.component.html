@@ -1,9 +1,9 @@
 <div class="wrap-header-cart js-panel-cart" >
       <div class="s-full js-hide-cart"></div>
   
-      <div class="header-cart flex-col-l p-l-65 p-r-25" (blur)="clickTo()">
+      <div class="header-cart flex-col-l p-l-65 p-r-25" (blur)="clickTo()" id="carrito">
         <div class="header-cart-title flex-w flex-sb-m p-b-8">
-          <span class="mtext-103 cl2">
+          <span class="mtext-103 " id="">
             Tu carrito
           </span>
   
@@ -22,7 +22,7 @@
                 <img src="{{x.imagenProducto}}" alt="carrito">
               </div>
   
-              <div class="header-cart-item-txt p-t-8">
+              <div class="header-cart-item-txt p-t-8 productos" >
                 <a routerLink="/detalle/{{key}}/{{x.nombreProducto}}" class="header-cart-item-name hov-cl1 trans-04">
                   {{x.nombreProducto | changeLine}}                  
                 </a>

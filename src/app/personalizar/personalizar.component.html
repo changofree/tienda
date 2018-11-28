@@ -1,16 +1,63 @@
 <div class="main-content mt-2">
-    <div class="container-fluid">
-        <div class="alert alert-info alert-with-icon mb-3 mt-5 px-3 point" data-notify="container">
-            <h3 class="rbld mb-1 mt-0">¡Personalizá el color de tu tienda!</h3>
-               El color debe ser escrito en codigo html de color, podes elegir cualquiera y copiar el codigo del siguiente link: 
-               <a target="_blank" href="https://html-color-codes.info/codigos-de-colores-hexadecimales/" ><b class="text-dark">Buscar colores</b></a>
-               <p>
-               <input type="text" placeholder="#fff" name="color" class="input-personalizado" [(ngModel)]="color">
-               <button class="btn btn-success" (click)="cambiarColor()">
-                  Cambiar color
-               </button>
-              </p>
-           </div>
-    </div>
-  </div>
+
+<div class="card">
+          <div class="card-header card-header-info">
+              <h3 class="card-title"><b>¡Acá vas a poder editar partes de tu web, y personalizar a tu gusto!</b></h3>
+          </div>
+          <div class="card-body"> 
+              <div class="row">
+                  <div class="col-md-12">
+                     <div class="alert alert-info alert-with-icon mb-3 mt-5 px-3 point" data-notify="container">
+                        <h3 class="rbld mb-1 mt-0">¡Personalizá el fondo de tu tienda!</h3>
+                           El color debe ser escrito en codigo html de color, podes elegir cualquiera y copiar el codigo del siguiente link: 
+                           <a target="_blank" href="https://html-color-codes.info/codigos-de-colores-hexadecimales/" ><b class="text-dark">Buscar colores</b></a>
+                           <p>
+                           <input type="text" placeholder="#fff" name="color" class="mt-3 input-personalizado" [(ngModel)]="color">
+                           <button class="btn btn-outline-info text-dark" (click)="cambiarColor()">
+                              Cambiar color
+                           </button>
+                          </p>
+                       </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="alert alert-info alert-with-icon mb-3 mt-5 px-3 point" data-notify="container">
+                        <h3 class="rbld mb-1 mt-0">¡Personalizá el color de fuente de tu tienda!</h3>
+                           El color debe ser escrito en codigo html de color, podes elegir cualquiera y copiar el codigo del siguiente link: 
+                           <a target="_blank" href="https://html-color-codes.info/codigos-de-colores-hexadecimales/" ><b class="text-dark">Buscar colores</b></a>
+                           <p>
+                           <input type="text" placeholder="#fff" name="color" class="mt-3 input-personalizado" [(ngModel)]="colorFuente">
+                           <button class="btn btn-outline-info text-dark" (click)="cambiarColorFuente()">
+                              Cambiar color de fuente
+                           </button>
+                          </p>
+                       </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="alert alert-info alert-with-icon mb-3 mt-5 px-3 point" data-notify="container">
+                        <h3 class="rbld mb-1 mt-0">Información de tu tienda</h3>
+                           Contale a tus clientes de que se trata tu tienda, y cuales son tus objetivos, date a conocer. 
+                           <p>
+                           <textarea type="text" placeholder="Información de tu tienda" name="color" class="mt-3 textarea-personalizado" [(ngModel)]="Informacion"></textarea>
+                           <button class="btn btn-outline-info text-dark" (click)="cambiarInformacion()">
+                              Cambiar Información
+                           </button>
+                          </p>
+                       </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="alert alert-info alert-with-icon mb-3 mt-5 px-3 point" data-notify="container">
+                        <h3 class="rbld mb-1 mt-0">Agregá maps a tu tienda</h3>
+                           Contale a tus clientes en que zona estas ubicado, si no tenes tienda fisica, directamente especificá tu pais. 
+                           <p>
+                           <textarea type="text" placeholder="Información de tu tienda" name="color" class="mt-3 textarea-personalizado" [(ngModel)]="google"></textarea>
+                           <button class="btn btn-outline-info text-dark" (click)="cambiarGoogle()">
+                              Cambiar Ubicación
+                           </button>
+                          </p>
+                       </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+</div>
   

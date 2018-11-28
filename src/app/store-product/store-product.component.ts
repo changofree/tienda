@@ -37,7 +37,7 @@ export class StoreProductComponent implements OnInit {
     this.StoreProduct = {
       name: "",
       code: "",
-      offer: "",
+      offer: 0,
       price: "",
       description: "",
       stock:0,

@@ -1,0 +1,43 @@
+<div class="main-content mt-2">
+
+  <div class="card">
+            <div class="card-header card-header-info">
+                <h3 class="card-title"><b>¡Agregá un logo y dale valor a tu web!</b></h3>
+            </div>
+            <div class="card-body"> 
+                <div class="row mt-4">
+                  <div class="col-12 text-center">
+                    <h4>Recomendamos que tu logo sea png, para que la calidad sea la más optima.</h4>
+                  </div>
+                  <label *ngIf="!logo" class="labelFile text-center" id="labelFile">
+                    <i class="material-icons">photo_camera</i>
+                    <input type="file" id="upload-file" (change)="selectFile($event)">
+                  </label>
+                  <img class="mx-auto img-logo" *ngIf="logo" src="{{logo}}">
+                  <div class="col-12 text-center">
+                  <div *ngIf="currentFileUpload" class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped"
+                      role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                      aria-valuemin="0" aria-valuemax="100"
+                      [ngStyle]="{width:progress.percentage+'%'}">
+                      <a *ngIf="progress.estado === null">
+                        {{progress.percentage}}%
+                      </a>
+                      <a *ngIf="progress.estado !== null">
+                          {{progress.estado}}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label *ngIf="logo" class="labelFile-t text-center" id="labelFile">
+                    Cambiar logo
+                    <input type="file" id="upload-file" (change)="selectFile($event)">
+                  </label>
+                </div>
+                </div>
+            </div>
+        </div>
+  </div>
+    
+  

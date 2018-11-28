@@ -1,20 +1,28 @@
+<app-global></app-global>
+
+<!-- *ngIf="boolTiempo" -->
+<div *ngIf="boolTiempo" class="cont-img" (click)="hola()">
+    <div class="img">
+        <img src="{{oferta}}">
+        <!-- <i class="material-icons close">close</i> -->
+    </div>
+</div>
+
 <header>
-<div class="container ">
-    <div class="row">
-<div class="col-4 col-md-4 hide">
-    <!-- <i class="material-icons lupa">search</i> -->
-    <!-- <input class="buscar" type="text" placeholder="Buscar producto"> -->
-</div>  
-<div class="col-6 col-md-4 title-text text-center">
-    <b class="title ">
+
+<div class="container tam-15vh py-0 tt">
+    <div class="row tam-15vh">
+<div class="col-6 col-md-6 title-text">
+    <b class="" *ngIf="!logo">
         {{Marca}}
     </b>
+    <img class="img-logo" *ngIf="logo" src="{{logo}}">
 </div> 
-<div class="col-6 col-md-4">
+<div class="col-6 col-md-6">
     <b class="pull-right price" (click)="viewCart = true">
             <i class="material-icons pt-1">shopping_cart	
             </i>
-            Carrito
+            <b class="text-carrito">{{ProductosCarritos}}</b>
     </b>
 </div>
 </div>
@@ -28,13 +36,13 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-              <a class="nav-link" (click)="goHome()">Inicio</a>
+              <a class="nav-link colorFuente" (click)="goHome()">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="goProduct()">Productos</a>
+              <a class="nav-link colorFuente" (click)="goProduct()">Productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="goNosotros()">Contacto</a>
+              <a class="nav-link colorFuente" (click)="goNosotros()">Contacto</a>
             </li>
           </ul>
         </div>
@@ -43,13 +51,13 @@
     <div class="container imp cont-mobile hide-note colorCliente">
         <div class="row text-center">
             <div class="col-4 cont-menu-mob {{Inicio}}">
-                    <a class="mr-3 w-33 ftn-k" (click)="goHome()"> Inicio</a>
+                    <a class="mr-3 w-33 ftn-k colorFuente" (click)="goHome()"> Inicio</a>
             </div>
             <div class="col-4 cont-menu-mob {{Producto}}">
-                    <a class="mr-3 w-33 ftn-k" (click)="goProduct()"> Productos</a>   
+                    <a class="mr-3 w-33 ftn-k colorFuente" (click)="goProduct()"> Productos</a>   
             </div>
             <div class="col-4 cont-menu-mob {{Nosotros}}">
-                    <a class="mr-3 w-33 ftn-k" (click)="goNosotros()"> Nosotros</a>
+                    <a class="mr-3 w-33 ftn-k colorFuente" (click)="goNosotros()"> Contacto</a>
             </div>
         </div>
     </div>

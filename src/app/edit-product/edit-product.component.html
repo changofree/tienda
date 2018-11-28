@@ -16,13 +16,16 @@
                         <textarea matInput type="text" placeholder="Descripcion del producto" style="min-height: 50px"  (change)="updateTemp()" name="descripcion" [(ngModel)]="ProductToEdit.description"></textarea>
                       </mat-form-field>
                       <div class="row">
-                      <mat-form-field class="col-3">
-                          <input matInput type="text" placeholder="Precio del producto" name="precio" [(ngModel)]="ProductToEdit.price" (change)="updateTemp()">
+                          <mat-form-field class="col-6">
+                              <input matInput type="text" placeholder="Precio" name="precio" [(ngModel)]="ProductToEdit.price" (change)="updateTemp()">
+                          </mat-form-field>
+                      <mat-form-field class="col-6">
+                          <input matInput type="text" placeholder="% de oferta (Dejar con 0 si no tiene oferta)" name="preciso" [(ngModel)]="ProductToEdit.offer" (change)="updateTemp()">
                       </mat-form-field>
-                      <mat-form-field class="col-3">
+                      <mat-form-field class="col-6">
                           <input matInput type="text" placeholder="Cantidad de productos en stock" name="stock" [(ngModel)]="ProductToEdit.stock" (change)="updateTemp()">
                       </mat-form-field>
-                      <mat-form-field class="col-3">
+                      <mat-form-field class="col-6">
                           <input matInput type="text" placeholder="Codigo del producto" name="codigo" [(ngModel)]="ProductToEdit.code" (change)="updateTemp()">
                       </mat-form-field>
                       <div class="form-group col-3">

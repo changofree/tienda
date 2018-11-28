@@ -17,6 +17,10 @@ import { ListadoventasComponent } from 'app/listadoventas/listadoventas.componen
 import { SoporteComponent } from 'app/soporte/soporte.component';
 import { PlantillaComponent } from 'app/plantilla/plantilla.component';
 import { PersonalizarComponent } from 'app/personalizar/personalizar.component';
+import { LogoComponent } from 'app/logo/logo.component';
+import { BannersComponent } from 'app/banners/banners.component';
+import { PixelfbComponent } from 'app/pixelfb/pixelfb.component';
+import { AnuncioComponent } from 'app/anuncio/anuncio.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -69,6 +73,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'backend/icons',          component: IconsComponent },
     { path: 'backend/maps',           component: MapsComponent },
     { path: 'backend/inicio',  component: NotificationsComponent },
+    { path: 'backend/logo',        component: LogoComponent },
     { path: 'backend/upgrade',        component: UpgradeComponent },
     { path: 'backend/plantillas',        component: PlantillaComponent },
     { path: 'backend/personalizar',        component: PersonalizarComponent },
@@ -76,6 +81,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'backend/listado-productos/editar/:key', component: EditProductComponent},
     { path: 'backend/listado-pedidos', component: ListadopedidosComponent},
     { path: 'backend/listado-ventas', component: ListadoventasComponent},
+    { path: 'backend/banners', component: BannersComponent},
     { path: 'backend/soporte', component: SoporteComponent},
+    { path: 'backend/pixelfb', component: PixelfbComponent},
+    { path: 'backend/ofertas', component: AnuncioComponent },
     { path: 'backend/anuncios', component: AnunciosComponent }
 ];

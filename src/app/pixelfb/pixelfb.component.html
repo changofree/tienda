@@ -1,0 +1,23 @@
+<div class="main-content mt-2">
+
+    <div class="card">
+              <div class="card-header card-header-info">
+                  <h3 class="card-title"><b>Configurá tu pixel de Facebook</b></h3>
+              </div>
+              <div class="card-body"> 
+                  <div class="row mt-4">
+                    <div class="col-12 text-center">
+                      <h4>Para configurar tu pixel, lo unico que necesitamos es el indentificador de tu pixel. <small>Esto es una funcionalidad en fase beta.</small></h4>
+                    </div>
+                   <div class="col-12 text-center">
+                     <mat-form-field>
+                       <input matInput type="text" placeholder="Numero de indentificacion" name="jaja" [(ngModel)]="numerPixel">
+                     </mat-form-field>
+                     <button class="btn btn-outline-info" (click)="updatePixel()">Agregar pixel</button>
+                   </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+      
+    

@@ -29,6 +29,10 @@ import { PlantillaComponent } from 'app/plantilla/plantilla.component';
 import { ChangeLinePipe } from 'app/change-line.pipe';
 import { ChangeLineDPipe } from 'app/change-line-d.pipe';
 import { PersonalizarComponent } from 'app/personalizar/personalizar.component';
+import { LogoComponent } from 'app/logo/logo.component';
+import { BannersComponent } from 'app/banners/banners.component';
+import { PixelfbComponent } from 'app/pixelfb/pixelfb.component';
+import { AnuncioComponent } from 'app/anuncio/anuncio.component';
 
 
 @NgModule({
@@ -51,6 +55,8 @@ import { PersonalizarComponent } from 'app/personalizar/personalizar.component';
     PlantillaComponent,
     TypographyComponent,
     IconsComponent,
+    LogoComponent,
+    BannersComponent,
     TableCategoriaComponent,
     MapsComponent,
     SoporteComponent,
@@ -61,6 +67,8 @@ import { PersonalizarComponent } from 'app/personalizar/personalizar.component';
     ListadoventasComponent,
     ChangeLineDPipe,
     PersonalizarComponent,
+    PixelfbComponent,
+    AnuncioComponent
   ],
 })
 

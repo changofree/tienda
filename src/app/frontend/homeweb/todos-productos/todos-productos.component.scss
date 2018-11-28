@@ -16,6 +16,20 @@
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px');
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 
+.banner{
+    animation-duration: 3s;
+    animation-name: in;
+  }
+  @keyframes in{
+      from {
+          opacity: 0;
+      }
+      to{
+            opacity: 1;
+      }
+  }
+
+
 .fuente{
     font-family: 'Dosis', sans-serif!important; //Alta fuente
 }
@@ -49,7 +63,51 @@ select{
 .hide-note{
     display: none!important;
 }
+.filtro-content{
+    height: 100vh;
+    border: 0px!important;
+    border-radius:0px!important;
+    padding-left:25px;
+    padding-right:25px;
+}
+.modal-header{
+    align-items: center;
+    padding: 0px;
+    height: 8vh;
+    display: flex;
+}
+.banner{
+    width: 100%;
+    max-height: 35vh;
+}
+.oferta-producto{
+    position: relative;
+    background: black;
+    color: white;
+    padding: 5px;
+    top: 40px;
+}
+.modal-title{
+    display:flex;
+}
+.item-categoria{
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 1px solid #969696;
+}
+
+
+.categorias{
+    width: 100%;
+    overflow: auto;
+    display: inherit;
+    max-height: 40px;
+}
 @media  screen and (max-width: 767px) {
+    .hide-note{
+        display: block!important;
+    }
     .hide-mobile{
         display: none!important;
     }

@@ -91,7 +91,7 @@ export class ProductoService {
 
 
   getListClientsWithSnap(){
-    return this.listClient = this.fireBase.list('cliente');
+    return this.listClient = this.fireBase.list('cliente'); 
   }
   editClient(clientObject : Cliente){
     if(clientObject.web.product === undefined){
@@ -107,9 +107,16 @@ export class ProductoService {
       clientObject.web.carrito = null;
     }
     
+    if(clientObject.web.banner === undefined){
+      clientObject.web.banner = null;
+    }
     this.listClient.update(clientObject.$key, {
       web:{
+        banner:clientObject.web.banner,
         product: clientObject.web.product,
+        color:clientObject.web.color,
+        colorFuente:clientObject.web.colorFuente,
+        logo:clientObject.web.logo,
         anuncios: clientObject.web.anuncios,
         categoria: clientObject.web.categoria,
         plataforma: clientObject.web.plataforma,
@@ -123,7 +130,7 @@ export class ProductoService {
   }
 
   returnListProducts(keyClient : string){
-    return this.products = this.fireBase.list("cliente/"+keyClient+"/web/product");
+    return this.products = this.fireBase.list("cliente/"+keyClient+"/web/product", ref => ref.orderByChild('destacado'));
   }
   returnListProductsOrderByStock(keyClient : string){
     return this.products = this.fireBase.list("cliente/"+keyClient+"/web/product", ref => ref.orderByChild('stock'));
@@ -157,7 +164,7 @@ export class ProductoService {
       name:storeProduct.name,
       code: storeProduct.code,
       price: storeProduct.price,
-      offer: storeProduct.price,
+      offer: storeProduct.offer,
       category: storeProduct.category,
       description: storeProduct.description,
       stock: storeProduct.stock,
@@ -185,16 +192,20 @@ export class ProductoService {
     if(storeProduct.peso === undefined){
       storeProduct.peso = 0;
     }
+    if(storeProduct.destacado === undefined){
+      storeProduct.destacado = null;
+    }
 
     this.products.update(key, {
       name:storeProduct.name,
       code: storeProduct.code,
       price: storeProduct.price,
-      offer: storeProduct.price,
+      offer: storeProduct.offer,
       category: storeProduct.category,
       description: storeProduct.description,
       stock: storeProduct.stock,
       img: storeProduct.img,
+      destacado: storeProduct.destacado,
       profundidad: storeProduct.profundidad,
       alto:storeProduct.alto,
       ancho:storeProduct.ancho,

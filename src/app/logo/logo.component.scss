@@ -1,0 +1,64 @@
+.labelFile {
+    overflow: hidden;
+    position: relative;
+}
+.labelFile [type=file] {
+    cursor: inherit;
+    display: none;
+    font-size: 10px;
+    color: black;
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.labelFile{
+    margin: auto;
+    cursor: pointer;
+    border: 1px solid #00bcd4;
+    display: block;
+    border-radius: 4px!important;
+    width: 198px;
+    color: #18bcd4!important;
+    border-radius: 0px;
+    -webkit-box-shadow: 0px 2px 1.5px #a5a5a5;
+    box-shadow: 0px 2px 1.5px #a5a5a5;
+    padding: 70px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.labelFile-t {
+    overflow: hidden;
+    position: relative;
+}
+.labelFile-t [type=file] {
+    cursor: inherit;
+    display: none;
+    font-size: 10px;
+    color: black;
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.labelFile-t{
+    margin: auto;
+    cursor: pointer;
+    border: 1px solid #00bcd4;
+    display: block;
+    border-radius: 4px!important;
+    width: 198px;
+    color: #18bcd4!important;
+    border-radius: 0px;
+    -webkit-box-shadow: 0px 2px 1.5px #a5a5a5;
+    box-shadow: 0px 2px 1.5px #a5a5a5;
+    padding: 8px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+.img-logo{
+    max-width: 200px;
+    max-height: 200px;
+}

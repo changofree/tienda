@@ -15,6 +15,9 @@
                                       Imagen
                                   </th>
                                   <th>
+                                      Destacar
+                                  </th>
+                                  <th>
                                       Producto
                                   </th>
                                   <th>
@@ -28,6 +31,13 @@
                                 <tr *ngFor="let toto of listProducts">
                                       <td class="img-th">
                                           <img src="{{toto.img[0]}}">
+                                      </td>
+                                      <td>
+                                           <i *ngIf="!toto.destacado" class="material-icons cp" (click)="updateDest(toto)">check_circle_outline</i>
+
+                                           <i *ngIf="toto.destacado === 'check_circle_outline'" class="material-icons cp" (click)="updateDest(toto)">check_circle_outline</i>
+                                           <i *ngIf="toto.destacado === 'check_circle'" class="material-icons cp" (click)="updateDest(toto)">check_circle</i>
+
                                       </td>
                                       <td class="td-name">
                                           {{toto.name  | changeLineD }}

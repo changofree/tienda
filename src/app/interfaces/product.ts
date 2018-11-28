@@ -3,7 +3,7 @@ export interface Product {
     name?:string;
     code?:string;
     price?:string;
-    offer?:string;
+    offer?:number;
     category?:string;
     description?:string;
     stock?:number;
@@ -14,4 +14,5 @@ export interface Product {
     profundidad?:number;
     alto?:number;
     ancho?:number;
+    destacado?:string;
 }

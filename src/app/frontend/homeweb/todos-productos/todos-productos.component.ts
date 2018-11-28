@@ -16,6 +16,12 @@ export class TodosProductosComponent implements OnInit {
   listProducts : Product[];
   listFilter : Product[];
   key : string;
+  banner : string; 
+
+  categoriaAnterior : any;
+  categoriaActual : any;
+  ordenAnterior : any;
+  ordenActual : any;
 
   constructor(
     private ProductService : ProductoService,
@@ -27,8 +33,21 @@ export class TodosProductosComponent implements OnInit {
 
   ngOnInit() {
     const key = this._activatedRoute.snapshot.paramMap.get('key');     
+    const productoBuscado = this._activatedRoute.snapshot.paramMap.get('producto');     
+    
     this.key = key; 
     
+    this.ProductService.getListClientsWithSnap()
+    .snapshotChanges()
+    .subscribe(data => {
+      data.forEach(element => {
+        let x = element.payload.toJSON();
+        x["$key"] = element.key;
+        if(x["$key"] === this.key){
+          this.banner = x["web"]["banner"];
+        }
+      });
+    })
     this.ProductService.returnListCategory(key)
     .snapshotChanges()
     .subscribe(data => {
@@ -50,6 +69,14 @@ export class TodosProductosComponent implements OnInit {
         this.listProducts.push(x);
         this.listFilter.push(x);
       });
+      if(productoBuscado !== null){
+        this.listFilter = [];
+        this.listProducts.forEach(element => {
+          if(element.name.toUpperCase().match(productoBuscado.toUpperCase())){
+            this.listFilter.push(element);
+          }
+        });
+      }
     });
 
   }
@@ -99,7 +126,77 @@ export class TodosProductosComponent implements OnInit {
     }else{
       this.listFilter = this.listProducts;
     }
-    console.log(this.listFilter);
   }
+
+  selectCategory(category){
+    this.categoriaActual = category;
+    if(this.categoriaAnterior === undefined){
+      this.categoriaAnterior = category;
+      document.getElementById(category).style.background = "black";
+      document.getElementById(category).style.color = "white";
+    }else{
+      document.getElementById(this.categoriaAnterior).style.color = "black";
+      document.getElementById(this.categoriaAnterior).style.background = "transparent";
+      this.categoriaAnterior = category;
+      document.getElementById(category).style.background = "black";
+      document.getElementById(category).style.color = "white";
+    }
+  }
+
+  selectPrecio(bool){
+    this.ordenActual = bool;
+    if(this.ordenAnterior === undefined){
+      this.ordenAnterior = bool;
+      document.getElementById(bool).style.background = "black";
+      document.getElementById(bool).style.color = "white";
+    }else{
+      document.getElementById(this.ordenAnterior).style.color = "black";
+      document.getElementById(this.ordenAnterior).style.background = "transparent";
+      this.ordenAnterior = bool;
+      document.getElementById(bool).style.background = "black";
+      document.getElementById(bool).style.color = "white";
+    }
+  }
+
+  //OrdenActual = true = Por mayor
+  //OrdenActual = false = Por menor
+
+  applyFilter(){
+    console.log(this.ordenActual);
+    this.listFilter = this.listProducts;
+    let l = this.listFilter.length;
+    if(this.ordenActual !== undefined){
+      if(this.ordenActual){
+
+        for (let i = 0; i < l; i++ ) {
+          for (let j = 0; j < l - 1 - i; j++ ) {
+            if ( this.listFilter[ j ].price < this.listFilter[ j + 1 ].price ) {
+              [ this.listFilter[ j ], this.listFilter[ j + 1 ] ] = [ this.listFilter[ j + 1 ], this.listFilter[ j ] ];
+            }
+          }  
+        }
+
+      }else if(!this.ordenActual){
+
+        for (let i = 0; i < l; i++ ) {
+          for (let j = 0; j < l - 1 - i; j++ ) {
+            if ( this.listFilter[ j ].price > this.listFilter[ j + 1 ].price ) {
+              [ this.listFilter[ j ], this.listFilter[ j + 1 ] ] = [ this.listFilter[ j + 1 ], this.listFilter[ j ] ];
+            }
+          }  
+        }
+      } 
+    }
+    if(this.categoriaActual !== undefined){
+      let aux = this.listFilter;
+      this.listFilter = [];
+      aux.forEach(element => {
+        if(element.category === this.categoriaActual){
+          this.listFilter.push(element);
+        }
+      });
+    }
+  }
+
 
 }

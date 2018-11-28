@@ -1,9 +1,22 @@
-<div class="f-width py-3" *ngIf="buttonEdit">
+
+	<!-- Facebook Pixel Code -->
+
+  <!-- End Facebook Pixel Code -->
+  
+	<span class="btn-search" data-toggle="modal" data-target="#exampleModal">
+			<i class="material-icons">
+			search	
+			</i>
+		</span>
+<span class="btn-show"  style="cursor:pointer" *ngIf="configNav" (click)="openClose()">	
+	<i class="material-icons">keyboard_arrow_down</i>
+</span>
+<div class="f-width py-3" *ngIf="buttonEdit && !configNav">
 	<div class="container">
 		<div class="row">
 			<div class="col-12 bt-c">
 				<button type="button" class="btn btn-outline-light ov text-white ml-4" routerLink="/backend/inicio">Configurar web</button>
-				<button type="button" class="btn btn-outline-light ov text-white ml-4" (click)="reload()">Cerrar sesión</button>
+				<button type="button" class="btn btn-outline-light ov text-white ml-4" (click)="openClose()" style="display:table-cell;"><i class="material-icons">keyboard_arrow_up</i></button>
 			</div>
 		</div>
 	</div>
@@ -12,7 +25,7 @@
 <!-- Header -->
 
 	<!-- Slider -->
-	<section class="section-slide" *ngIf="arrayImg[0]">
+	<section class="section-slide" *ngIf="arrayImg[0]" class="banner">
 			<div id="demo" class="carousel slide" data-ride="carousel">
 
 					<!-- Indicators -->
@@ -37,10 +50,14 @@
 				  
 					<!-- Left and right controls -->
 					<a class="carousel-control-prev" href="#demo" data-slide="prev">
+					<span class="left-item">
 					  <span class="carousel-control-prev-icon"></span>
+					</span>
 					</a>
 					<a class="carousel-control-next" href="#demo" data-slide="next">
+					<span class="rig-item">
 					  <span class="carousel-control-next-icon"></span>
+					</span>
 					</a>
 				  
 				  </div>
@@ -75,8 +92,9 @@
 			<div class="row pt-4 isotope-grid">
 				<div class="col-sm-6 col-md-4 col-6 col-lg-3 p-b-35 isotope-item women" *ngFor="let product of listFilter | slice : Desde : Hasta">
 					<!-- Block2 -->
-					<div class="block2">
+					<div class="block2" >
 						<div class="block2-pic hov-img0">
+							<span class="oferta-producto" *ngIf="product.offer !== 0">OFF %{{product.offer}}</span>
 							<img src="{{product.img[0]}}" alt="IMG-PRODUCT">
 
 							<a routerLink="/detalle/{{key}}/{{product.name}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -110,6 +128,9 @@
 
 	</section>
 	
+
+
+
 <app-footerweb>
 </app-footerweb>
 
@@ -224,3 +245,22 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="/assets/js/main.js"></script>
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				<h3 class="modal-title">¡Hola! ¿Como estas? 😃</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body text-center">
+			<b class="mt-4">¿Qué estas buscando?</b>
+			<input type="text" class="my-4 mx-auto" style="border-bottom:1px solid #b3b3b3" placeholder="Estoy buscando..." [(ngModel)]="productoBuscado">
+			<button class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close" routerLink="/productos/{{key}}/{{productoBuscado}}"  > Buscar </button>
+			</div>
+		</div>
+		</div>
+	</div>
+		  

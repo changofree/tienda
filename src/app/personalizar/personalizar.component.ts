@@ -9,13 +9,20 @@ import { DashboardService } from 'app/dashboard.service';
 export class PersonalizarComponent implements OnInit {
 
   color : string;
+  colorFuente : string;
   key : string;
   web : any;
+  Informacion : string;
+  google : string;
+
   constructor(
     private dashboard : DashboardService
   )
   {
     this.color = "";
+    this.colorFuente = "";
+    this.Informacion = "";
+    this.google = "";
   }
 
   ngOnInit() {
@@ -38,5 +45,14 @@ export class PersonalizarComponent implements OnInit {
 
   cambiarColor(){
     this.dashboard.updateColor(this.color,this.web, this.key);
+  }
+  cambiarGoogle(){
+    this.dashboard.updateGoogle(this.google,this.web, this.key);
+  }
+  cambiarColorFuente(){
+    this.dashboard.updateColorFuente(this.colorFuente,this.web, this.key);
+  }
+  cambiarInformacion(){
+    this.dashboard.updateInformacion(this.Informacion, this.web, this.key);
   }
 }

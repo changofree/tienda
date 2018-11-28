@@ -21,13 +21,15 @@ export class HomewebComponent implements OnInit {
   listProducts : Product[];
   listCategory : Category[];
   listFilter : Product[];
-
+  configNav : boolean;
   arrayImg : string[];
   Marca : string;
   view : boolean = true;
 
   Desde : number = 0;
   Hasta : number = 8;
+
+  productoBuscado : string;
 
   viewCart : boolean = false;
   key : string;
@@ -43,10 +45,15 @@ export class HomewebComponent implements OnInit {
     private PedidoService : PedidoService,
     private router : Router
   ){
+    this.productoBuscado = "";
     this.buttonEdit = false;
+    this.configNav = false;
   }
 
-
+  openClose(){
+    this.configNav = (this.configNav === false) ? true : false;
+  }
+  
   changeBoolean(event){
     this.viewCart = false;
   }
@@ -54,6 +61,7 @@ export class HomewebComponent implements OnInit {
     location.reload();
   }
   ngOnInit() {
+
     localStorage.removeItem('firebase:previous_websocket_failure');
 
     this.router.events.subscribe((evt) => {
@@ -76,6 +84,7 @@ export class HomewebComponent implements OnInit {
       this.getCookie();
     }
 
+  
     // Si el cliente que ingreso a la web no tiene ningun login guardado, no se muestra el boton de configuracion de web.
     clienteOnline = localStorage.getItem("cliente-chango");
     if(clienteOnline === undefined || clienteOnline === null){
@@ -157,7 +166,10 @@ export class HomewebComponent implements OnInit {
         let x = element.payload.toJSON();
         x["$key"] = element.key;
         this.listProducts.push(x);
-        this.listFilter.push(x);
+        
+        if(x["destacado"] === 'check_circle'){
+          this.listFilter.push(x);
+        }
       });
 
       //  Contamos la cantidad de productos, si supera los que hay + 8 mostramos el boton mostrar mas.

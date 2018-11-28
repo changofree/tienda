@@ -74,8 +74,23 @@
 // .wrap-header-cart{
 //     visibility: visible!important;
 // }
+.carousel-control-next-icon {
+    background-position-x: 3px;
+}
+.carousel-control-prev-icon {
+    background-position-x: 3px;
+}
 .header-v4{
     height: 67px!important;
+}
+.btn-twitere{
+    border: 1px solid lightblue;
+    color: white;
+    background: lightblue;
+    padding: 3px 15px 3px 8px;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 5px;
 }
 .tapa {
     -webkit-box-pack: end;
@@ -84,6 +99,13 @@
     -ms-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    align-items: center;
+}
+.btn-move{
+    background: gray;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 .img-back{

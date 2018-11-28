@@ -56,6 +56,10 @@ import { NosotrosComponent } from './frontend/homeweb/nosotros/nosotros.componen
 import { ChangeLinePipe } from './change-line.pipe';
 import { ChangeLineDPipe } from './change-line-d.pipe';
 import { PersonalizarComponent } from './personalizar/personalizar.component';
+import { BannersComponent } from './banners/banners.component';
+import { PixelfbComponent } from './pixelfb/pixelfb.component';
+import { GlobalComponent } from './global/global.component';
+import { AnuncioComponent } from './anuncio/anuncio.component';
 
 
 @NgModule({
@@ -102,6 +106,7 @@ import { PersonalizarComponent } from './personalizar/personalizar.component';
     TodosProductosComponent,
     NosotrosComponent,
     ChangeLinePipe,
+    GlobalComponent,
   ],
   providers: [AnunciosService, ProductoService, DashboardService, PedidoService],
   bootstrap: [AppComponent]

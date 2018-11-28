@@ -1,7 +1,9 @@
 <app-navbar-home></app-navbar-home>
+<img class="banner" src="{{banner}}" *ngIf="banner">
 <section class="py-5">
   <div class="container">
     <div class="row">
+        
       <div class="col-md-2 col-12 hide-mobile">
         <div class="row ">
           <div class="col-md-12 pb-4">
@@ -13,14 +15,13 @@
         </div>
       </div>
       <div class="col-12 mb-3 text-center hide-note">
-        <select class="pull-right" (change)="clickFilter($event.target.value)">
-          <option value="0">Categorias</option>
-          <option *ngFor="let x of listCategory" value="{{x.name}}">{{x.name}}</option>
-        </select>
+          <button type="button" class="btn btn-outline-dark pull-right" data-toggle="modal" data-target="#exampleModal">
+              <i class="material-icons">pageview</i> Filtrar 
+            </button>
       </div>
       <div class="col-md-10 col-12">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 hide-mobile">
             <select class="pull-right" (change)="ordenar($event.target.value)">
               <option value="orden">Ordernar por</option>
               <option value="mayor">Por mayor precio</option>
@@ -34,6 +35,8 @@
                   <!-- Block2 -->
                   <div class="block2">
                     <div class="block2-pic hov-img0">
+        							<span class="oferta-producto" *ngIf="product.offer !== 0">OFF %{{product.offer}}</span>
+
                       <img src="{{product.img[0]}}" alt="IMG-PRODUCT">
         
                       <a routerLink="/detalle/{{key}}/{{product.name}}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
@@ -62,4 +65,40 @@
   </div>
 
 </section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog mx-0 my-0" role="document">
+    <div class="modal-content filtro-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </h5>
+      <b (click)="applyFilter()" data-dismiss="modal" aria-label="Close">Aplicar</b>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12 mt-3 text-center">
+            Categorias
+          </div>
+            <div class="categorias mt-3">
+              <a class="item-categoria" *ngFor="let x of listCategory" id={{x.name}} (click)="selectCategory(x.name)">{{x.name}}</a>
+            </div>
+        
+        <div class="col-12 mt-5 text-center">
+          Ordenar
+        </div>
+        <div class="categorias mt-3">
+            <a class="item-categoria" id="true" (click)="selectPrecio(true)">Mayor precio</a>
+            <a class="item-categoria" id="false" (click)="selectPrecio(false)">Menor precio</a>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <app-footerweb></app-footerweb>

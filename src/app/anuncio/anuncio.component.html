@@ -1,0 +1,45 @@
+
+<div class="main-content mt-2">
+
+    <div class="card">
+              <div class="card-header card-header-info">
+                  <h3 class="card-title"><b>¡Agregá una imagen con alguna oferta que tengas!</b></h3>
+              </div>
+              <div class="card-body"> 
+                  <div class="row mt-4">
+                    <div class="col-12 text-center">
+                      <h4>La imagen que vas a agregar se va a mostrar a todos tus clientes que esten mas de 3 minutos en tu web.</h4>
+                    </div>
+                    <div class="col-12 text-center">
+                    <div *ngIf="currentFileUpload" class="progress">
+                      <div class="progress-bar progress-bar-info progress-bar-striped"
+                        role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                        aria-valuemin="0" aria-valuemax="100"
+                        [ngStyle]="{width:progress.percentage+'%'}">
+                        <a *ngIf="progress.estado === null">
+                          {{progress.percentage}}%
+                        </a>
+                        <a *ngIf="progress.estado !== null">
+                            {{progress.estado}}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <div class="cont-banner">
+                      <i class="material-icons" *ngIf="!oferta">add_a_photo</i>
+                      <img *ngIf="oferta" src="{{oferta}}" class="banner">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label class="labelFile-t text-center" id="labelFile-t">
+                      Elegir Oferta
+                      <input type="file" id="upload-file" (change)="selectFile($event)">
+                    </label>
+                  </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+      
+    

@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { PedidoService } from 'app/services/pedido.service';
 import { DashboardService } from 'app/dashboard.service';
 import { ActivatedRoute, Router } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-navbar-home',
@@ -9,14 +10,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./navbar-home.component.scss']
 })
 export class NavbarHomeComponent implements OnInit {
-
+  
   Marca : String;
   viewCart : Boolean;
   Inicio : string;
   Producto : string;
   Nosotros : string;
   key : any;
-
+  ProductosCarritos : number;
+  logo : string;
 
   private value; // private property _item
 
@@ -34,11 +36,14 @@ export class NavbarHomeComponent implements OnInit {
   @Output() boold = new EventEmitter<boolean>();
 
   Color: string;
+  ColorFuente : string;
+  oferta : string;
 
   constructor(
     private dashboard : DashboardService,
     private _activatedRoute: ActivatedRoute,
-    private router : Router
+    private router : Router,
+    private PedidoService : PedidoService
     ) 
   {
     this.Marca = "";
@@ -63,7 +68,61 @@ export class NavbarHomeComponent implements OnInit {
     this.router.navigateByUrl("/nosotros/"+this.key);    
   }
 
+  boolTiempo : boolean;
+  hola(){
+    this.boolTiempo = false;
+  }
+  tiempo(ahora){
+    setTimeout(() => {
+      let data = new Date() 
+      let minute = data.getMinutes()
+      let suma;
+      if((minute - ahora) === 2 && this.oferta !== undefined){
+        this.boolTiempo = true;
+      }else{
+       this.tiempo(ahora); 
+      }
+
+    }, 1000)
+  }
   ngOnInit() {
+    this.boolTiempo = false;
+
+    let data = new Date() 
+    let minute = data.getMinutes() 
+    let ahora = minute;
+
+    this.tiempo(ahora);
+    
+
+
+
+
+    
+    localStorage.removeItem('firebase:previous_websocket_failure');
+    
+    /**
+     * Cantidad de productos en el carrito
+     */
+    const key = this._activatedRoute.snapshot.paramMap.get('key');
+    const producto = this._activatedRoute.snapshot.paramMap.get('producto');     
+    let numeroPedido = localStorage.getItem('numero-pedido');
+    let KeyPedido = localStorage.getItem("key-pedido");
+    const carrito = this.PedidoService.returnListCarrito(key); // Damos valor a la variable de RealTime database de FB para luego hacer el listado.
+    this.key = key;
+    
+    carrito.snapshotChanges()
+    .subscribe(data => {
+    let cantCarrito = [];      
+      data.forEach(element => {
+        let y = element.payload.toJSON();
+        y["$key"] = element.key;
+        if(parseInt(y["numeroPedido"]) === parseInt(numeroPedido) ){    //Numero pedido tomado por localStorage para poder darle tiempo de vida al carrito de cada cliente.
+          cantCarrito.push(y);
+        }
+      });
+      this.ProductosCarritos = cantCarrito.length;
+    });
     let href = this.router.url;
     let search = "/productos/";
     let searchtwo = "/nosotros/";
@@ -82,7 +141,6 @@ export class NavbarHomeComponent implements OnInit {
       this.Producto = "false";  
     }
     this.viewCart = false;
-    const key = this._activatedRoute.snapshot.paramMap.get('key');     
     this.key = key;
     this.dashboard.returnListClients()
     .snapshotChanges()
@@ -93,9 +151,17 @@ export class NavbarHomeComponent implements OnInit {
         if(x["$key"] === key){
           this.Marca = x["marca"];          
           this.Color = x["web"]["color"];
+          this.oferta = x["web"]["oferta"];
+          if(x["web"]["logo"] !== undefined){
+            this.logo = x["web"]["logo"]
+          }
+          this.ColorFuente = x["web"]["colorFuente"];
         }
       });
+      console.log(this.oferta);
+      document.title = "Tienda Online - "+this.Marca;
       let color = document.getElementsByClassName("colorCliente") as HTMLCollectionOf<HTMLElement>;
+      let colorFuente = document.getElementsByClassName("colorFuente") as HTMLCollectionOf<HTMLElement>;
 
       function setCssTextStyle(el, style, value) {
         var result = el.style.cssText.match(new RegExp("(?:[;\\s]|^)(" +
@@ -110,8 +176,11 @@ export class NavbarHomeComponent implements OnInit {
           el.style.cssText += " " + style + ": " + value + ";";
         }
       }
+      for(var i=0; i<colorFuente.length; i++){
+        setCssTextStyle(colorFuente[i], "color", this.ColorFuente +"!important");
+      }
 		  for (var i=0; i<color.length; i++){
-        setCssTextStyle(color[i], "background", this.Color.toString() +"!important");
+        setCssTextStyle(color[i], "background", this.Color +"!important");
       } 
     });
 

@@ -18,6 +18,10 @@ export class FooterwebComponent implements OnInit {
   WhatsApp : string;
   Facebook : string;
   Instagram: string;
+  key : string;
+  ColorFuente : string;
+  informacion : string;
+
   constructor(
     private dashboard : DashboardService,
     private ProductService : ProductoService,
@@ -26,7 +30,8 @@ export class FooterwebComponent implements OnInit {
   ){}
 
   ngOnInit() {
-    const key = this._activatedRoute.snapshot.paramMap.get('key');     
+    const key = this._activatedRoute.snapshot.paramMap.get('key'); 
+    this.key = key;    
     this.Facebook = "";
     this.WhatsApp = "";
     this.Instagram = "";
@@ -51,11 +56,19 @@ export class FooterwebComponent implements OnInit {
       data.forEach(element => {
         let x = element.payload.toJSON();
         x["$key"] = element.key;
-        if(x["$key"] === key)
-        this.listClients.push(x);
-        this.Color = x["web"]["color"];
+        if(x["$key"] === key){
+          this.listClients.push(x); 
+          this.Color = x["web"]["color"];
+          this.ColorFuente = x["web"]["colorFuente"];
+          this.informacion = x["web"]["informacion"];
+        }
       });
-
+      console.log(this.informacion);
+      this.Facebook = this.listClients[0].web.facebook;
+      this.WhatsApp = this.listClients[0].web.whatsapp;
+      this.Instagram = this.listClients[0].web.instagram;
+  
+      let colorFuente = document.getElementsByClassName("colorFuente") as HTMLCollectionOf<HTMLElement>;
       let color = document.getElementsByClassName("colorCliente") as HTMLCollectionOf<HTMLElement>;
 
       function setCssTextStyle(el, style, value) {
@@ -71,8 +84,11 @@ export class FooterwebComponent implements OnInit {
           el.style.cssText += " " + style + ": " + value + ";";
         }
       }
+      for(var i=0; i<colorFuente.length; i++){
+        setCssTextStyle(colorFuente[i], "color", this.ColorFuente +"!important");
+      }
 		  for (var i=0; i<color.length; i++){
-        setCssTextStyle(color[i], "background", this.Color.toString() +"!important");
+        setCssTextStyle(color[i], "background", this.Color +"!important");
       } 
 
 
@@ -89,9 +105,7 @@ export class FooterwebComponent implements OnInit {
         this.router.navigateByUrl("/validacion")        
       }
 
-      this.Facebook = this.listClients[0].web.facebook;
-      this.WhatsApp = this.listClients[0].web.whatsapp;
-      this.Instagram = this.listClients[0].web.instagram;
+     
     });
   }
 }

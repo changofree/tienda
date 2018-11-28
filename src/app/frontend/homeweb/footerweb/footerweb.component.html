@@ -3,13 +3,13 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12 col-lg-4 p-b-50">
-            <h4 class="stext-301 cl0 p-b-30">
+            <h4 class="stext-301 cl0 p-b-30 colorFuente">
               Categorias
             </h4>
   
             <ul>
               <li class="p-b-10" *ngFor="let x of listCategory">
-                <a routerLink="/productos/Ropa-Cristal" class="stext-107 cl7 hov-cl1 trans-04">
+                <a routerLink="/productos/{{key}}" class="stext-107 cl7 hov-cl1 trans-04 colorFuente">
                   {{x.name}}
                 </a>
               </li>
@@ -17,28 +17,28 @@
           </div>
   
           <div class="col-sm-12 col-lg-4 p-b-50">
-            <h4 class="stext-301 cl0 p-b-30">
+            <h4 class="stext-301 cl0 p-b-30 colorFuente">
               Contacto
             </h4>
   
             <ul>
               <li class="p-b-10">
-                <a class="stext-107 cl7 hov-cl1 tsts trans-04">
+                <a class="stext-107 cl7 hov-cl1 tsts trans-04 colorFuente">
                   <i class="fa ic fa-whatsapp"></i>
                   {{WhatsApp}}
                 </a>
               </li>
 
               <li class="p-b-10">
-                <a href="{{Facebook}}" class="stext-107 cl7 hov-cl1 trans-04">
+                <a href="{{Facebook}}" class="stext-107 cl7 hov-cl1 trans-04 colorFuente">
                   
-                  <i class="fa ic fa-facebook-square"></i>   {{Facebook}}
+                  <i class="fa ic fa-facebook-square colorFuente"></i>   {{Facebook}}
                 </a>
               </li>
   
               <li class="p-b-10">
-                <a href="{{Instagram}}" class="stext-107 cl7 hov-cl1 trans-04">
-                    <i class="fa ic fa-instagram	
+                <a href="{{Instagram}}" class="stext-107 cl7 hov-cl1 trans-04 colorFuente">
+                    <i class="fa ic fa-instagram colorFuente
                     "></i>
                   {{Instagram}}
                 </a>
@@ -47,29 +47,25 @@
           </div>
   
           <div class="col-sm-12 col-lg-4 p-b-50">
-            <h4 class="stext-301 cl0 p-b-30">
+            <h4 class="stext-301 cl0 p-b-30 colorFuente">
               Información
             </h4>
   
-            <p class="stext-107 cl7 size-201">
+            <p class="stext-107 cl7 size-201 colorFuente" *ngIf="!informacion">
               Web hecha por el equipo de ChangoFree. Contestamos consultas y damos asersoria sin cargo por redes sociales.
             </p>
-  
-            <div class="p-t-27">
-  
-              <a href="https://www.instagram.com/changofree" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                <i class="fa fa-instagram"></i>
-              </a>
-  
-            </div>
+            <p class="stext-107 cl7 size-201 colorFuente" *ngIf="informacion">
+              {{informacion}}
+            </p>
+            
           </div>
         </div>
   
         <div class="p-t-40">
   
-          <p class="stext-107 cl6 txt-center">
-            Web Ecommerce creada con ChangoFree - 2018
-          </p>
+          <p class="stext-107 cl6 txt-center colorFuente">
+            Tienda online creada con <a href="https://changofree.com">ChangoFree</a> - 2018
+           </p>
         </div>
       </div>
     </footer>

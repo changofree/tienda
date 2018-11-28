@@ -13,7 +13,33 @@
 @import 'assets/vendor/perfect-scrollbar/perfect-scrollbar.css';
 @import 'assets/css/util.css';
 @import 'assets/css/main.css';
-
+#carrito {
+    animation-duration: 1s;
+    animation-name: slidein;
+  }
+  .productos{
+    animation-duration: 3s;
+    animation-name: in;
+  }
+  @keyframes in{
+      from {
+          opacity: 0;
+      }
+      to{
+            opacity: 1;
+      }
+  }
+  @keyframes slidein {
+    from {
+      margin-left: 0%;
+      width: 0px
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 390px;
+    }
+  }
 .wrap-menu-desktop{
     position: absolute!important;
     top:0px!important;

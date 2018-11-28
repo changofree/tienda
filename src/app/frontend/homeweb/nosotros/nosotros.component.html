@@ -1,13 +1,23 @@
 <app-navbar-home></app-navbar-home>
 <section style="background: white!important;">
 <div class="container">
-  <div class="row">
-    <div class="col-12 text-center">
-      <h3 style="color:black">Información de contacto</h3>
+  <div class="row py-4">
+    <div class="col-12 col-md-6">
+      <h3 style="color:black" >Información de contacto</h3>
+      <p class="mb-5">{{informacion}}</p>
       <p>WhatsApp : {{clienteInfo.web.whatsapp}}</p>
       <p>Facebook: {{clienteInfo.web.facebook}}</p>
-      <p>Instagram: <a href="https://www.instagram.com/{{clienteInfo.web.instagram}}">{{clienteInfo.web.instagram}}</a></p>
+      <p>Instagram: <a href="{{clienteInfo.web.instagram}}">{{clienteInfo.web.instagram}}</a></p>
     </div>
+    <div class="col-12 col-md-6"  id="maps" *ngIf="boolGoogle">
+
+    </div>
+
+    <div class="col-12 col-md-6" *ngIf="!boolGoogle">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26088483.56493871!2d-81.71884622851712!3d-37.04248320418734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccaf5f5fdc667%3A0x3d2f77992af00fa8!2sArgentina!5e0!3m2!1ses-419!2sar!4v1543288011724" 
+          frameborder="0" style="border:0; width: 100%;height: 350px;" allowfullscreen></iframe>
+    </div>
+
   </div>
 </div>
 </section>

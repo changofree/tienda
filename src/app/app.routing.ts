@@ -34,6 +34,11 @@ const routes: Routes =[
     component: TodosProductosComponent
   },
   {
+    path: 'productos/:key/:producto',
+    component: TodosProductosComponent
+  },
+  
+  {
     path: 'detalle/:key/:producto',
     component: DetalleComponent
   },
